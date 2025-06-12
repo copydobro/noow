@@ -168,22 +168,13 @@ export default function OnboardingStep6() {
   };
 
   const handleComplete = () => {
-    Alert.alert(
-      'Добро пожаловать в Noowing! 🎉',
-      'Ваш профиль настроен и готов к использованию. Начнем повышать продуктивность!',
-      [
-        { 
-          text: 'Начать Noowing', 
-          onPress: () => {
-            // Сохраняем флаг завершения онбординга
-            if (typeof window !== 'undefined') {
-              localStorage.setItem('onboardingCompleted', 'true');
-            }
-            router.push('/(tabs)');
-          }
-        }
-      ]
-    );
+    // Сохраняем флаг завершения онбординга
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('onboardingCompleted', 'true');
+    }
+    
+    // Используем replace вместо push для полной замены стека навигации
+    router.replace('/(tabs)');
   };
 
   const resetOnboarding = () => {
@@ -200,7 +191,7 @@ export default function OnboardingStep6() {
             if (typeof window !== 'undefined') {
               localStorage.clear();
             }
-            router.push('/onboarding');
+            router.replace('/onboarding');
           }
         }
       ]
@@ -209,7 +200,7 @@ export default function OnboardingStep6() {
 
   return (
     <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
+      colors={['#0A0A0A', '#1A1A1A', '#2A2A2A']}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
@@ -220,21 +211,21 @@ export default function OnboardingStep6() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
               <View style={styles.progressBar}>
                 <View style={[styles.progressFill, { width: '100%' }]} />
               </View>
-              <Text style={styles.progressText}>Шаг 6 из 6</Text>
+              <Text style={styles.progressText}>ШАГ 6 ИЗ 6</Text>
             </View>
 
             <TouchableOpacity 
               style={styles.resetButton}
               onPress={resetOnboarding}
             >
-              <Text style={styles.resetButtonText}>Сброс</Text>
+              <Text style={styles.resetButtonText}>СБРОС</Text>
             </TouchableOpacity>
           </View>
 
@@ -242,31 +233,31 @@ export default function OnboardingStep6() {
           <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={styles.mainContent}>
               <View style={styles.iconContainer}>
-                <CheckCircle size={48} color="#4ADE80" strokeWidth={1.5} />
+                <CheckCircle size={48} color="#FF6B35" strokeWidth={1.5} />
               </View>
 
-              <Text style={styles.title}>Вот твоя настройка Noowing:</Text>
+              <Text style={styles.title}>НАСТРОЙКА NOOWING ЗАВЕРШЕНА</Text>
 
               {/* Profile Section */}
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
                   <View style={styles.sectionTitleContainer}>
-                    <User size={20} color="#00D4FF" strokeWidth={2} />
-                    <Text style={styles.sectionTitle}>Твой профиль</Text>
+                    <User size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <Text style={styles.sectionTitle}>ТВОЙ ПРОФИЛЬ</Text>
                   </View>
                   <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
-                    <Edit3 size={16} color="#00D4FF" strokeWidth={2} />
-                    <Text style={styles.editButtonText}>Редактировать</Text>
+                    <Edit3 size={16} color="#FF6B35" strokeWidth={1.5} />
+                    <Text style={styles.editButtonText}>РЕДАКТИРОВАТЬ</Text>
                   </TouchableOpacity>
                 </View>
                 
                 <View style={styles.profileItem}>
-                  <Text style={styles.profileLabel}>Возрастной диапазон:</Text>
+                  <Text style={styles.profileLabel}>ВОЗРАСТНОЙ ДИАПАЗОН:</Text>
                   <Text style={styles.profileValue}>{userData.ageRange} ({userData.ageRangeLabel})</Text>
                 </View>
                 
                 <View style={styles.profileItem}>
-                  <Text style={styles.profileLabel}>Уровень активности:</Text>
+                  <Text style={styles.profileLabel}>УРОВЕНЬ АКТИВНОСТИ:</Text>
                   <Text style={styles.profileValue}>{userData.activityLevelLabel}</Text>
                 </View>
               </View>
@@ -275,55 +266,55 @@ export default function OnboardingStep6() {
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
                   <View style={styles.sectionTitleContainer}>
-                    <Clock size={20} color="#00D4FF" strokeWidth={2} />
-                    <Text style={styles.sectionTitle}>Расписание</Text>
+                    <Clock size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <Text style={styles.sectionTitle}>РАСПИСАНИЕ</Text>
                   </View>
                   <TouchableOpacity style={styles.editButton} onPress={handleEditSchedule}>
-                    <Edit3 size={16} color="#00D4FF" strokeWidth={2} />
-                    <Text style={styles.editButtonText}>Редактировать</Text>
+                    <Edit3 size={16} color="#FF6B35" strokeWidth={1.5} />
+                    <Text style={styles.editButtonText}>РЕДАКТИРОВАТЬ</Text>
                   </TouchableOpacity>
                 </View>
                 
                 <View style={styles.profileItem}>
-                  <Text style={styles.profileLabel}>Рабочие часы:</Text>
+                  <Text style={styles.profileLabel}>РАБОЧИЕ ЧАСЫ:</Text>
                   <Text style={styles.profileValue}>{userData.workStartTime} - {userData.workEndTime}</Text>
                 </View>
                 
                 <View style={styles.profileItem}>
-                  <Text style={styles.profileLabel}>Часовой пояс:</Text>
+                  <Text style={styles.profileLabel}>ЧАСОВОЙ ПОЯС:</Text>
                   <Text style={styles.profileValue}>{userData.timezone}</Text>
                 </View>
               </View>
 
               {/* Cycle Explanation */}
               <View style={styles.cycleContainer}>
-                <Text style={styles.cycleTitle}>Твой персональный цикл 45-2-5:</Text>
+                <Text style={styles.cycleTitle}>ТВОЙ ПЕРСОНАЛЬНЫЙ ЦИКЛ 45-2-5:</Text>
                 <View style={styles.cycleItem}>
-                  <View style={[styles.cycleDot, { backgroundColor: '#4ADE80' }]} />
-                  <Text style={styles.cycleText}>45 минут сосредоточенной работы</Text>
+                  <View style={[styles.cycleDot, { backgroundColor: '#FF6B35' }]} />
+                  <Text style={styles.cycleText}>45 МИНУТ СОСРЕДОТОЧЕННОЙ РАБОТЫ</Text>
                 </View>
                 <View style={styles.cycleItem}>
-                  <View style={[styles.cycleDot, { backgroundColor: '#FBBF24' }]} />
-                  <Text style={styles.cycleText}>2 минуты физической активации ({userData.activityLevel})</Text>
+                  <View style={[styles.cycleDot, { backgroundColor: '#FF6B35' }]} />
+                  <Text style={styles.cycleText}>2 МИНУТЫ ФИЗИЧЕСКОЙ АКТИВАЦИИ ({userData.activityLevel.toUpperCase()})</Text>
                 </View>
                 <View style={styles.cycleItem}>
-                  <View style={[styles.cycleDot, { backgroundColor: '#8B5CF6' }]} />
-                  <Text style={styles.cycleText}>5 минут восстановления</Text>
+                  <View style={[styles.cycleDot, { backgroundColor: '#FF6B35' }]} />
+                  <Text style={styles.cycleText}>5 МИНУТ ВОССТАНОВЛЕНИЯ</Text>
                 </View>
               </View>
 
               <View style={styles.infoContainer}>
-                <Text style={styles.infoTitle}>💡 Что дальше?</Text>
+                <Text style={styles.infoTitle}>💡 ЧТО ДАЛЬШЕ?</Text>
                 <Text style={styles.infoText}>
-                  • Все настройки можно изменить в профиле{'\n'}
-                  • Таймер автоматически подстроится под ваше расписание{'\n'}
-                  • Упражнения адаптированы под ваш уровень активности{'\n'}
-                  • Начните с одного цикла и постепенно увеличивайте
+                  • ВСЕ НАСТРОЙКИ МОЖНО ИЗМЕНИТЬ В ПРОФИЛЕ{'\n'}
+                  • ТАЙМЕР АВТОМАТИЧЕСКИ ПОДСТРОИТСЯ ПОД ВАШЕ РАСПИСАНИЕ{'\n'}
+                  • УПРАЖНЕНИЯ АДАПТИРОВАНЫ ПОД ВАШ УРОВЕНЬ АКТИВНОСТИ{'\n'}
+                  • НАЧНИТЕ С ОДНОГО ЦИКЛА И ПОСТЕПЕННО УВЕЛИЧИВАЙТЕ
                 </Text>
               </View>
 
               <Text style={styles.editPrompt}>
-                Готовы начать свое путешествие к лучшей продуктивности? 🚀
+                ГОТОВЫ НАЧАТЬ СВОЕ ПУТЕШЕСТВИЕ К ЛУЧШЕЙ ПРОДУКТИВНОСТИ? 🚀
               </Text>
             </View>
           </ScrollView>
@@ -335,11 +326,11 @@ export default function OnboardingStep6() {
               onPress={handleComplete}
             >
               <LinearGradient
-                colors={['#4ADE80', '#22C55E']}
+                colors={['#FF6B35', '#E55A2B']}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.buttonText}>Начать Noowing</Text>
-                <ArrowRight size={20} color="#000" strokeWidth={2} />
+                <Text style={styles.buttonText}>НАЧАТЬ NOOWING</Text>
+                <ArrowRight size={20} color="#000" strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -375,33 +366,35 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
     marginBottom: 8,
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#4ADE80',
+    backgroundColor: '#FF6B35',
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
+    letterSpacing: 1.5,
   },
   resetButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: 'rgba(239, 68, 68, 0.08)',
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.3)',
+    borderColor: 'rgba(239, 68, 68, 0.2)',
     marginLeft: 16,
   },
   resetButtonText: {
     fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#EF4444',
+    letterSpacing: 1,
   },
   scrollView: {
     flex: 1,
@@ -412,11 +405,11 @@ const styles = StyleSheet.create({
   },
   iconContainer: {
     marginBottom: 24,
-    padding: 16,
-    backgroundColor: 'rgba(74, 222, 128, 0.1)',
-    borderRadius: 20,
+    padding: 20,
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderRadius: 25,
     borderWidth: 1,
-    borderColor: 'rgba(74, 222, 128, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
     fontSize: 24,
@@ -425,117 +418,126 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 32,
     lineHeight: 32,
+    letterSpacing: 2,
   },
   sectionContainer: {
     width: '100%',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
+    padding: 24,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   sectionHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 20,
   },
   sectionTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginLeft: 8,
+    marginLeft: 12,
+    letterSpacing: 2,
   },
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 8,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.3)',
+    borderColor: 'rgba(255, 107, 53, 0.2)',
   },
   editButtonText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
-    color: '#00D4FF',
-    marginLeft: 4,
+    color: '#FF6B35',
+    marginLeft: 6,
+    letterSpacing: 1,
   },
   profileItem: {
-    marginBottom: 12,
+    marginBottom: 16,
   },
   profileLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
-    marginBottom: 4,
+    color: 'rgba(255, 255, 255, 0.6)',
+    marginBottom: 6,
+    letterSpacing: 1,
   },
   profileValue: {
     fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    letterSpacing: 0.5,
   },
   cycleContainer: {
     width: '100%',
-    backgroundColor: 'rgba(0, 212, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: 'rgba(255, 107, 53, 0.05)',
+    borderRadius: 20,
+    padding: 24,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   cycleTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
-    color: '#00D4FF',
-    marginBottom: 16,
+    color: '#FF6B35',
+    marginBottom: 20,
     textAlign: 'center',
+    letterSpacing: 2,
   },
   cycleItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 16,
   },
   cycleDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    marginRight: 12,
+    marginRight: 16,
   },
   cycleText: {
-    fontSize: 15,
-    fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.9)',
-    lineHeight: 22,
-    flex: 1,
-  },
-  infoContainer: {
-    width: '100%',
-    backgroundColor: 'rgba(74, 222, 128, 0.05)',
-    borderRadius: 16,
-    padding: 20,
-    marginBottom: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(74, 222, 128, 0.2)',
-  },
-  infoTitle: {
-    fontSize: 16,
-    fontFamily: 'Inter-SemiBold',
-    color: '#4ADE80',
-    marginBottom: 12,
-    textAlign: 'center',
-  },
-  infoText: {
     fontSize: 14,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
     lineHeight: 20,
+    flex: 1,
+    letterSpacing: 1,
+  },
+  infoContainer: {
+    width: '100%',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
+    padding: 24,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+  },
+  infoTitle: {
+    fontSize: 16,
+    fontFamily: 'Inter-SemiBold',
+    color: '#FF6B35',
+    marginBottom: 16,
+    textAlign: 'center',
+    letterSpacing: 2,
+  },
+  infoText: {
+    fontSize: 14,
+    fontFamily: 'Inter-Regular',
+    color: 'rgba(255, 255, 255, 0.7)',
+    lineHeight: 22,
+    letterSpacing: 0.5,
   },
   editPrompt: {
     fontSize: 16,
@@ -543,25 +545,27 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     textAlign: 'center',
     lineHeight: 24,
+    letterSpacing: 1,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: 20,
     overflow: 'hidden',
   },
   buttonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
+    paddingVertical: 20,
     paddingHorizontal: 32,
   },
   buttonText: {
     fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 8,
+    marginRight: 12,
+    letterSpacing: 2,
   },
 });
