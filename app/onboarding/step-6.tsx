@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ArrowRight, ArrowLeft, CircleCheck as CheckCircle, Edit3, Clock, Globe, Activity, User } from 'lucide-react-native';
+import { ArrowRight, ArrowLeft, CircleCheck as CheckCircle, CreditCard as Edit3, Clock, Globe, Activity, User } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 // Реальные данные пользователя (в реальном приложении это будет из AsyncStorage или контекста)
