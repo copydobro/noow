@@ -198,21 +198,21 @@ export default function ActivityTab() {
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Статистика', `Вы выполнили ${completedExercises.size} упражнений сегодня!`);
             }}>
-              <Zap size={18} color="#FF6B35" strokeWidth={1.5} />
+              <Zap size={16} color="#FF6B35" strokeWidth={1.5} />
               <Text style={styles.statNumber}>{completedExercises.size}</Text>
               <Text style={styles.statLabel}>ВЫПОЛНЕНО</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Доступно', `${exercises.length} упражнений готовы к выполнению`);
             }}>
-              <Target size={18} color="#FF6B35" strokeWidth={1.5} />
+              <Target size={16} color="#FF6B35" strokeWidth={1.5} />
               <Text style={styles.statNumber}>{exercises.length}</Text>
               <Text style={styles.statLabel}>ДОСТУПНО</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Время активности', `Вы потратили ${completedExercises.size * 2} минут на упражнения`);
             }}>
-              <Clock size={18} color="#FF6B35" strokeWidth={1.5} />
+              <Clock size={16} color="#FF6B35" strokeWidth={1.5} />
               <Text style={styles.statNumber}>{completedExercises.size * 2}</Text>
               <Text style={styles.statLabel}>МИНУТ</Text>
             </TouchableOpacity>
@@ -248,6 +248,7 @@ export default function ActivityTab() {
           <ScrollView 
             style={styles.exerciseList}
             showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.exerciseListContent}
           >
             {filteredExercises.map((exercise) => (
               <TouchableOpacity 
@@ -268,7 +269,7 @@ export default function ActivityTab() {
                       }}
                     >
                       {completedExercises.has(exercise.id) ? (
-                        <CheckCircle size={20} color="#FF6B35" strokeWidth={1.5} />
+                        <CheckCircle size={18} color="#FF6B35" strokeWidth={1.5} />
                       ) : (
                         <View style={styles.incompleteCircle} />
                       )}
@@ -284,7 +285,7 @@ export default function ActivityTab() {
                       </View>
                       <View style={[
                         styles.difficultyTag,
-                        { backgroundColor: `${difficultyColors[exercise.difficulty]}15` }
+                        { backgroundColor: `${difficultyColors[exercise.difficulty]}10` }
                       ]}>
                         <Text style={[
                           styles.difficultyText,
@@ -306,7 +307,7 @@ export default function ActivityTab() {
                         colors={['#FF6B35', '#E55A2B']}
                         style={styles.startButtonGradient}
                       >
-                        <Play size={14} color="#000" strokeWidth={1.5} />
+                        <Play size={12} color="#000" strokeWidth={1.5} />
                         <Text style={styles.startButtonText}>{exercise.duration}</Text>
                       </LinearGradient>
                     </TouchableOpacity>
@@ -333,68 +334,68 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 10,
+    paddingBottom: 10,
   },
   header: {
-    marginBottom: 20,
+    marginBottom: 16,
   },
   title: {
-    fontSize: 36,
-    fontFamily: 'Inter-Bold',
-    color: '#FFFFFF',
-    letterSpacing: 4,
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 12,
-    fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.5)',
-    lineHeight: 16,
-    letterSpacing: 1,
-  },
-  statsContainer: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: 20,
-  },
-  statCard: {
-    flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 16,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-  },
-  statNumber: {
     fontSize: 24,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    marginTop: 8,
-    marginBottom: 4,
+    letterSpacing: 3,
+    marginBottom: 2,
   },
-  statLabel: {
-    fontSize: 9,
+  subtitle: {
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.5)',
+    lineHeight: 12,
     letterSpacing: 1.5,
   },
+  statsContainer: {
+    flexDirection: 'row',
+    gap: 6,
+    marginBottom: 16,
+  },
+  statCard: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
+    padding: 10,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
+  },
+  statNumber: {
+    fontSize: 16,
+    fontFamily: 'Inter-Bold',
+    color: '#FF6B35',
+    marginBottom: 1,
+  },
+  statLabel: {
+    fontSize: 8,
+    fontFamily: 'Inter-Medium',
+    color: 'rgba(255, 255, 255, 0.4)',
+    letterSpacing: 1,
+  },
   categoryScroll: {
-    marginBottom: 20,
-    maxHeight: 50,
+    marginBottom: 16,
+    maxHeight: 40,
   },
   categoryContainer: {
     paddingRight: 20,
-    gap: 8,
+    gap: 6,
     alignItems: 'center',
   },
   categoryButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    minWidth: 60,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
+    minWidth: 50,
     alignItems: 'center',
   },
   categoryButtonActive: {
@@ -402,7 +403,7 @@ const styles = StyleSheet.create({
     borderColor: '#FF6B35',
   },
   categoryText: {
-    fontSize: 10,
+    fontSize: 9,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.6)',
     letterSpacing: 1,
@@ -413,51 +414,54 @@ const styles = StyleSheet.create({
   exerciseList: {
     flex: 1,
   },
+  exerciseListContent: {
+    paddingBottom: 20,
+  },
   exerciseCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    marginBottom: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
+    marginBottom: 10,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   exerciseImage: {
     width: '100%',
-    height: 100,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    height: 80,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
   },
   exerciseContent: {
-    padding: 16,
+    padding: 12,
   },
   exerciseHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   exerciseName: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     flex: 1,
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   completeButton: {
-    padding: 4,
+    padding: 2,
   },
   incompleteCircle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    borderWidth: 2,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
+    borderWidth: 1.5,
     borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   exerciseDescription: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
-    lineHeight: 16,
-    marginBottom: 12,
+    lineHeight: 14,
+    marginBottom: 10,
   },
   exerciseFooter: {
     flexDirection: 'row',
@@ -466,46 +470,46 @@ const styles = StyleSheet.create({
   },
   exerciseInfo: {
     flexDirection: 'row',
-    gap: 6,
+    gap: 4,
     flex: 1,
   },
   exerciseTag: {
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    borderRadius: 12,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 8,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
   },
   exerciseCategory: {
-    fontSize: 9,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.7)',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   difficultyTag: {
-    borderRadius: 12,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    borderRadius: 8,
+    paddingVertical: 2,
+    paddingHorizontal: 6,
   },
   difficultyText: {
-    fontSize: 9,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   startButton: {
-    borderRadius: 12,
+    borderRadius: 10,
     overflow: 'hidden',
   },
   startButtonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    gap: 4,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    gap: 3,
   },
   startButtonText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
 });
