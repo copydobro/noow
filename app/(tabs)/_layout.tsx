@@ -10,17 +10,17 @@ export default function TabLayout() {
           backgroundColor: '#0A0A0A',
           borderTopColor: 'rgba(255, 107, 53, 0.15)',
           borderTopWidth: 1,
-          paddingTop: 12,
-          paddingBottom: 12,
-          height: 85,
+          paddingTop: 8,
+          paddingBottom: 8,
+          height: 70,
         },
         tabBarActiveTintColor: '#FF6B35',
         tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.3)',
         tabBarLabelStyle: {
-          fontSize: 10,
+          fontSize: 9,
           fontFamily: 'Inter-SemiBold',
-          marginTop: 6,
-          letterSpacing: 1.5,
+          marginTop: 4,
+          letterSpacing: 1,
         },
       }}>
       <Tabs.Screen
@@ -28,7 +28,7 @@ export default function TabLayout() {
         options={{
           title: 'РИТМ',
           tabBarIcon: ({ size, color }) => (
-            <Brain size={size} color={color} strokeWidth={1.5} />
+            <Brain size={size - 2} color={color} strokeWidth={1.5} />
           ),
         }}
       />
@@ -37,7 +37,7 @@ export default function TabLayout() {
         options={{
           title: 'АКТИВНОСТЬ',
           tabBarIcon: ({ size, color }) => (
-            <Activity size={size} color={color} strokeWidth={1.5} />
+            <Activity size={size - 2} color={color} strokeWidth={1.5} />
           ),
         }}
       />
@@ -46,7 +46,7 @@ export default function TabLayout() {
         options={{
           title: 'СТАТИСТИКА',
           tabBarIcon: ({ size, color }) => (
-            <BarChart3 size={size} color={color} strokeWidth={1.5} />
+            <BarChart3 size={size - 2} color={color} strokeWidth={1.5} />
           ),
         }}
       />
@@ -55,7 +55,7 @@ export default function TabLayout() {
         options={{
           title: 'ПРОФИЛЬ',
           tabBarIcon: ({ size, color }) => (
-            <User size={size} color={color} strokeWidth={1.5} />
+            <User size={size - 2} color={color} strokeWidth={1.5} />
           ),
         }}
       />
