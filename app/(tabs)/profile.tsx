@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, CreditCard as Edit3, LogOut, CircleHelp as HelpCircle, Share2 } from 'lucide-react-native';
@@ -37,7 +37,7 @@ export default function ProfileTab() {
       subtitle: userStats.workHours,
       icon: Clock,
       type: 'navigation',
-      onPress: () => console.log('Edit work hours'),
+      onPress: () => Alert.alert('Рабочие часы', 'Здесь вы можете изменить свои рабочие часы для оптимального планирования циклов Noowing'),
     },
     {
       id: 'activity-level',
@@ -45,7 +45,7 @@ export default function ProfileTab() {
       subtitle: userStats.level,
       icon: Activity,
       type: 'navigation',
-      onPress: () => console.log('Edit activity level'),
+      onPress: () => Alert.alert('Уровень активности', 'Настройте интенсивность физических упражнений под свой уровень подготовки'),
     },
     {
       id: 'timezone',
@@ -53,7 +53,7 @@ export default function ProfileTab() {
       subtitle: userStats.timezone,
       icon: Globe,
       type: 'navigation',
-      onPress: () => console.log('Edit timezone'),
+      onPress: () => Alert.alert('Часовой пояс', 'Установите правильный часовой пояс для синхронизации с вашим биологическим ритмом'),
     },
   ];
 
@@ -65,7 +65,10 @@ export default function ProfileTab() {
       icon: Bell,
       type: 'toggle',
       value: notifications,
-      onToggle: setNotifications,
+      onToggle: (value) => {
+        setNotifications(value);
+        Alert.alert('Уведомления', value ? 'Уведомления включены' : 'Уведомления отключены');
+      },
     },
     {
       id: 'dark-mode',
@@ -74,7 +77,10 @@ export default function ProfileTab() {
       icon: Moon,
       type: 'toggle',
       value: darkMode,
-      onToggle: setDarkMode,
+      onToggle: (value) => {
+        setDarkMode(value);
+        Alert.alert('Тема', value ? 'Темная тема включена' : 'Светлая тема включена');
+      },
     },
   ];
 
@@ -85,7 +91,7 @@ export default function ProfileTab() {
       subtitle: 'FAQ, контакты',
       icon: HelpCircle,
       type: 'navigation',
-      onPress: () => console.log('Help'),
+      onPress: () => Alert.alert('Помощь', 'Здесь вы найдете ответы на часто задаваемые вопросы и сможете связаться с поддержкой'),
     },
     {
       id: 'share',
@@ -93,9 +99,27 @@ export default function ProfileTab() {
       subtitle: 'Расскажи друзьям о Noowing',
       icon: Share2,
       type: 'navigation',
-      onPress: () => console.log('Share'),
+      onPress: () => Alert.alert('Поделиться', 'Расскажите друзьям о Noowing и помогите им улучшить свою продуктивность!'),
     },
   ];
+
+  const showUserStats = () => {
+    Alert.alert(
+      'Статистика пользователя',
+      `Всего циклов: ${userStats.totalCycles}\nТекущая серия: ${userStats.currentStreak} дней\nЛучшая серия: ${userStats.bestStreak} дней`
+    );
+  };
+
+  const handleLogout = () => {
+    Alert.alert(
+      'Выйти из аккаунта',
+      'Вы уверены, что хотите выйти? Ваш прогресс будет сохранен.',
+      [
+        { text: 'Отмена', style: 'cancel' },
+        { text: 'Выйти', style: 'destructive', onPress: () => Alert.alert('Выход', 'Вы вышли из аккаунта') }
+      ]
+    );
+  };
 
   const renderSetting = (setting: ProfileSetting) => (
     <TouchableOpacity
@@ -139,13 +163,16 @@ export default function ProfileTab() {
             {/* Header */}
             <View style={styles.header}>
               <Text style={styles.title}>Профиль</Text>
-              <TouchableOpacity style={styles.editButton}>
+              <TouchableOpacity 
+                style={styles.editButton}
+                onPress={() => Alert.alert('Редактировать', 'Здесь вы можете изменить информацию профиля')}
+              >
                 <Edit3 size={20} color="#00D4FF" strokeWidth={2} />
               </TouchableOpacity>
             </View>
 
             {/* User Card */}
-            <View style={styles.userCard}>
+            <TouchableOpacity style={styles.userCard} onPress={showUserStats}>
               <LinearGradient
                 colors={['rgba(0, 212, 255, 0.1)', 'rgba(0, 212, 255, 0.05)']}
                 style={styles.userCardGradient}
@@ -159,10 +186,10 @@ export default function ProfileTab() {
                   <Text style={styles.userAge}>Возраст: {userStats.ageRange}</Text>
                 </View>
               </LinearGradient>
-            </View>
+            </TouchableOpacity>
 
             {/* Stats */}
-            <View style={styles.statsContainer}>
+            <TouchableOpacity style={styles.statsContainer} onPress={showUserStats}>
               <View style={styles.statItem}>
                 <Text style={styles.statNumber}>{userStats.totalCycles}</Text>
                 <Text style={styles.statLabel}>Всего циклов</Text>
@@ -177,7 +204,7 @@ export default function ProfileTab() {
                 <Text style={styles.statNumber}>{userStats.bestStreak}</Text>
                 <Text style={styles.statLabel}>Лучшая серия</Text>
               </View>
-            </View>
+            </TouchableOpacity>
 
             {/* Profile Settings */}
             <View style={styles.section}>
@@ -204,7 +231,7 @@ export default function ProfileTab() {
             </View>
 
             {/* Logout Button */}
-            <TouchableOpacity style={styles.logoutButton}>
+            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
               <LogOut size={20} color="#EF4444" strokeWidth={2} />
               <Text style={styles.logoutText}>Выйти из аккаунта</Text>
             </TouchableOpacity>

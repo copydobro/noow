@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Play, Clock, Zap, Target, CircleCheck as CheckCircle } from 'lucide-react-native';
+import { Play, Clock, Zap, Target, CircleCheck as CheckCircle, Star } from 'lucide-react-native';
 
 interface Exercise {
   id: string;
@@ -13,6 +13,7 @@ interface Exercise {
   image: string;
   description: string;
   completed?: boolean;
+  instructions: string[];
 }
 
 const exercises: Exercise[] = [
@@ -24,6 +25,13 @@ const exercises: Exercise[] = [
     category: 'Ноги',
     image: 'https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=400',
     description: 'Классические приседания для активации мышц ног',
+    instructions: [
+      'Встаньте прямо, ноги на ширине плеч',
+      'Медленно опуститесь, как будто садитесь на стул',
+      'Держите спину прямо, колени не выходят за носки',
+      'Поднимитесь в исходное положение',
+      'Повторите 10-15 раз'
+    ]
   },
   {
     id: '2',
@@ -33,6 +41,13 @@ const exercises: Exercise[] = [
     category: 'Грудь',
     image: 'https://images.pexels.com/photos/4162438/pexels-photo-4162438.jpeg?auto=compress&cs=tinysrgb&w=400',
     description: 'Отжимания от пола для укрепления верхней части тела',
+    instructions: [
+      'Примите упор лежа, руки на ширине плеч',
+      'Тело должно быть прямой линией',
+      'Медленно опуститесь к полу',
+      'Оттолкнитесь в исходное положение',
+      'Повторите 8-12 раз'
+    ]
   },
   {
     id: '3',
@@ -42,6 +57,13 @@ const exercises: Exercise[] = [
     category: 'Кор',
     image: 'https://images.pexels.com/photos/4162451/pexels-photo-4162451.jpeg?auto=compress&cs=tinysrgb&w=400',
     description: 'Статическое упражнение для укрепления мышц кора',
+    instructions: [
+      'Примите упор лежа на предплечьях',
+      'Тело должно быть прямой линией',
+      'Напрягите мышцы живота',
+      'Держите позицию 30-60 секунд',
+      'Дышите равномерно'
+    ]
   },
   {
     id: '4',
@@ -51,6 +73,13 @@ const exercises: Exercise[] = [
     category: 'Кардио',
     image: 'https://images.pexels.com/photos/4162450/pexels-photo-4162450.jpeg?auto=compress&cs=tinysrgb&w=400',
     description: 'Прыжки на месте для кардио нагрузки',
+    instructions: [
+      'Встаньте прямо, ноги вместе',
+      'Прыгните, разводя ноги в стороны',
+      'Одновременно поднимите руки над головой',
+      'Вернитесь в исходное положение',
+      'Повторите 15-20 раз'
+    ]
   },
   {
     id: '5',
@@ -60,6 +89,13 @@ const exercises: Exercise[] = [
     category: 'Растяжка',
     image: 'https://images.pexels.com/photos/4056723/pexels-photo-4056723.jpeg?auto=compress&cs=tinysrgb&w=400',
     description: 'Мягкая растяжка для снятия напряжения в шее',
+    instructions: [
+      'Сядьте или встаньте прямо',
+      'Медленно наклоните голову вправо',
+      'Задержитесь на 15 секунд',
+      'Повторите в другую сторону',
+      'Выполните круговые движения головой'
+    ]
   },
   {
     id: '6',
@@ -69,6 +105,13 @@ const exercises: Exercise[] = [
     category: 'Ноги',
     image: 'https://images.pexels.com/photos/4162452/pexels-photo-4162452.jpeg?auto=compress&cs=tinysrgb&w=400',
     description: 'Выпады для проработки мышц ног и ягодиц',
+    instructions: [
+      'Встаньте прямо, ноги на ширине плеч',
+      'Сделайте шаг вперед одной ногой',
+      'Опуститесь, сгибая оба колена под 90°',
+      'Вернитесь в исходное положение',
+      'Повторите 8-10 раз на каждую ногу'
+    ]
   },
 ];
 
@@ -104,6 +147,42 @@ export default function ActivityTab() {
     setCompletedExercises(newCompleted);
   };
 
+  const startExercise = (exercise: Exercise) => {
+    Alert.alert(
+      exercise.name,
+      `Готов начать ${exercise.name}?\n\nИнструкции:\n${exercise.instructions.join('\n')}`,
+      [
+        { text: 'Отмена', style: 'cancel' },
+        { 
+          text: 'Начать', 
+          onPress: () => {
+            Alert.alert(
+              'Упражнение началось!',
+              `Выполняй ${exercise.name} в течение ${exercise.duration}`,
+              [
+                { 
+                  text: 'Завершить', 
+                  onPress: () => {
+                    toggleExerciseCompletion(exercise.id);
+                    Alert.alert('Отлично!', 'Упражнение завершено! 🎉');
+                  }
+                }
+              ]
+            );
+          }
+        }
+      ]
+    );
+  };
+
+  const showExerciseDetails = (exercise: Exercise) => {
+    Alert.alert(
+      exercise.name,
+      `${exercise.description}\n\nИнструкции:\n${exercise.instructions.join('\n')}`,
+      [{ text: 'Понятно', style: 'default' }]
+    );
+  };
+
   return (
     <LinearGradient
       colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
@@ -119,21 +198,27 @@ export default function ActivityTab() {
 
           {/* Stats */}
           <View style={styles.statsContainer}>
-            <View style={styles.statCard}>
+            <TouchableOpacity style={styles.statCard} onPress={() => {
+              Alert.alert('Статистика', `Вы выполнили ${completedExercises.size} упражнений сегодня!`);
+            }}>
               <Zap size={24} color="#FBBF24" strokeWidth={2} />
               <Text style={styles.statNumber}>{completedExercises.size}</Text>
               <Text style={styles.statLabel}>Выполнено</Text>
-            </View>
-            <View style={styles.statCard}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.statCard} onPress={() => {
+              Alert.alert('Доступно', `${exercises.length} упражнений готовы к выполнению`);
+            }}>
               <Target size={24} color="#4ADE80" strokeWidth={2} />
               <Text style={styles.statNumber}>{exercises.length}</Text>
               <Text style={styles.statLabel}>Доступно</Text>
-            </View>
-            <View style={styles.statCard}>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.statCard} onPress={() => {
+              Alert.alert('Время активности', `Вы потратили ${completedExercises.size * 2} минут на упражнения`);
+            }}>
               <Clock size={24} color="#8B5CF6" strokeWidth={2} />
               <Text style={styles.statNumber}>{completedExercises.size * 2}</Text>
               <Text style={styles.statLabel}>Минут</Text>
-            </View>
+            </TouchableOpacity>
           </View>
 
           {/* Category Filter */}
@@ -168,7 +253,11 @@ export default function ActivityTab() {
             showsVerticalScrollIndicator={false}
           >
             {filteredExercises.map((exercise) => (
-              <View key={exercise.id} style={styles.exerciseCard}>
+              <TouchableOpacity 
+                key={exercise.id} 
+                style={styles.exerciseCard}
+                onPress={() => showExerciseDetails(exercise)}
+              >
                 <Image source={{ uri: exercise.image }} style={styles.exerciseImage} />
                 
                 <View style={styles.exerciseContent}>
@@ -176,7 +265,10 @@ export default function ActivityTab() {
                     <Text style={styles.exerciseName}>{exercise.name}</Text>
                     <TouchableOpacity
                       style={styles.completeButton}
-                      onPress={() => toggleExerciseCompletion(exercise.id)}
+                      onPress={(e) => {
+                        e.stopPropagation();
+                        toggleExerciseCompletion(exercise.id);
+                      }}
                     >
                       {completedExercises.has(exercise.id) ? (
                         <CheckCircle size={24} color="#4ADE80" strokeWidth={2} />
@@ -206,7 +298,13 @@ export default function ActivityTab() {
                       </View>
                     </View>
                     
-                    <TouchableOpacity style={styles.startButton}>
+                    <TouchableOpacity 
+                      style={styles.startButton}
+                      onPress={(e) => {
+                        e.stopPropagation();
+                        startExercise(exercise);
+                      }}
+                    >
                       <LinearGradient
                         colors={['#00D4FF', '#0099CC']}
                         style={styles.startButtonGradient}
@@ -217,7 +315,7 @@ export default function ActivityTab() {
                     </TouchableOpacity>
                   </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             ))}
           </ScrollView>
         </View>

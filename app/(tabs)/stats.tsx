@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar, TrendingUp, Award, Clock, Brain, Activity, Coffee } from 'lucide-react-native';
+import { Calendar, TrendingUp, Award, Clock, Brain, Activity, Coffee, Share2, ChartBar as BarChart3 } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 
@@ -13,6 +13,7 @@ interface StatCard {
   icon: any;
   color: string;
   gradient: string[];
+  onPress?: () => void;
 }
 
 interface WeekData {
@@ -50,6 +51,7 @@ export default function StatsTab() {
       icon: Brain,
       color: '#4ADE80',
       gradient: ['#4ADE80', '#22C55E'],
+      onPress: () => Alert.alert('Циклы работы', 'Вы завершили 156 циклов глубокой работы! Каждый цикл длится 45 минут.')
     },
     {
       title: 'Время активности',
@@ -58,6 +60,7 @@ export default function StatsTab() {
       icon: Clock,
       color: '#00D4FF',
       gradient: ['#00D4FF', '#0099CC'],
+      onPress: () => Alert.alert('Время активности', 'Сегодня вы потратили 5 часов 12 минут на активные упражнения!')
     },
     {
       title: 'Активаций',
@@ -66,6 +69,7 @@ export default function StatsTab() {
       icon: Activity,
       color: '#FBBF24',
       gradient: ['#FBBF24', '#F59E0B'],
+      onPress: () => Alert.alert('Физические активации', 'Вы выполнили 312 двухминутных активаций! Отличная работа!')
     },
     {
       title: 'Текущая серия',
@@ -74,6 +78,7 @@ export default function StatsTab() {
       icon: TrendingUp,
       color: '#8B5CF6',
       gradient: ['#8B5CF6', '#7C3AED'],
+      onPress: () => Alert.alert('Серия', 'Ваша текущая серия: 7 дней подряд! Лучший результат: 14 дней.')
     },
   ];
 
@@ -82,6 +87,34 @@ export default function StatsTab() {
     { key: 'month', label: 'Месяц' },
     { key: 'year', label: 'Год' },
   ];
+
+  const shareStats = () => {
+    Alert.alert(
+      'Поделиться статистикой',
+      'Хотите поделиться своими достижениями в Noowing?',
+      [
+        { text: 'Отмена', style: 'cancel' },
+        { text: 'Поделиться', onPress: () => Alert.alert('Успех!', 'Статистика отправлена!') }
+      ]
+    );
+  };
+
+  const showWeeklyChart = () => {
+    const totalCycles = weekData.reduce((sum, day) => sum + day.cycles, 0);
+    const avgCycles = Math.round(totalCycles / weekData.length);
+    Alert.alert(
+      'Недельная статистика',
+      `Всего циклов за неделю: ${totalCycles}\nСреднее в день: ${avgCycles}\nЛучший день: Четверг (12 циклов)`
+    );
+  };
+
+  const showAchievement = (achievement: typeof achievements[0]) => {
+    Alert.alert(
+      achievement.title,
+      achievement.description + (achievement.earned ? '\n\n🏆 Достижение получено!' : '\n\n🔒 Достижение заблокировано'),
+      [{ text: 'Понятно', style: 'default' }]
+    );
+  };
 
   return (
     <LinearGradient
@@ -95,6 +128,9 @@ export default function StatsTab() {
             <View style={styles.header}>
               <Text style={styles.title}>Статистика</Text>
               <Text style={styles.subtitle}>Твой прогресс в Noowing</Text>
+              <TouchableOpacity style={styles.shareButton} onPress={shareStats}>
+                <Share2 size={20} color="#00D4FF" strokeWidth={2} />
+              </TouchableOpacity>
             </View>
 
             {/* Period Selector */}
@@ -121,7 +157,11 @@ export default function StatsTab() {
             {/* Stats Cards */}
             <View style={styles.statsGrid}>
               {statCards.map((stat, index) => (
-                <View key={index} style={styles.statCard}>
+                <TouchableOpacity 
+                  key={index} 
+                  style={styles.statCard}
+                  onPress={stat.onPress}
+                >
                   <LinearGradient
                     colors={[`${stat.color}20`, `${stat.color}10`]}
                     style={styles.statCardGradient}
@@ -133,16 +173,23 @@ export default function StatsTab() {
                     <Text style={styles.statCardValue}>{stat.value}</Text>
                     <Text style={styles.statCardSubtitle}>{stat.subtitle}</Text>
                   </LinearGradient>
-                </View>
+                </TouchableOpacity>
               ))}
             </View>
 
             {/* Weekly Chart */}
-            <View style={styles.chartContainer}>
-              <Text style={styles.chartTitle}>Активность за неделю</Text>
+            <TouchableOpacity style={styles.chartContainer} onPress={showWeeklyChart}>
+              <View style={styles.chartHeader}>
+                <Text style={styles.chartTitle}>Активность за неделю</Text>
+                <BarChart3 size={20} color="#00D4FF" strokeWidth={2} />
+              </View>
               <View style={styles.chart}>
                 {weekData.map((day, index) => (
-                  <View key={index} style={styles.chartBar}>
+                  <TouchableOpacity 
+                    key={index} 
+                    style={styles.chartBar}
+                    onPress={() => Alert.alert(day.day, `Циклов: ${day.cycles} из ${day.maxCycles}`)}
+                  >
                     <View style={styles.barContainer}>
                       <View 
                         style={[
@@ -156,16 +203,19 @@ export default function StatsTab() {
                     </View>
                     <Text style={styles.barLabel}>{day.day}</Text>
                     <Text style={styles.barValue}>{day.cycles}</Text>
-                  </View>
+                  </TouchableOpacity>
                 ))}
               </View>
-            </View>
+            </TouchableOpacity>
 
             {/* Phase Distribution */}
             <View style={styles.phaseContainer}>
               <Text style={styles.phaseTitle}>Распределение времени</Text>
               <View style={styles.phaseStats}>
-                <View style={styles.phaseStat}>
+                <TouchableOpacity 
+                  style={styles.phaseStat}
+                  onPress={() => Alert.alert('Работа', 'Вы потратили 117 часов на глубокую работу (75% времени)')}
+                >
                   <View style={styles.phaseIcon}>
                     <Brain size={20} color="#4ADE80" strokeWidth={2} />
                   </View>
@@ -174,9 +224,12 @@ export default function StatsTab() {
                     <Text style={styles.phaseValue}>117 часов</Text>
                   </View>
                   <Text style={styles.phasePercentage}>75%</Text>
-                </View>
+                </TouchableOpacity>
                 
-                <View style={styles.phaseStat}>
+                <TouchableOpacity 
+                  style={styles.phaseStat}
+                  onPress={() => Alert.alert('Активация', 'Вы потратили 10.4 часа на физические активации (7% времени)')}
+                >
                   <View style={styles.phaseIcon}>
                     <Activity size={20} color="#FBBF24" strokeWidth={2} />
                   </View>
@@ -185,9 +238,12 @@ export default function StatsTab() {
                     <Text style={styles.phaseValue}>10.4 часа</Text>
                   </View>
                   <Text style={styles.phasePercentage}>7%</Text>
-                </View>
+                </TouchableOpacity>
                 
-                <View style={styles.phaseStat}>
+                <TouchableOpacity 
+                  style={styles.phaseStat}
+                  onPress={() => Alert.alert('Отдых', 'Вы потратили 26 часов на восстановление (18% времени)')}
+                >
                   <View style={styles.phaseIcon}>
                     <Coffee size={20} color="#8B5CF6" strokeWidth={2} />
                   </View>
@@ -196,7 +252,7 @@ export default function StatsTab() {
                     <Text style={styles.phaseValue}>26 часов</Text>
                   </View>
                   <Text style={styles.phasePercentage}>18%</Text>
-                </View>
+                </TouchableOpacity>
               </View>
             </View>
 
@@ -205,12 +261,13 @@ export default function StatsTab() {
               <Text style={styles.achievementsTitle}>Достижения</Text>
               <View style={styles.achievementsList}>
                 {achievements.map((achievement) => (
-                  <View 
+                  <TouchableOpacity 
                     key={achievement.id} 
                     style={[
                       styles.achievementCard,
                       !achievement.earned && styles.achievementCardLocked
                     ]}
+                    onPress={() => showAchievement(achievement)}
                   >
                     <View style={styles.achievementIcon}>
                       <Award 
@@ -238,7 +295,7 @@ export default function StatsTab() {
                         <Text style={styles.achievementBadgeText}>✓</Text>
                       </View>
                     )}
-                  </View>
+                  </TouchableOpacity>
                 ))}
               </View>
             </View>
@@ -266,17 +323,29 @@ const styles = StyleSheet.create({
   },
   header: {
     marginBottom: 24,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
   },
   title: {
     fontSize: 28,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     marginBottom: 8,
+    flex: 1,
   },
   subtitle: {
     fontSize: 16,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
+    flex: 1,
+  },
+  shareButton: {
+    padding: 8,
+    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 212, 255, 0.3)',
   },
   periodSelector: {
     flexDirection: 'row',
@@ -350,11 +419,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
   },
+  chartHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
   chartTitle: {
     fontSize: 18,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 20,
   },
   chart: {
     flexDirection: 'row',

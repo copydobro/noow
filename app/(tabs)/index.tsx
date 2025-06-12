@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Play, Pause, SkipForward, Brain, Activity, Coffee } from 'lucide-react-native';
+import { Play, Pause, SkipForward, Brain, Activity, Coffee, RotateCcw } from 'lucide-react-native';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
   withTiming, 
   withRepeat,
-  interpolate
+  interpolate,
+  runOnJS
 } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
@@ -35,6 +36,7 @@ const PHASE_CONFIG = {
     icon: Brain,
     color: '#4ADE80',
     gradient: ['#4ADE80', '#22C55E'],
+    message: 'Сосредоточься на важной задаче. Никаких отвлечений!',
   },
   activation: {
     title: 'Физическая активация',
@@ -42,6 +44,7 @@ const PHASE_CONFIG = {
     icon: Activity,
     color: '#FBBF24',
     gradient: ['#FBBF24', '#F59E0B'],
+    message: 'Встань и подвигайся! Сделай несколько упражнений.',
   },
   rest: {
     title: 'Восстановление',
@@ -49,6 +52,7 @@ const PHASE_CONFIG = {
     icon: Coffee,
     color: '#8B5CF6',
     gradient: ['#8B5CF6', '#7C3AED'],
+    message: 'Расслабься и восстанови силы перед следующим циклом.',
   },
 };
 
@@ -62,6 +66,16 @@ export default function HomeTab() {
 
   const pulseAnimation = useSharedValue(0);
   const progressAnimation = useSharedValue(0);
+
+  // Функция для показа уведомлений
+  const showPhaseAlert = (phase: CyclePhase) => {
+    const config = PHASE_CONFIG[phase];
+    Alert.alert(
+      config.title,
+      config.message,
+      [{ text: 'Понятно', style: 'default' }]
+    );
+  };
 
   useEffect(() => {
     if (cycleState.isActive) {
@@ -91,15 +105,19 @@ export default function HomeTab() {
           timeRemaining: prev.timeRemaining - 1,
         }));
       }, 1000);
-    } else if (cycleState.timeRemaining === 0) {
-      // Move to next phase
+    } else if (cycleState.timeRemaining === 0 && cycleState.isActive) {
+      // Переход к следующей фазе
       const nextPhase = getNextPhase(cycleState.phase);
       setCycleState(prev => ({
         ...prev,
         phase: nextPhase,
         timeRemaining: PHASE_DURATIONS[nextPhase],
         cycleCount: nextPhase === 'work' ? prev.cycleCount + 1 : prev.cycleCount,
+        isActive: false, // Останавливаем таймер для подтверждения
       }));
+      
+      // Показываем уведомление о новой фазе
+      runOnJS(showPhaseAlert)(nextPhase);
     }
 
     return () => clearInterval(interval);
@@ -127,7 +145,32 @@ export default function HomeTab() {
       phase: nextPhase,
       timeRemaining: PHASE_DURATIONS[nextPhase],
       cycleCount: nextPhase === 'work' ? prev.cycleCount + 1 : prev.cycleCount,
+      isActive: false,
     }));
+    
+    showPhaseAlert(nextPhase);
+  };
+
+  const resetTimer = () => {
+    Alert.alert(
+      'Сбросить таймер?',
+      'Это сбросит текущий цикл и статистику',
+      [
+        { text: 'Отмена', style: 'cancel' },
+        { 
+          text: 'Сбросить', 
+          style: 'destructive',
+          onPress: () => {
+            setCycleState({
+              phase: 'work',
+              timeRemaining: PHASE_DURATIONS.work,
+              isActive: false,
+              cycleCount: 0,
+            });
+          }
+        }
+      ]
+    );
   };
 
   const formatTime = (seconds: number): string => {
@@ -201,20 +244,23 @@ export default function HomeTab() {
           {/* Phase Indicators */}
           <View style={styles.phaseIndicators}>
             {Object.entries(PHASE_CONFIG).map(([phase, config]) => (
-              <View
+              <TouchableOpacity
                 key={phase}
                 style={[
                   styles.phaseIndicator,
                   cycleState.phase === phase && styles.phaseIndicatorActive,
                   { borderColor: config.color }
                 ]}
+                onPress={() => {
+                  Alert.alert(config.title, config.message);
+                }}
               >
                 <config.icon 
                   size={20} 
                   color={cycleState.phase === phase ? config.color : 'rgba(255,255,255,0.4)'} 
                   strokeWidth={2} 
                 />
-              </View>
+              </TouchableOpacity>
             ))}
           </View>
 
@@ -245,16 +291,9 @@ export default function HomeTab() {
 
             <TouchableOpacity
               style={styles.controlButton}
-              onPress={() => {
-                setCycleState({
-                  phase: 'work',
-                  timeRemaining: PHASE_DURATIONS.work,
-                  isActive: false,
-                  cycleCount: 0,
-                });
-              }}
+              onPress={resetTimer}
             >
-              <Text style={styles.resetText}>Reset</Text>
+              <RotateCcw size={24} color="#FFFFFF" strokeWidth={2} />
             </TouchableOpacity>
           </View>
 
@@ -267,7 +306,9 @@ export default function HomeTab() {
                 <Text style={styles.progressStatLabel}>Циклов</Text>
               </View>
               <View style={styles.progressStat}>
-                <Text style={styles.progressStatNumber}>{Math.floor(cycleState.cycleCount * 52 / 60)}ч {(cycleState.cycleCount * 52) % 60}м</Text>
+                <Text style={styles.progressStatNumber}>
+                  {Math.floor(cycleState.cycleCount * 52 / 60)}ч {(cycleState.cycleCount * 52) % 60}м
+                </Text>
                 <Text style={styles.progressStatLabel}>Время</Text>
               </View>
               <View style={styles.progressStat}>
@@ -423,11 +464,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  resetText: {
-    fontSize: 12,
-    fontFamily: 'Inter-Medium',
-    color: '#FFFFFF',
   },
   dailyProgress: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
