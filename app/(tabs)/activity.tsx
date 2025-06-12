@@ -331,11 +331,11 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingHorizontal: 20,
+    paddingTop: 10,
   },
   header: {
-    marginBottom: 24,
+    marginBottom: 20,
   },
   title: {
     fontSize: 36,
@@ -353,8 +353,8 @@ const styles = StyleSheet.create({
   },
   statsContainer: {
     flexDirection: 'row',
-    gap: 12,
-    marginBottom: 24,
+    gap: 8,
+    marginBottom: 20,
   },
   statCard: {
     flex: 1,
@@ -379,11 +379,11 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
   },
   categoryScroll: {
-    marginBottom: 24,
+    marginBottom: 20,
   },
   categoryContainer: {
-    paddingRight: 24,
-    gap: 12,
+    paddingRight: 20,
+    gap: 8,
   },
   categoryButton: {
     paddingVertical: 12,
