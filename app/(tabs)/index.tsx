@@ -8,8 +8,7 @@ import Animated, {
   useAnimatedStyle, 
   withTiming, 
   withRepeat,
-  interpolate,
-  runOnJS
+  interpolate
 } from 'react-native-reanimated';
 
 const { width } = Dimensions.get('window');
@@ -73,7 +72,14 @@ export default function HomeTab() {
     Alert.alert(
       config.title,
       config.message,
-      [{ text: 'Понятно', style: 'default' }]
+      [
+        { 
+          text: 'Начать', 
+          onPress: () => {
+            setCycleState(prev => ({ ...prev, isActive: true }));
+          }
+        }
+      ]
     );
   };
 
@@ -117,7 +123,7 @@ export default function HomeTab() {
       }));
       
       // Показываем уведомление о новой фазе
-      runOnJS(showPhaseAlert)(nextPhase);
+      showPhaseAlert(nextPhase);
     }
 
     return () => clearInterval(interval);
