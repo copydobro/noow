@@ -1,23 +1,210 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { ArrowRight, ArrowLeft, CircleCheck as CheckCircle, CreditCard as Edit3, Clock, Globe } from 'lucide-react-native';
+import { ArrowRight, ArrowLeft, CircleCheck as CheckCircle, Edit3, Clock, Globe, Activity, User } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-// Mock data - in real app this would come from state/storage
-const mockUserData = {
-  ageRange: '26-35',
-  ageRangeLabel: 'Технологические воины',
-  activityLevel: 'intermediate',
-  activityLevelLabel: 'Средний (11-20 приседаний)',
-  workHours: '09:00 - 17:00',
-  timezone: 'Europe/Moscow (UTC+3)',
+// Реальные данные пользователя (в реальном приложении это будет из AsyncStorage или контекста)
+const getUserData = () => {
+  // Здесь должны быть данные из предыдущих шагов
+  // Пока используем localStorage для веб-версии
+  if (typeof window !== 'undefined') {
+    return {
+      ageRange: localStorage.getItem('userAgeRange') || '26-35',
+      ageRangeLabel: localStorage.getItem('userAgeRangeLabel') || 'Технологические воины',
+      activityLevel: localStorage.getItem('userActivityLevel') || 'intermediate',
+      activityLevelLabel: localStorage.getItem('userActivityLevelLabel') || 'Средний (11-20 приседаний)',
+      workStartTime: localStorage.getItem('userWorkStartTime') || '09:00',
+      workEndTime: localStorage.getItem('userWorkEndTime') || '17:00',
+      timezone: localStorage.getItem('userTimezone') || 'Europe/Moscow (UTC+3)',
+    };
+  }
+  
+  // Fallback для мобильных платформ
+  return {
+    ageRange: '26-35',
+    ageRangeLabel: 'Технологические воины',
+    activityLevel: 'intermediate',
+    activityLevelLabel: 'Средний (11-20 приседаний)',
+    workStartTime: '09:00',
+    workEndTime: '17:00',
+    timezone: 'Europe/Moscow (UTC+3)',
+  };
 };
 
 export default function OnboardingStep6() {
+  const [userData, setUserData] = useState(getUserData());
+
+  const handleEditProfile = () => {
+    Alert.alert(
+      'Редактировать профиль',
+      'Выберите что хотите изменить:',
+      [
+        { 
+          text: 'Возраст', 
+          onPress: () => {
+            Alert.alert(
+              'Изменить возраст',
+              'Выберите новый возрастной диапазон:',
+              [
+                { text: '18-25', onPress: () => updateUserData('ageRange', '18-25', 'Цифровые аборигены') },
+                { text: '26-35', onPress: () => updateUserData('ageRange', '26-35', 'Технологические воины') },
+                { text: '36-45', onPress: () => updateUserData('ageRange', '36-45', 'Цифровые лидеры') },
+                { text: '46+', onPress: () => updateUserData('ageRange', '46+', 'Технологические пионеры') },
+                { text: 'Отмена', style: 'cancel' }
+              ]
+            );
+          }
+        },
+        { 
+          text: 'Активность', 
+          onPress: () => {
+            Alert.alert(
+              'Изменить уровень активности',
+              'Выберите новый уровень:',
+              [
+                { text: 'Начинающий', onPress: () => updateUserData('activityLevel', 'beginner', 'Начинающий (0-10 приседаний)') },
+                { text: 'Средний', onPress: () => updateUserData('activityLevel', 'intermediate', 'Средний (11-20 приседаний)') },
+                { text: 'Продвинутый', onPress: () => updateUserData('activityLevel', 'advanced', 'Продвинутый (21+ приседаний)') },
+                { text: 'Отмена', style: 'cancel' }
+              ]
+            );
+          }
+        },
+        { text: 'Отмена', style: 'cancel' }
+      ]
+    );
+  };
+
+  const handleEditSchedule = () => {
+    Alert.alert(
+      'Редактировать расписание',
+      'Выберите что хотите изменить:',
+      [
+        { 
+          text: 'Рабочие часы', 
+          onPress: () => {
+            Alert.alert(
+              'Изменить рабочие часы',
+              'Выберите новое время:',
+              [
+                { text: '08:00 - 16:00', onPress: () => updateWorkHours('08:00', '16:00') },
+                { text: '09:00 - 17:00', onPress: () => updateWorkHours('09:00', '17:00') },
+                { text: '10:00 - 18:00', onPress: () => updateWorkHours('10:00', '18:00') },
+                { text: '11:00 - 19:00', onPress: () => updateWorkHours('11:00', '19:00') },
+                { text: 'Отмена', style: 'cancel' }
+              ]
+            );
+          }
+        },
+        { 
+          text: 'Часовой пояс', 
+          onPress: () => {
+            Alert.alert(
+              'Изменить часовой пояс',
+              'Выберите новый часовой пояс:',
+              [
+                { text: 'UTC+3 (Москва)', onPress: () => updateUserData('timezone', 'Europe/Moscow (UTC+3)', null) },
+                { text: 'UTC+2 (Киев)', onPress: () => updateUserData('timezone', 'Europe/Kiev (UTC+2)', null) },
+                { text: 'UTC+1 (Берлин)', onPress: () => updateUserData('timezone', 'Europe/Berlin (UTC+1)', null) },
+                { text: 'UTC+0 (Лондон)', onPress: () => updateUserData('timezone', 'Europe/London (UTC+0)', null) },
+                { text: 'Отмена', style: 'cancel' }
+              ]
+            );
+          }
+        },
+        { text: 'Отмена', style: 'cancel' }
+      ]
+    );
+  };
+
+  const updateUserData = (field: string, value: string, label: string | null) => {
+    const newData = { ...userData };
+    
+    if (field === 'ageRange') {
+      newData.ageRange = value;
+      newData.ageRangeLabel = label || '';
+    } else if (field === 'activityLevel') {
+      newData.activityLevel = value;
+      newData.activityLevelLabel = label || '';
+    } else if (field === 'timezone') {
+      newData.timezone = value;
+    }
+    
+    setUserData(newData);
+    
+    // Сохраняем в localStorage для веб-версии
+    if (typeof window !== 'undefined') {
+      if (field === 'ageRange') {
+        localStorage.setItem('userAgeRange', value);
+        localStorage.setItem('userAgeRangeLabel', label || '');
+      } else if (field === 'activityLevel') {
+        localStorage.setItem('userActivityLevel', value);
+        localStorage.setItem('userActivityLevelLabel', label || '');
+      } else if (field === 'timezone') {
+        localStorage.setItem('userTimezone', value);
+      }
+    }
+    
+    Alert.alert('Успешно!', 'Настройки обновлены');
+  };
+
+  const updateWorkHours = (startTime: string, endTime: string) => {
+    const newData = { 
+      ...userData, 
+      workStartTime: startTime, 
+      workEndTime: endTime 
+    };
+    setUserData(newData);
+    
+    // Сохраняем в localStorage
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('userWorkStartTime', startTime);
+      localStorage.setItem('userWorkEndTime', endTime);
+    }
+    
+    Alert.alert('Успешно!', `Рабочие часы изменены на ${startTime} - ${endTime}`);
+  };
+
   const handleComplete = () => {
-    router.push('/(tabs)');
+    Alert.alert(
+      'Добро пожаловать в Noowing! 🎉',
+      'Ваш профиль настроен и готов к использованию. Начнем повышать продуктивность!',
+      [
+        { 
+          text: 'Начать Noowing', 
+          onPress: () => {
+            // Сохраняем флаг завершения онбординга
+            if (typeof window !== 'undefined') {
+              localStorage.setItem('onboardingCompleted', 'true');
+            }
+            router.push('/(tabs)');
+          }
+        }
+      ]
+    );
+  };
+
+  const resetOnboarding = () => {
+    Alert.alert(
+      'Сбросить настройки',
+      'Вы уверены, что хотите начать настройку заново?',
+      [
+        { text: 'Отмена', style: 'cancel' },
+        { 
+          text: 'Сбросить', 
+          style: 'destructive',
+          onPress: () => {
+            // Очищаем сохраненные данные
+            if (typeof window !== 'undefined') {
+              localStorage.clear();
+            }
+            router.push('/onboarding');
+          }
+        }
+      ]
+    );
   };
 
   return (
@@ -42,6 +229,13 @@ export default function OnboardingStep6() {
               </View>
               <Text style={styles.progressText}>Шаг 6 из 6</Text>
             </View>
+
+            <TouchableOpacity 
+              style={styles.resetButton}
+              onPress={resetOnboarding}
+            >
+              <Text style={styles.resetButtonText}>Сброс</Text>
+            </TouchableOpacity>
           </View>
 
           {/* Main content */}
@@ -56,8 +250,11 @@ export default function OnboardingStep6() {
               {/* Profile Section */}
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
-                  <Text style={styles.sectionTitle}>🧠 Твой профиль:</Text>
-                  <TouchableOpacity style={styles.editButton}>
+                  <View style={styles.sectionTitleContainer}>
+                    <User size={20} color="#00D4FF" strokeWidth={2} />
+                    <Text style={styles.sectionTitle}>Твой профиль</Text>
+                  </View>
+                  <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
                     <Edit3 size={16} color="#00D4FF" strokeWidth={2} />
                     <Text style={styles.editButtonText}>Редактировать</Text>
                   </TouchableOpacity>
@@ -65,46 +262,49 @@ export default function OnboardingStep6() {
                 
                 <View style={styles.profileItem}>
                   <Text style={styles.profileLabel}>Возрастной диапазон:</Text>
-                  <Text style={styles.profileValue}>{mockUserData.ageRange} ({mockUserData.ageRangeLabel})</Text>
+                  <Text style={styles.profileValue}>{userData.ageRange} ({userData.ageRangeLabel})</Text>
                 </View>
                 
                 <View style={styles.profileItem}>
-                  <Text style={styles.profileLabel}>Активность:</Text>
-                  <Text style={styles.profileValue}>{mockUserData.activityLevelLabel}</Text>
+                  <Text style={styles.profileLabel}>Уровень активности:</Text>
+                  <Text style={styles.profileValue}>{userData.activityLevelLabel}</Text>
                 </View>
               </View>
 
               {/* Schedule Section */}
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
-                  <Text style={styles.sectionTitle}>⏰ Расписание:</Text>
-                  <TouchableOpacity style={styles.editButton}>
-                    <Clock size={16} color="#00D4FF" strokeWidth={2} />
+                  <View style={styles.sectionTitleContainer}>
+                    <Clock size={20} color="#00D4FF" strokeWidth={2} />
+                    <Text style={styles.sectionTitle}>Расписание</Text>
+                  </View>
+                  <TouchableOpacity style={styles.editButton} onPress={handleEditSchedule}>
+                    <Edit3 size={16} color="#00D4FF" strokeWidth={2} />
                     <Text style={styles.editButtonText}>Редактировать</Text>
                   </TouchableOpacity>
                 </View>
                 
                 <View style={styles.profileItem}>
                   <Text style={styles.profileLabel}>Рабочие часы:</Text>
-                  <Text style={styles.profileValue}>{mockUserData.workHours}</Text>
+                  <Text style={styles.profileValue}>{userData.workStartTime} - {userData.workEndTime}</Text>
                 </View>
                 
                 <View style={styles.profileItem}>
                   <Text style={styles.profileLabel}>Часовой пояс:</Text>
-                  <Text style={styles.profileValue}>{mockUserData.timezone}</Text>
+                  <Text style={styles.profileValue}>{userData.timezone}</Text>
                 </View>
               </View>
 
               {/* Cycle Explanation */}
               <View style={styles.cycleContainer}>
-                <Text style={styles.cycleTitle}>Твой цикл 45-2-5:</Text>
+                <Text style={styles.cycleTitle}>Твой персональный цикл 45-2-5:</Text>
                 <View style={styles.cycleItem}>
                   <View style={[styles.cycleDot, { backgroundColor: '#4ADE80' }]} />
                   <Text style={styles.cycleText}>45 минут сосредоточенной работы</Text>
                 </View>
                 <View style={styles.cycleItem}>
                   <View style={[styles.cycleDot, { backgroundColor: '#FBBF24' }]} />
-                  <Text style={styles.cycleText}>2 минуты физической активации</Text>
+                  <Text style={styles.cycleText}>2 минуты физической активации ({userData.activityLevel})</Text>
                 </View>
                 <View style={styles.cycleItem}>
                   <View style={[styles.cycleDot, { backgroundColor: '#8B5CF6' }]} />
@@ -112,8 +312,18 @@ export default function OnboardingStep6() {
                 </View>
               </View>
 
+              <View style={styles.infoContainer}>
+                <Text style={styles.infoTitle}>💡 Что дальше?</Text>
+                <Text style={styles.infoText}>
+                  • Все настройки можно изменить в профиле{'\n'}
+                  • Таймер автоматически подстроится под ваше расписание{'\n'}
+                  • Упражнения адаптированы под ваш уровень активности{'\n'}
+                  • Начните с одного цикла и постепенно увеличивайте
+                </Text>
+              </View>
+
               <Text style={styles.editPrompt}>
-                Хочешь что-то изменить? Ты сможешь настроить это позже в профиле.
+                Готовы начать свое путешествие к лучшей продуктивности? 🚀
               </Text>
             </View>
           </ScrollView>
@@ -128,7 +338,7 @@ export default function OnboardingStep6() {
                 colors={['#4ADE80', '#22C55E']}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.buttonText}>Давай Noowing</Text>
+                <Text style={styles.buttonText}>Начать Noowing</Text>
                 <ArrowRight size={20} color="#000" strokeWidth={2} />
               </LinearGradient>
             </TouchableOpacity>
@@ -179,6 +389,20 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.7)',
     fontFamily: 'Inter-Medium',
   },
+  resetButton: {
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: 'rgba(239, 68, 68, 0.3)',
+    marginLeft: 16,
+  },
+  resetButtonText: {
+    fontSize: 12,
+    fontFamily: 'Inter-Medium',
+    color: '#EF4444',
+  },
   scrollView: {
     flex: 1,
   },
@@ -217,10 +441,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
   },
+  sectionTitleContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   sectionTitle: {
     fontSize: 18,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    marginLeft: 8,
   },
   editButton: {
     flexDirection: 'row',
@@ -286,12 +515,34 @@ const styles = StyleSheet.create({
     lineHeight: 22,
     flex: 1,
   },
-  editPrompt: {
+  infoContainer: {
+    width: '100%',
+    backgroundColor: 'rgba(74, 222, 128, 0.05)',
+    borderRadius: 16,
+    padding: 20,
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(74, 222, 128, 0.2)',
+  },
+  infoTitle: {
+    fontSize: 16,
+    fontFamily: 'Inter-SemiBold',
+    color: '#4ADE80',
+    marginBottom: 12,
+    textAlign: 'center',
+  },
+  infoText: {
     fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.6)',
-    textAlign: 'center',
+    color: 'rgba(255, 255, 255, 0.8)',
     lineHeight: 20,
+  },
+  editPrompt: {
+    fontSize: 16,
+    fontFamily: 'Inter-Medium',
+    color: '#FFFFFF',
+    textAlign: 'center',
+    lineHeight: 24,
   },
   bottomSection: {
     paddingBottom: 20,
