@@ -266,7 +266,7 @@ export default function HomeTab() {
           <View style={styles.timerContainer}>
             <Animated.View style={[styles.timerCircle, pulseStyle]}>
               <View style={styles.timerContent}>
-                <IconComponent size={36} color="#FF6B35" strokeWidth={1.5} />
+                <IconComponent size={32} color="#FF6B35" strokeWidth={1.5} />
                 <Text style={styles.timerTime}>{formatTime(cycleState.timeRemaining)}</Text>
                 <Text style={styles.timerPhase}>{currentConfig.title}</Text>
                 <Text style={styles.timerSubtitle}>{currentConfig.subtitle}</Text>
@@ -279,35 +279,13 @@ export default function HomeTab() {
             </Animated.View>
           </View>
 
-          {/* Phase Indicators */}
-          <View style={styles.phaseIndicators}>
-            {Object.entries(PHASE_CONFIG).map(([phase, config]) => (
-              <TouchableOpacity
-                key={phase}
-                style={[
-                  styles.phaseIndicator,
-                  cycleState.phase === phase && styles.phaseIndicatorActive,
-                ]}
-                onPress={() => {
-                  Alert.alert(config.title, config.message);
-                }}
-              >
-                <config.icon 
-                  size={16} 
-                  color={cycleState.phase === phase ? '#FF6B35' : 'rgba(255,255,255,0.4)'} 
-                  strokeWidth={1.5} 
-                />
-              </TouchableOpacity>
-            ))}
-          </View>
-
           {/* Controls */}
           <View style={styles.controls}>
             <TouchableOpacity
               style={styles.controlButton}
               onPress={skipPhase}
             >
-              <SkipForward size={20} color="#FFFFFF" strokeWidth={1.5} />
+              <SkipForward size={18} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -319,9 +297,9 @@ export default function HomeTab() {
                 style={styles.playButtonGradient}
               >
                 {cycleState.isActive ? (
-                  <Pause size={24} color="#000" strokeWidth={1.5} />
+                  <Pause size={20} color="#000" strokeWidth={1.5} />
                 ) : (
-                  <Play size={24} color="#000" strokeWidth={1.5} />
+                  <Play size={20} color="#000" strokeWidth={1.5} />
                 )}
               </LinearGradient>
             </TouchableOpacity>
@@ -330,7 +308,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={resetTimer}
             >
-              <RotateCcw size={20} color="#FFFFFF" strokeWidth={1.5} />
+              <RotateCcw size={18} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
           </View>
 
@@ -357,63 +335,65 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 10,
+    paddingBottom: 10,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   greeting: {
-    fontSize: 28,
+    fontSize: 24,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    letterSpacing: 4,
-    marginBottom: 4,
+    letterSpacing: 3,
+    marginBottom: 2,
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: 'rgba(255, 255, 255, 0.5)',
     letterSpacing: 1.5,
   },
   statsContainer: {
     flexDirection: 'row',
-    gap: 8,
-    marginBottom: 20,
+    gap: 6,
+    marginBottom: 16,
   },
   statCard: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderRadius: 16,
-    padding: 12,
+    padding: 10,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   statNumber: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Inter-Bold',
     color: '#FF6B35',
-    marginBottom: 2,
+    marginBottom: 1,
   },
   statLabel: {
-    fontSize: 9,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.5)',
+    color: 'rgba(255, 255, 255, 0.4)',
     letterSpacing: 1,
   },
   timerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
     position: 'relative',
+    flex: 1,
   },
   timerCircle: {
-    width: width * 0.65,
-    height: width * 0.65,
-    borderRadius: width * 0.325,
+    width: width * 0.6,
+    height: width * 0.6,
+    borderRadius: width * 0.3,
     backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -421,87 +401,67 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTime: {
-    fontSize: 36,
+    fontSize: 32,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    marginTop: 8,
-    marginBottom: 4,
-    letterSpacing: 2,
+    marginTop: 6,
+    marginBottom: 3,
+    letterSpacing: 1,
   },
   timerPhase: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 2,
+    marginBottom: 1,
     letterSpacing: 1,
     textAlign: 'center',
   },
   timerSubtitle: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.5)',
+    color: 'rgba(255, 255, 255, 0.4)',
     letterSpacing: 0.5,
     textAlign: 'center',
   },
   progressRing: {
     position: 'absolute',
-    width: width * 0.7,
-    height: width * 0.7,
-    borderRadius: width * 0.35,
+    width: width * 0.65,
+    height: width * 0.65,
+    borderRadius: width * 0.325,
     borderWidth: 2,
-    borderColor: 'rgba(255, 107, 53, 0.15)',
+    borderColor: 'rgba(255, 107, 53, 0.1)',
   },
   progressIndicator: {
     position: 'absolute',
-    top: -4,
+    top: -3,
     left: '50%',
-    width: 6,
-    height: 6,
+    width: 4,
+    height: 4,
     backgroundColor: '#FF6B35',
-    borderRadius: 3,
-    marginLeft: -3,
-  },
-  phaseIndicators: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 16,
-    marginBottom: 20,
-  },
-  phaseIndicator: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.02)',
-  },
-  phaseIndicatorActive: {
-    borderColor: '#FF6B35',
-    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderRadius: 2,
+    marginLeft: -2,
   },
   controls: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 20,
-    marginBottom: 20,
+    gap: 16,
+    marginBottom: 16,
   },
   controlButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   playButton: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     overflow: 'hidden',
   },
   playButtonGradient: {
@@ -512,22 +472,22 @@ const styles = StyleSheet.create({
   phaseInfo: {
     backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderRadius: 16,
-    padding: 16,
+    padding: 12,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   phaseInfoTitle: {
-    fontSize: 10,
+    fontSize: 9,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
     letterSpacing: 1.5,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   phaseInfoText: {
-    fontSize: 12,
+    fontSize: 11,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
-    lineHeight: 16,
+    color: 'rgba(255, 255, 255, 0.6)',
+    lineHeight: 14,
     letterSpacing: 0.3,
   },
 });
