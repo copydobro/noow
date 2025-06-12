@@ -266,7 +266,7 @@ export default function HomeTab() {
           <View style={styles.timerContainer}>
             <Animated.View style={[styles.timerCircle, pulseStyle]}>
               <View style={styles.timerContent}>
-                <IconComponent size={32} color="#FF6B35" strokeWidth={1.5} />
+                <IconComponent size={28} color="#FF6B35" strokeWidth={1.5} />
                 <Text style={styles.timerTime}>{formatTime(cycleState.timeRemaining)}</Text>
                 <Text style={styles.timerPhase}>{currentConfig.title}</Text>
                 <Text style={styles.timerSubtitle}>{currentConfig.subtitle}</Text>
@@ -285,7 +285,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={skipPhase}
             >
-              <SkipForward size={18} color="#FFFFFF" strokeWidth={1.5} />
+              <SkipForward size={16} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -297,9 +297,9 @@ export default function HomeTab() {
                 style={styles.playButtonGradient}
               >
                 {cycleState.isActive ? (
-                  <Pause size={20} color="#000" strokeWidth={1.5} />
+                  <Pause size={18} color="#000" strokeWidth={1.5} />
                 ) : (
-                  <Play size={20} color="#000" strokeWidth={1.5} />
+                  <Play size={18} color="#000" strokeWidth={1.5} />
                 )}
               </LinearGradient>
             </TouchableOpacity>
@@ -308,7 +308,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={resetTimer}
             >
-              <RotateCcw size={18} color="#FFFFFF" strokeWidth={1.5} />
+              <RotateCcw size={16} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
           </View>
 
@@ -335,11 +335,11 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 70, // Увеличиваем отступ снизу для навигации
   },
   header: {
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   greeting: {
     fontSize: 24,
@@ -357,25 +357,25 @@ const styles = StyleSheet.create({
   statsContainer: {
     flexDirection: 'row',
     gap: 6,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   statCard: {
     flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderRadius: 16,
-    padding: 10,
+    padding: 8,
     alignItems: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   statNumber: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Bold',
     color: '#FF6B35',
     marginBottom: 1,
   },
   statLabel: {
-    fontSize: 8,
+    fontSize: 7,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.4)',
     letterSpacing: 1,
@@ -383,14 +383,15 @@ const styles = StyleSheet.create({
   timerContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
     position: 'relative',
     flex: 1,
+    maxHeight: width * 0.7,
   },
   timerCircle: {
-    width: width * 0.6,
-    height: width * 0.6,
-    borderRadius: width * 0.3,
+    width: width * 0.65,
+    height: width * 0.65,
+    borderRadius: width * 0.325,
     backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.05)',
@@ -401,18 +402,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTime: {
-    fontSize: 32,
+    fontSize: 36,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    marginTop: 6,
-    marginBottom: 3,
+    marginTop: 8,
+    marginBottom: 4,
     letterSpacing: 1,
   },
   timerPhase: {
-    fontSize: 10,
+    fontSize: 11,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 1,
+    marginBottom: 2,
     letterSpacing: 1,
     textAlign: 'center',
   },
@@ -425,9 +426,9 @@ const styles = StyleSheet.create({
   },
   progressRing: {
     position: 'absolute',
-    width: width * 0.65,
-    height: width * 0.65,
-    borderRadius: width * 0.325,
+    width: width * 0.7,
+    height: width * 0.7,
+    borderRadius: width * 0.35,
     borderWidth: 2,
     borderColor: 'rgba(255, 107, 53, 0.1)',
   },
@@ -445,13 +446,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 16,
-    marginBottom: 16,
+    gap: 20,
+    marginBottom: 12,
   },
   controlButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
@@ -459,9 +460,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   playButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+    width: 52,
+    height: 52,
+    borderRadius: 26,
     overflow: 'hidden',
   },
   playButtonGradient: {
