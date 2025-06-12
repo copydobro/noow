@@ -61,7 +61,7 @@ export default function ProfileTab() {
     {
       id: 'notifications',
       title: 'УВЕДОМЛЕНИЯ',
-      subtitle: 'Напоминания о циклах',
+      subtitle: 'НАПОМИНАНИЯ О ЦИКЛАХ',
       icon: Bell,
       type: 'toggle',
       value: notifications,
@@ -73,7 +73,7 @@ export default function ProfileTab() {
     {
       id: 'dark-mode',
       title: 'ТЕМНАЯ ТЕМА',
-      subtitle: 'Автоматически',
+      subtitle: 'АВТОМАТИЧЕСКИ',
       icon: Moon,
       type: 'toggle',
       value: darkMode,
@@ -88,7 +88,7 @@ export default function ProfileTab() {
     {
       id: 'help',
       title: 'ПОМОЩЬ И ПОДДЕРЖКА',
-      subtitle: 'FAQ, контакты',
+      subtitle: 'FAQ, КОНТАКТЫ',
       icon: HelpCircle,
       type: 'navigation',
       onPress: () => Alert.alert('Помощь', 'Здесь вы найдете ответы на часто задаваемые вопросы и сможете связаться с поддержкой'),
@@ -96,7 +96,7 @@ export default function ProfileTab() {
     {
       id: 'share',
       title: 'ПОДЕЛИТЬСЯ ПРИЛОЖЕНИЕМ',
-      subtitle: 'Расскажи друзьям о Noowing',
+      subtitle: 'РАССКАЖИ ДРУЗЬЯМ О NOOWING',
       icon: Share2,
       type: 'navigation',
       onPress: () => Alert.alert('Поделиться', 'Расскажите друзьям о Noowing и помогите им улучшить свою продуктивность!'),
@@ -129,7 +129,7 @@ export default function ProfileTab() {
       disabled={setting.type === 'toggle'}
     >
       <View style={styles.settingIcon}>
-        <setting.icon size={20} color="#FF6B35" strokeWidth={1.5} />
+        <setting.icon size={16} color="#FF6B35" strokeWidth={1.5} />
       </View>
       
       <View style={styles.settingContent}>
@@ -143,11 +143,11 @@ export default function ProfileTab() {
         <Switch
           value={setting.value}
           onValueChange={setting.onToggle}
-          trackColor={{ false: 'rgba(255,255,255,0.1)', true: '#FF6B35' }}
+          trackColor={{ false: 'rgba(255,255,255,0.08)', true: '#FF6B35' }}
           thumbColor={setting.value ? '#FFFFFF' : '#FFFFFF'}
         />
       ) : (
-        <ChevronRight size={20} color="rgba(255,255,255,0.3)" strokeWidth={1.5} />
+        <ChevronRight size={16} color="rgba(255,255,255,0.3)" strokeWidth={1.5} />
       )}
     </TouchableOpacity>
   );
@@ -164,7 +164,7 @@ export default function ProfileTab() {
                 style={styles.editButton}
                 onPress={() => Alert.alert('Редактировать', 'Здесь вы можете изменить информацию профиля')}
               >
-                <Edit3 size={20} color="#FF6B35" strokeWidth={1.5} />
+                <Edit3 size={16} color="#FF6B35" strokeWidth={1.5} />
               </TouchableOpacity>
             </View>
 
@@ -175,7 +175,7 @@ export default function ProfileTab() {
                 style={styles.userCardGradient}
               >
                 <View style={styles.userAvatar}>
-                  <Brain size={32} color="#FF6B35" strokeWidth={1.5} />
+                  <Brain size={24} color="#FF6B35" strokeWidth={1.5} />
                 </View>
                 
                 <View style={styles.userInfo}>
@@ -229,7 +229,7 @@ export default function ProfileTab() {
 
             {/* Logout Button */}
             <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-              <LogOut size={20} color="#EF4444" strokeWidth={1.5} />
+              <LogOut size={16} color="#EF4444" strokeWidth={1.5} />
               <Text style={styles.logoutText}>ВЫЙТИ ИЗ АККАУНТА</Text>
             </TouchableOpacity>
 
@@ -254,171 +254,172 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingHorizontal: 20,
+    paddingTop: 10,
     paddingBottom: 100,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   title: {
-    fontSize: 36,
+    fontSize: 24,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    letterSpacing: 4,
+    letterSpacing: 3,
   },
   editButton: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 107, 53, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   userCard: {
-    borderRadius: 20,
+    borderRadius: 16,
     overflow: 'hidden',
-    marginBottom: 24,
+    marginBottom: 16,
   },
   userCardGradient: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 24,
+    padding: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 107, 53, 0.15)',
-    borderRadius: 20,
+    borderColor: 'rgba(255, 107, 53, 0.1)',
+    borderRadius: 16,
   },
   userAvatar: {
-    width: 64,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: 'rgba(255, 107, 53, 0.15)',
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 20,
+    marginRight: 12,
   },
   userInfo: {
     flex: 1,
   },
   userName: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 4,
-    letterSpacing: 1,
+    marginBottom: 2,
+    letterSpacing: 0.5,
   },
   userAge: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.6)',
-    letterSpacing: 1,
+    color: 'rgba(255, 255, 255, 0.5)',
+    letterSpacing: 1.5,
   },
   statsContainer: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 32,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   statItem: {
     flex: 1,
     alignItems: 'center',
   },
   statNumber: {
-    fontSize: 28,
+    fontSize: 20,
     fontFamily: 'Inter-Bold',
     color: '#FF6B35',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   statLabel: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.5)',
+    color: 'rgba(255, 255, 255, 0.4)',
     textAlign: 'center',
     letterSpacing: 1,
   },
   statDivider: {
     width: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
-    marginHorizontal: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    marginHorizontal: 12,
   },
   section: {
-    marginBottom: 32,
+    marginBottom: 20,
   },
   sectionTitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-SemiBold',
-    color: '#FFFFFF',
-    letterSpacing: 2,
-    marginBottom: 16,
+    color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1.5,
+    marginBottom: 12,
   },
   settingsList: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   settingItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: 'rgba(255, 255, 255, 0.03)',
   },
   settingIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 16,
+    marginRight: 12,
   },
   settingContent: {
     flex: 1,
   },
   settingTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
-    marginBottom: 2,
+    marginBottom: 1,
     letterSpacing: 0.5,
   },
   settingSubtitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.5)',
+    color: 'rgba(255, 255, 255, 0.4)',
+    letterSpacing: 0.5,
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(239, 68, 68, 0.08)',
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 24,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.2)',
+    borderColor: 'rgba(239, 68, 68, 0.15)',
   },
   logoutText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#EF4444',
     marginLeft: 8,
     letterSpacing: 1,
   },
   versionText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.3)',
     textAlign: 'center',
-    letterSpacing: 1,
+    letterSpacing: 1.5,
   },
 });
