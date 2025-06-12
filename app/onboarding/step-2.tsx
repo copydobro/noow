@@ -17,6 +17,15 @@ export default function OnboardingStep2() {
 
   const handleContinue = () => {
     if (selectedAge) {
+      // Сохраняем выбранные данные
+      const selectedRange = ageRanges.find(range => range.id === selectedAge);
+      if (selectedRange) {
+        // Для веб-версии используем localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('userAgeRange', selectedRange.id);
+          localStorage.setItem('userAgeRangeLabel', selectedRange.subtitle);
+        }
+      }
       router.push('/onboarding/step-3');
     }
   };

@@ -34,8 +34,18 @@ export default function OnboardingStep5() {
 
   const handleContinue = () => {
     if (selectedMethod === 'auto' && detectedTimezone) {
+      // Сохраняем автоматически определенный часовой пояс
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userTimezone', detectedTimezone);
+      }
       router.push('/onboarding/step-6');
     } else if (selectedMethod === 'manual' && validateUTCOffset(utcOffset)) {
+      // Сохраняем вручную введенный часовой пояс
+      const offsetString = utcOffset.startsWith('+') || utcOffset.startsWith('-') ? utcOffset : '+' + utcOffset;
+      const timezoneString = `UTC${offsetString}`;
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userTimezone', timezoneString);
+      }
       router.push('/onboarding/step-6');
     }
   };

@@ -66,6 +66,11 @@ export default function OnboardingStep4() {
 
   const handleContinue = () => {
     if (startTime && endTime) {
+      // Сохраняем выбранные данные
+      if (typeof window !== 'undefined') {
+        localStorage.setItem('userWorkStartTime', startTime);
+        localStorage.setItem('userWorkEndTime', endTime);
+      }
       router.push('/onboarding/step-5');
     }
   };

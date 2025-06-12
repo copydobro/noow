@@ -34,6 +34,15 @@ export default function OnboardingStep3() {
 
   const handleContinue = () => {
     if (selectedLevel) {
+      // Сохраняем выбранные данные
+      const selectedActivityLevel = activityLevels.find(level => level.id === selectedLevel);
+      if (selectedActivityLevel) {
+        // Для веб-версии используем localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('userActivityLevel', selectedActivityLevel.id);
+          localStorage.setItem('userActivityLevelLabel', `${selectedActivityLevel.label} (${selectedActivityLevel.subtitle})`);
+        }
+      }
       router.push('/onboarding/step-4');
     }
   };
