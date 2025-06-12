@@ -26,7 +26,7 @@ function AnimatedTabIcon({
   IconComponent, 
   focused, 
   color, 
-  size = 24 
+  size = 18 
 }: { 
   IconComponent: any;
   focused: boolean;
@@ -42,7 +42,7 @@ function AnimatedTabIcon({
     if (focused) {
       // Последовательность анимаций при активации
       scale.value = withSequence(
-        withTiming(1.3, { duration: 150 }),
+        withTiming(1.2, { duration: 150 }),
         withSpring(1.1, { damping: 12, stiffness: 200 })
       );
       
@@ -55,7 +55,7 @@ function AnimatedTabIcon({
       
       // Пульсация
       pulseScale.value = withSequence(
-        withDelay(200, withTiming(1.2, { duration: 300 })),
+        withDelay(200, withTiming(1.15, { duration: 300 })),
         withTiming(1, { duration: 300 })
       );
     } else {
@@ -88,9 +88,9 @@ function AnimatedTabIcon({
       {/* Main icon */}
       <Animated.View style={animatedIconStyle}>
         <AnimatedIcon 
-          size={focused ? 26 : 22} 
+          size={focused ? 20 : 18} 
           color={color} 
-          strokeWidth={focused ? 2.5 : 1.8} 
+          strokeWidth={focused ? 2 : 1.5} 
         />
       </Animated.View>
     </View>
@@ -207,9 +207,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
-    height: 60,
-    paddingTop: 4,
-    paddingBottom: 8,
+    height: 50,
+    paddingTop: 2,
+    paddingBottom: 6,
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -220,9 +220,9 @@ const styles = StyleSheet.create({
   },
   tabBarBackground: {
     flex: 1,
-    backgroundColor: 'rgba(10, 10, 10, 0.95)',
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
+    backgroundColor: 'rgba(10, 10, 10, 0.98)',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     overflow: 'hidden',
     position: 'relative',
   },
@@ -232,18 +232,18 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.3)',
+    backgroundColor: 'rgba(255, 107, 53, 0.4)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.8,
-    shadowRadius: 10,
+    shadowRadius: 8,
   },
   animatedBorder: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
-    height: 2,
+    height: 1,
     backgroundColor: 'linear-gradient(90deg, transparent, #FF6B35, transparent)',
     opacity: 0.6,
   },
@@ -251,26 +251,26 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 40,
-    height: 40,
+    width: 28,
+    height: 28,
   },
   glowEffect: {
     position: 'absolute',
-    width: 35,
-    height: 35,
-    borderRadius: 17.5,
-    backgroundColor: 'rgba(255, 107, 53, 0.15)',
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: 'rgba(255, 107, 53, 0.12)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 15,
+    shadowOpacity: 0.6,
+    shadowRadius: 10,
   },
   tabBackground: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: 60,
+    height: 50,
     zIndex: -1,
   },
   gradientLine1: {
@@ -279,11 +279,11 @@ const styles = StyleSheet.create({
     left: '10%',
     width: '20%',
     height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.2)',
+    backgroundColor: 'rgba(255, 107, 53, 0.15)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
   gradientLine2: {
     position: 'absolute',
@@ -291,11 +291,11 @@ const styles = StyleSheet.create({
     left: '40%',
     width: '20%',
     height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.3)',
+    backgroundColor: 'rgba(255, 107, 53, 0.25)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.7,
-    shadowRadius: 8,
+    shadowOpacity: 0.6,
+    shadowRadius: 5,
   },
   gradientLine3: {
     position: 'absolute',
@@ -303,10 +303,10 @@ const styles = StyleSheet.create({
     left: '70%',
     width: '20%',
     height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.2)',
+    backgroundColor: 'rgba(255, 107, 53, 0.15)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
+    shadowOpacity: 0.4,
+    shadowRadius: 3,
   },
 });
