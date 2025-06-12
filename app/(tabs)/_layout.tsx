@@ -26,7 +26,7 @@ function AnimatedTabIcon({
   IconComponent, 
   focused, 
   color, 
-  size = 18 
+  size = 20 
 }: { 
   IconComponent: any;
   focused: boolean;
@@ -88,7 +88,7 @@ function AnimatedTabIcon({
       {/* Main icon */}
       <Animated.View style={animatedIconStyle}>
         <AnimatedIcon 
-          size={focused ? 20 : 18} 
+          size={focused ? 22 : 20} 
           color={color} 
           strokeWidth={focused ? 2 : 1.5} 
         />
@@ -207,9 +207,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
-    height: 50,
-    paddingTop: 2,
-    paddingBottom: 6,
+    height: 60,
+    paddingTop: 4,
+    paddingBottom: 8,
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -251,14 +251,14 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 28,
-    height: 28,
+    width: 40,
+    height: 40,
   },
   glowEffect: {
     position: 'absolute',
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 36,
+    height: 36,
+    borderRadius: 18,
     backgroundColor: 'rgba(255, 107, 53, 0.12)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: 50,
+    height: 60,
     zIndex: -1,
   },
   gradientLine1: {
