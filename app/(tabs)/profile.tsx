@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, CreditCard as Edit3, LogOut, CircleHelp as HelpCircle, Share2 } from 'lucide-react-native';
+import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, Edit3, LogOut, HelpCircle, Share2 } from 'lucide-react-native';
 
 interface ProfileSetting {
   id: string;
@@ -20,9 +20,9 @@ export default function ProfileTab() {
   const [darkMode, setDarkMode] = useState(true);
 
   const userStats = {
-    name: 'Технологический воин',
+    name: 'ТЕХНОЛОГИЧЕСКИЙ ВОИН',
     ageRange: '26-35',
-    level: 'Средний',
+    level: 'СРЕДНИЙ',
     workHours: '09:00 - 17:00',
     timezone: 'UTC+3',
     totalCycles: 156,
@@ -33,7 +33,7 @@ export default function ProfileTab() {
   const profileSettings: ProfileSetting[] = [
     {
       id: 'work-hours',
-      title: 'Рабочие часы',
+      title: 'РАБОЧИЕ ЧАСЫ',
       subtitle: userStats.workHours,
       icon: Clock,
       type: 'navigation',
@@ -41,7 +41,7 @@ export default function ProfileTab() {
     },
     {
       id: 'activity-level',
-      title: 'Уровень активности',
+      title: 'УРОВЕНЬ АКТИВНОСТИ',
       subtitle: userStats.level,
       icon: Activity,
       type: 'navigation',
@@ -49,7 +49,7 @@ export default function ProfileTab() {
     },
     {
       id: 'timezone',
-      title: 'Часовой пояс',
+      title: 'ЧАСОВОЙ ПОЯС',
       subtitle: userStats.timezone,
       icon: Globe,
       type: 'navigation',
@@ -60,7 +60,7 @@ export default function ProfileTab() {
   const appSettings: ProfileSetting[] = [
     {
       id: 'notifications',
-      title: 'Уведомления',
+      title: 'УВЕДОМЛЕНИЯ',
       subtitle: 'Напоминания о циклах',
       icon: Bell,
       type: 'toggle',
@@ -72,7 +72,7 @@ export default function ProfileTab() {
     },
     {
       id: 'dark-mode',
-      title: 'Темная тема',
+      title: 'ТЕМНАЯ ТЕМА',
       subtitle: 'Автоматически',
       icon: Moon,
       type: 'toggle',
@@ -87,7 +87,7 @@ export default function ProfileTab() {
   const otherSettings: ProfileSetting[] = [
     {
       id: 'help',
-      title: 'Помощь и поддержка',
+      title: 'ПОМОЩЬ И ПОДДЕРЖКА',
       subtitle: 'FAQ, контакты',
       icon: HelpCircle,
       type: 'navigation',
@@ -95,7 +95,7 @@ export default function ProfileTab() {
     },
     {
       id: 'share',
-      title: 'Поделиться приложением',
+      title: 'ПОДЕЛИТЬСЯ ПРИЛОЖЕНИЕМ',
       subtitle: 'Расскажи друзьям о Noowing',
       icon: Share2,
       type: 'navigation',
@@ -129,7 +129,7 @@ export default function ProfileTab() {
       disabled={setting.type === 'toggle'}
     >
       <View style={styles.settingIcon}>
-        <setting.icon size={20} color="#FF6B35" strokeWidth={2} />
+        <setting.icon size={20} color="#FF6B35" strokeWidth={1.5} />
       </View>
       
       <View style={styles.settingContent}>
@@ -143,11 +143,11 @@ export default function ProfileTab() {
         <Switch
           value={setting.value}
           onValueChange={setting.onToggle}
-          trackColor={{ false: 'rgba(255,255,255,0.2)', true: '#FF6B35' }}
+          trackColor={{ false: 'rgba(255,255,255,0.1)', true: '#FF6B35' }}
           thumbColor={setting.value ? '#FFFFFF' : '#FFFFFF'}
         />
       ) : (
-        <ChevronRight size={20} color="rgba(255,255,255,0.4)" strokeWidth={2} />
+        <ChevronRight size={20} color="rgba(255,255,255,0.3)" strokeWidth={1.5} />
       )}
     </TouchableOpacity>
   );
@@ -164,23 +164,23 @@ export default function ProfileTab() {
                 style={styles.editButton}
                 onPress={() => Alert.alert('Редактировать', 'Здесь вы можете изменить информацию профиля')}
               >
-                <Edit3 size={20} color="#FF6B35" strokeWidth={2} />
+                <Edit3 size={20} color="#FF6B35" strokeWidth={1.5} />
               </TouchableOpacity>
             </View>
 
             {/* User Card */}
             <TouchableOpacity style={styles.userCard} onPress={showUserStats}>
               <LinearGradient
-                colors={['rgba(255, 107, 53, 0.1)', 'rgba(255, 107, 53, 0.05)']}
+                colors={['rgba(255, 107, 53, 0.08)', 'rgba(255, 107, 53, 0.03)']}
                 style={styles.userCardGradient}
               >
                 <View style={styles.userAvatar}>
-                  <Brain size={32} color="#FF6B35" strokeWidth={2} />
+                  <Brain size={32} color="#FF6B35" strokeWidth={1.5} />
                 </View>
                 
                 <View style={styles.userInfo}>
                   <Text style={styles.userName}>{userStats.name}</Text>
-                  <Text style={styles.userAge}>Возраст: {userStats.ageRange}</Text>
+                  <Text style={styles.userAge}>ВОЗРАСТ: {userStats.ageRange}</Text>
                 </View>
               </LinearGradient>
             </TouchableOpacity>
@@ -229,12 +229,12 @@ export default function ProfileTab() {
 
             {/* Logout Button */}
             <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-              <LogOut size={20} color="#EF4444" strokeWidth={2} />
-              <Text style={styles.logoutText}>Выйти из аккаунта</Text>
+              <LogOut size={20} color="#EF4444" strokeWidth={1.5} />
+              <Text style={styles.logoutText}>ВЫЙТИ ИЗ АККАУНТА</Text>
             </TouchableOpacity>
 
             {/* App Version */}
-            <Text style={styles.versionText}>Noowing v1.0.0</Text>
+            <Text style={styles.versionText}>NOOWING V1.0.0</Text>
           </View>
         </ScrollView>
       </SafeAreaView>
@@ -265,42 +265,42 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 32,
+    fontSize: 36,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    letterSpacing: 2,
+    letterSpacing: 4,
   },
   editButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 107, 53, 0.3)',
+    borderColor: 'rgba(255, 107, 53, 0.2)',
   },
   userCard: {
-    borderRadius: 16,
+    borderRadius: 20,
     overflow: 'hidden',
     marginBottom: 24,
   },
   userCardGradient: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 20,
+    padding: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 107, 53, 0.2)',
-    borderRadius: 16,
+    borderColor: 'rgba(255, 107, 53, 0.15)',
+    borderRadius: 20,
   },
   userAvatar: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: 'rgba(255, 107, 53, 0.2)',
+    backgroundColor: 'rgba(255, 107, 53, 0.15)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 16,
+    marginRight: 20,
   },
   userInfo: {
     flex: 1,
@@ -310,27 +310,29 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     marginBottom: 4,
+    letterSpacing: 1,
   },
   userAge: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1,
   },
   statsContainer: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
+    padding: 24,
     marginBottom: 32,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   statItem: {
     flex: 1,
     alignItems: 'center',
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Inter-Bold',
     color: '#FF6B35',
     marginBottom: 4,
@@ -338,82 +340,85 @@ const styles = StyleSheet.create({
   statLabel: {
     fontSize: 10,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: 'rgba(255, 255, 255, 0.5)',
     textAlign: 'center',
-    letterSpacing: 0.5,
+    letterSpacing: 1,
   },
   statDivider: {
     width: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    marginHorizontal: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    marginHorizontal: 20,
   },
   section: {
     marginBottom: 32,
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    letterSpacing: 1,
+    letterSpacing: 2,
     marginBottom: 16,
   },
   settingsList: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   settingItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 16,
+    padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: 'rgba(255, 255, 255, 0.05)',
   },
   settingIcon: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 12,
+    marginRight: 16,
   },
   settingContent: {
     flex: 1,
   },
   settingTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     marginBottom: 2,
+    letterSpacing: 0.5,
   },
   settingSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: 'rgba(255, 255, 255, 0.5)',
   },
   logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-    borderRadius: 16,
-    padding: 16,
+    backgroundColor: 'rgba(239, 68, 68, 0.08)',
+    borderRadius: 20,
+    padding: 20,
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.3)',
+    borderColor: 'rgba(239, 68, 68, 0.2)',
   },
   logoutText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#EF4444',
     marginLeft: 8,
+    letterSpacing: 1,
   },
   versionText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.4)',
+    color: 'rgba(255, 255, 255, 0.3)',
     textAlign: 'center',
+    letterSpacing: 1,
   },
 });
