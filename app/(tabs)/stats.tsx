@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Calendar, TrendingUp, Award, Clock, Brain, Activity, Coffee, Share2, BarChart3 } from 'lucide-react-native';
+import { Calendar, TrendingUp, Award, Clock, Brain, Activity, Coffee, Share2, ChartBar as BarChart3 } from 'lucide-react-native';
 
 const { width } = Dimensions.get('window');
 

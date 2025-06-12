@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, Edit3, LogOut, HelpCircle, Share2 } from 'lucide-react-native';
+import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, CreditCard as Edit3, LogOut, CircleHelp as HelpCircle, Share2 } from 'lucide-react-native';
 
 interface ProfileSetting {
   id: string;

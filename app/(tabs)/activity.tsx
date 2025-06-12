@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Play, Clock, Zap, Target, CheckCircle, Star } from 'lucide-react-native';
+import { Play, Clock, Zap, Target, CircleCheck as CheckCircle, Star } from 'lucide-react-native';
 
 interface Exercise {
   id: string;
