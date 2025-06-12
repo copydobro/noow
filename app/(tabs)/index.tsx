@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -63,6 +63,7 @@ export default function HomeTab() {
     cycleCount: 0,
   });
 
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const pulseAnimation = useSharedValue(0);
   const progressAnimation = useSharedValue(0);
 
@@ -83,6 +84,7 @@ export default function HomeTab() {
     );
   };
 
+  // Анимации
   useEffect(() => {
     if (cycleState.isActive) {
       pulseAnimation.value = withRepeat(
@@ -101,32 +103,58 @@ export default function HomeTab() {
     progressAnimation.value = withTiming(progress, { duration: 300 });
   }, [cycleState.timeRemaining, cycleState.phase]);
 
+  // Основной таймер
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    
     if (cycleState.isActive && cycleState.timeRemaining > 0) {
-      interval = setInterval(() => {
-        setCycleState(prev => ({
-          ...prev,
-          timeRemaining: prev.timeRemaining - 1,
-        }));
+      intervalRef.current = setInterval(() => {
+        setCycleState(prev => {
+          const newTimeRemaining = prev.timeRemaining - 1;
+          
+          // Если время истекло
+          if (newTimeRemaining <= 0) {
+            const nextPhase = getNextPhase(prev.phase);
+            
+            // Очищаем интервал
+            if (intervalRef.current) {
+              clearInterval(intervalRef.current);
+              intervalRef.current = null;
+            }
+            
+            // Показываем уведомление о новой фазе
+            setTimeout(() => {
+              showPhaseAlert(nextPhase);
+            }, 100);
+            
+            return {
+              ...prev,
+              phase: nextPhase,
+              timeRemaining: PHASE_DURATIONS[nextPhase],
+              cycleCount: nextPhase === 'work' ? prev.cycleCount + 1 : prev.cycleCount,
+              isActive: false, // Останавливаем таймер для подтверждения
+            };
+          }
+          
+          return {
+            ...prev,
+            timeRemaining: newTimeRemaining,
+          };
+        });
       }, 1000);
-    } else if (cycleState.timeRemaining === 0 && cycleState.isActive) {
-      // Переход к следующей фазе
-      const nextPhase = getNextPhase(cycleState.phase);
-      setCycleState(prev => ({
-        ...prev,
-        phase: nextPhase,
-        timeRemaining: PHASE_DURATIONS[nextPhase],
-        cycleCount: nextPhase === 'work' ? prev.cycleCount + 1 : prev.cycleCount,
-        isActive: false, // Останавливаем таймер для подтверждения
-      }));
-      
-      // Показываем уведомление о новой фазе
-      showPhaseAlert(nextPhase);
+    } else {
+      // Очищаем интервал если таймер не активен
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
     }
 
-    return () => clearInterval(interval);
+    // Cleanup функция
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+    };
   }, [cycleState.isActive, cycleState.timeRemaining]);
 
   const getNextPhase = (currentPhase: CyclePhase): CyclePhase => {
