@@ -30,7 +30,7 @@ const PHASE_DURATIONS = {
 
 const PHASE_CONFIG = {
   work: {
-    title: 'Глубокая работа',
+    title: 'ГЛУБОКАЯ РАБОТА',
     subtitle: 'Время сосредоточиться',
     icon: Brain,
     color: '#FF6B35',
@@ -38,7 +38,7 @@ const PHASE_CONFIG = {
     message: 'Сосредоточься на важной задаче. Никаких отвлечений!',
   },
   activation: {
-    title: 'Физическая активация',
+    title: 'ФИЗИЧЕСКАЯ АКТИВАЦИЯ',
     subtitle: 'Время двигаться',
     icon: Activity,
     color: '#FF6B35',
@@ -46,7 +46,7 @@ const PHASE_CONFIG = {
     message: 'Встань и подвигайся! Сделай несколько упражнений.',
   },
   rest: {
-    title: 'Восстановление',
+    title: 'ВОССТАНОВЛЕНИЕ',
     subtitle: 'Время отдохнуть',
     icon: Coffee,
     color: '#FF6B35',
@@ -241,7 +241,7 @@ export default function HomeTab() {
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.greeting}>NOOWING</Text>
-            <Text style={styles.subtitle}>Цикл {cycleState.cycleCount + 1}</Text>
+            <Text style={styles.subtitle}>ЦИКЛ {cycleState.cycleCount + 1}</Text>
           </View>
 
           {/* Stats Cards */}
@@ -252,7 +252,7 @@ export default function HomeTab() {
             </View>
             <View style={styles.statCard}>
               <Text style={styles.statNumber}>
-                {Math.floor(cycleState.cycleCount * 52 / 60)}:{(cycleState.cycleCount * 52) % 60}
+                {formatTime(cycleState.cycleCount * 52 * 60)}
               </Text>
               <Text style={styles.statLabel}>ВРЕМЯ</Text>
             </View>
@@ -266,7 +266,7 @@ export default function HomeTab() {
           <View style={styles.timerContainer}>
             <Animated.View style={[styles.timerCircle, pulseStyle]}>
               <View style={styles.timerContent}>
-                <IconComponent size={48} color="#FF6B35" strokeWidth={2} />
+                <IconComponent size={48} color="#FF6B35" strokeWidth={1.5} />
                 <Text style={styles.timerTime}>{formatTime(cycleState.timeRemaining)}</Text>
                 <Text style={styles.timerPhase}>{currentConfig.title}</Text>
                 <Text style={styles.timerSubtitle}>{currentConfig.subtitle}</Text>
@@ -295,7 +295,7 @@ export default function HomeTab() {
                 <config.icon 
                   size={20} 
                   color={cycleState.phase === phase ? '#FF6B35' : 'rgba(255,255,255,0.4)'} 
-                  strokeWidth={2} 
+                  strokeWidth={1.5} 
                 />
               </TouchableOpacity>
             ))}
@@ -307,7 +307,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={skipPhase}
             >
-              <SkipForward size={24} color="#FFFFFF" strokeWidth={2} />
+              <SkipForward size={24} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -319,9 +319,9 @@ export default function HomeTab() {
                 style={styles.playButtonGradient}
               >
                 {cycleState.isActive ? (
-                  <Pause size={32} color="#000" strokeWidth={2} />
+                  <Pause size={32} color="#000" strokeWidth={1.5} />
                 ) : (
-                  <Play size={32} color="#000" strokeWidth={2} />
+                  <Play size={32} color="#000" strokeWidth={1.5} />
                 )}
               </LinearGradient>
             </TouchableOpacity>
@@ -330,7 +330,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={resetTimer}
             >
-              <RotateCcw size={24} color="#FFFFFF" strokeWidth={2} />
+              <RotateCcw size={24} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
           </View>
 
@@ -363,17 +363,17 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   greeting: {
-    fontSize: 32,
+    fontSize: 36,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    letterSpacing: 4,
+    letterSpacing: 6,
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
-    fontFamily: 'Inter-Regular',
+    fontSize: 14,
+    fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.6)',
-    letterSpacing: 1,
+    letterSpacing: 2,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -382,15 +382,15 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
+    padding: 20,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Inter-Bold',
     color: '#FF6B35',
     marginBottom: 4,
@@ -398,8 +398,8 @@ const styles = StyleSheet.create({
   statLabel: {
     fontSize: 10,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.6)',
-    letterSpacing: 1,
+    color: 'rgba(255, 255, 255, 0.5)',
+    letterSpacing: 1.5,
   },
   timerContainer: {
     alignItems: 'center',
@@ -411,9 +411,9 @@ const styles = StyleSheet.create({
     width: width * 0.7,
     height: width * 0.7,
     borderRadius: width * 0.35,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -421,36 +421,37 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTime: {
-    fontSize: 48,
+    fontSize: 52,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     marginTop: 16,
     marginBottom: 8,
-    letterSpacing: 2,
+    letterSpacing: 3,
   },
   timerPhase: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
     marginBottom: 4,
-    letterSpacing: 1,
+    letterSpacing: 2,
   },
   timerSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: 'rgba(255, 255, 255, 0.5)',
+    letterSpacing: 1,
   },
   progressRing: {
     position: 'absolute',
     width: width * 0.75,
     height: width * 0.75,
     borderRadius: width * 0.375,
-    borderWidth: 3,
-    borderColor: 'rgba(255, 107, 53, 0.2)',
+    borderWidth: 2,
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   progressIndicator: {
     position: 'absolute',
-    top: -3,
+    top: -4,
     left: '50%',
     width: 8,
     height: 8,
@@ -465,18 +466,18 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   phaseIndicator: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
   },
   phaseIndicatorActive: {
     borderColor: '#FF6B35',
-    backgroundColor: 'rgba(255, 107, 53, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
   },
   controls: {
     flexDirection: 'row',
@@ -486,12 +487,12 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   controlButton: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderColor: 'rgba(255, 255, 255, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -507,23 +508,24 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   phaseInfo: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 20,
+    padding: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   phaseInfoTitle: {
     fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    letterSpacing: 1,
-    marginBottom: 8,
+    letterSpacing: 2,
+    marginBottom: 12,
   },
   phaseInfoText: {
     fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.7)',
     lineHeight: 20,
+    letterSpacing: 0.5,
   },
 });

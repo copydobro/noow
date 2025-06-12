@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Image, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Play, Clock, Zap, Target, CircleCheck as CheckCircle, Star } from 'lucide-react-native';
+import { Play, Clock, Zap, Target, CheckCircle, Star } from 'lucide-react-native';
 
 interface Exercise {
   id: string;
@@ -122,19 +122,19 @@ const difficultyColors = {
 };
 
 const difficultyLabels = {
-  easy: 'Легко',
-  medium: 'Средне',
-  hard: 'Сложно',
+  easy: 'ЛЕГКО',
+  medium: 'СРЕДНЕ',
+  hard: 'СЛОЖНО',
 };
 
 export default function ActivityTab() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('Все');
+  const [selectedCategory, setSelectedCategory] = useState<string>('ВСЕ');
   const [completedExercises, setCompletedExercises] = useState<Set<string>>(new Set());
 
-  const categories = ['Все', 'Ноги', 'Грудь', 'Кор', 'Кардио', 'Растяжка'];
+  const categories = ['ВСЕ', 'НОГИ', 'ГРУДЬ', 'КОР', 'КАРДИО', 'РАСТЯЖКА'];
 
   const filteredExercises = exercises.filter(exercise => 
-    selectedCategory === 'Все' || exercise.category === selectedCategory
+    selectedCategory === 'ВСЕ' || exercise.category.toUpperCase() === selectedCategory
   );
 
   const toggleExerciseCompletion = (exerciseId: string) => {
@@ -190,7 +190,7 @@ export default function ActivityTab() {
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.title}>АКТИВАЦИЯ</Text>
-            <Text style={styles.subtitle}>Физические упражнения для 2-минутных активаций</Text>
+            <Text style={styles.subtitle}>ФИЗИЧЕСКИЕ УПРАЖНЕНИЯ ДЛЯ 2-МИНУТНЫХ АКТИВАЦИЙ</Text>
           </View>
 
           {/* Stats */}
@@ -198,21 +198,21 @@ export default function ActivityTab() {
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Статистика', `Вы выполнили ${completedExercises.size} упражнений сегодня!`);
             }}>
-              <Zap size={24} color="#FF6B35" strokeWidth={2} />
+              <Zap size={24} color="#FF6B35" strokeWidth={1.5} />
               <Text style={styles.statNumber}>{completedExercises.size}</Text>
               <Text style={styles.statLabel}>ВЫПОЛНЕНО</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Доступно', `${exercises.length} упражнений готовы к выполнению`);
             }}>
-              <Target size={24} color="#FF6B35" strokeWidth={2} />
+              <Target size={24} color="#FF6B35" strokeWidth={1.5} />
               <Text style={styles.statNumber}>{exercises.length}</Text>
               <Text style={styles.statLabel}>ДОСТУПНО</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Время активности', `Вы потратили ${completedExercises.size * 2} минут на упражнения`);
             }}>
-              <Clock size={24} color="#FF6B35" strokeWidth={2} />
+              <Clock size={24} color="#FF6B35" strokeWidth={1.5} />
               <Text style={styles.statNumber}>{completedExercises.size * 2}</Text>
               <Text style={styles.statLabel}>МИНУТ</Text>
             </TouchableOpacity>
@@ -259,7 +259,7 @@ export default function ActivityTab() {
                 
                 <View style={styles.exerciseContent}>
                   <View style={styles.exerciseHeader}>
-                    <Text style={styles.exerciseName}>{exercise.name}</Text>
+                    <Text style={styles.exerciseName}>{exercise.name.toUpperCase()}</Text>
                     <TouchableOpacity
                       style={styles.completeButton}
                       onPress={(e) => {
@@ -268,7 +268,7 @@ export default function ActivityTab() {
                       }}
                     >
                       {completedExercises.has(exercise.id) ? (
-                        <CheckCircle size={24} color="#FF6B35" strokeWidth={2} />
+                        <CheckCircle size={24} color="#FF6B35" strokeWidth={1.5} />
                       ) : (
                         <View style={styles.incompleteCircle} />
                       )}
@@ -280,11 +280,11 @@ export default function ActivityTab() {
                   <View style={styles.exerciseFooter}>
                     <View style={styles.exerciseInfo}>
                       <View style={styles.exerciseTag}>
-                        <Text style={styles.exerciseCategory}>{exercise.category}</Text>
+                        <Text style={styles.exerciseCategory}>{exercise.category.toUpperCase()}</Text>
                       </View>
                       <View style={[
                         styles.difficultyTag,
-                        { backgroundColor: `${difficultyColors[exercise.difficulty]}20` }
+                        { backgroundColor: `${difficultyColors[exercise.difficulty]}15` }
                       ]}>
                         <Text style={[
                           styles.difficultyText,
@@ -306,7 +306,7 @@ export default function ActivityTab() {
                         colors={['#FF6B35', '#E55A2B']}
                         style={styles.startButtonGradient}
                       >
-                        <Play size={16} color="#000" strokeWidth={2} />
+                        <Play size={16} color="#000" strokeWidth={1.5} />
                         <Text style={styles.startButtonText}>{exercise.duration}</Text>
                       </LinearGradient>
                     </TouchableOpacity>
@@ -338,17 +338,18 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 32,
+    fontSize: 36,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    letterSpacing: 2,
+    letterSpacing: 4,
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.6)',
-    lineHeight: 20,
+    color: 'rgba(255, 255, 255, 0.5)',
+    lineHeight: 16,
+    letterSpacing: 1,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -357,15 +358,15 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
+    padding: 20,
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   statNumber: {
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     marginTop: 8,
@@ -374,8 +375,8 @@ const styles = StyleSheet.create({
   statLabel: {
     fontSize: 10,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.6)',
-    letterSpacing: 1,
+    color: 'rgba(255, 255, 255, 0.5)',
+    letterSpacing: 1.5,
   },
   categoryScroll: {
     marginBottom: 24,
@@ -385,43 +386,44 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   categoryButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 25,
     borderWidth: 1,
-    borderColor: 'transparent',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   categoryButtonActive: {
-    backgroundColor: 'rgba(255, 107, 53, 0.2)',
+    backgroundColor: '#FF6B35',
     borderColor: '#FF6B35',
   },
   categoryText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1,
   },
   categoryTextActive: {
-    color: '#FF6B35',
+    color: '#000',
   },
   exerciseList: {
     flex: 1,
   },
   exerciseCard: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
     marginBottom: 16,
     overflow: 'hidden',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   exerciseImage: {
     width: '100%',
     height: 120,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
   },
   exerciseContent: {
-    padding: 16,
+    padding: 20,
   },
   exerciseHeader: {
     flexDirection: 'row',
@@ -434,6 +436,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     flex: 1,
+    letterSpacing: 1,
   },
   completeButton: {
     padding: 4,
@@ -443,12 +446,12 @@ const styles = StyleSheet.create({
     height: 24,
     borderRadius: 12,
     borderWidth: 2,
-    borderColor: 'rgba(255, 255, 255, 0.3)',
+    borderColor: 'rgba(255, 255, 255, 0.2)',
   },
   exerciseDescription: {
     fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
     lineHeight: 20,
     marginBottom: 16,
   },
@@ -463,39 +466,42 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   exerciseTag: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 15,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
   },
   exerciseCategory: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.8)',
+    color: 'rgba(255, 255, 255, 0.7)',
+    letterSpacing: 1,
   },
   difficultyTag: {
-    borderRadius: 12,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+    borderRadius: 15,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
   },
   difficultyText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
+    letterSpacing: 1,
   },
   startButton: {
-    borderRadius: 12,
+    borderRadius: 15,
     overflow: 'hidden',
   },
   startButtonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    gap: 4,
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    gap: 6,
   },
   startButtonText: {
     fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
+    letterSpacing: 0.5,
   },
 });
