@@ -6,10 +6,10 @@ import { ArrowRight, ArrowLeft } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 const ageRanges = [
-  { id: '18-25', label: '18-25', subtitle: 'Цифровые аборигены' },
-  { id: '26-35', label: '26-35', subtitle: 'Технологические воины' },
-  { id: '36-45', label: '36-45', subtitle: 'Цифровые лидеры' },
-  { id: '46+', label: '46+', subtitle: 'Технологические пионеры' },
+  { id: '18-25', label: '18-25', subtitle: 'ЦИФРОВЫЕ АБОРИГЕНЫ' },
+  { id: '26-35', label: '26-35', subtitle: 'ТЕХНОЛОГИЧЕСКИЕ ВОИНЫ' },
+  { id: '36-45', label: '36-45', subtitle: 'ЦИФРОВЫЕ ЛИДЕРЫ' },
+  { id: '46+', label: '46+', subtitle: 'ТЕХНОЛОГИЧЕСКИЕ ПИОНЕРЫ' },
 ];
 
 export default function OnboardingStep2() {
@@ -32,7 +32,7 @@ export default function OnboardingStep2() {
 
   return (
     <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
+      colors={['#0A0A0A', '#1A1A1A', '#2A2A2A']}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
@@ -43,24 +43,24 @@ export default function OnboardingStep2() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
               <View style={styles.progressBar}>
                 <View style={[styles.progressFill, { width: '33.33%' }]} />
               </View>
-              <Text style={styles.progressText}>Шаг 2 из 6</Text>
+              <Text style={styles.progressText}>ШАГ 2 ИЗ 6</Text>
             </View>
           </View>
 
           {/* Main content */}
           <View style={styles.mainContent}>
-            <Text style={styles.title}>Давай настроим твой ритм!</Text>
+            <Text style={styles.title}>ДАВАЙ НАСТРОИМ ТВОЙ РИТМ!</Text>
             
             <Text style={styles.description}>
-              Сначала выбери свой возрастной диапазон:
-              {'\n'}Это поможет нам создать твой идеальный биологический цикл.
+              СНАЧАЛА ВЫБЕРИ СВОЙ ВОЗРАСТНОЙ ДИАПАЗОН:
+              {'\n'}ЭТО ПОМОЖЕТ НАМ СОЗДАТЬ ТВОЙ ИДЕАЛЬНЫЙ БИОЛОГИЧЕСКИЙ ЦИКЛ.
             </Text>
 
             <View style={styles.optionsContainer}>
@@ -96,7 +96,7 @@ export default function OnboardingStep2() {
 
             {selectedAge && (
               <Text style={styles.confirmationText}>
-                Отлично! Давай Noowing!
+                ОТЛИЧНО! ДАВАЙ NOOWING!
               </Text>
             )}
           </View>
@@ -109,16 +109,16 @@ export default function OnboardingStep2() {
               disabled={!selectedAge}
             >
               <LinearGradient
-                colors={selectedAge ? ['#00D4FF', '#0099CC'] : ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
+                colors={selectedAge ? ['#FF6B35', '#E55A2B'] : ['rgba(255,255,255,0.05)', 'rgba(255,255,255,0.02)']}
                 style={styles.buttonGradient}
               >
                 <Text style={[
                   styles.buttonText,
                   !selectedAge && styles.buttonTextDisabled
                 ]}>
-                  Продолжить
+                  ПРОДОЛЖИТЬ
                 </Text>
-                <ArrowRight size={20} color={selectedAge ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
+                <ArrowRight size={20} color={selectedAge ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -154,19 +154,20 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
     marginBottom: 8,
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
+    letterSpacing: 1.5,
   },
   mainContent: {
     flex: 1,
@@ -178,6 +179,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 16,
     lineHeight: 36,
+    letterSpacing: 2,
   },
   description: {
     fontSize: 16,
@@ -186,22 +188,23 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 40,
+    letterSpacing: 0.5,
   },
   optionsContainer: {
     gap: 16,
     marginBottom: 32,
   },
   optionButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
-    borderWidth: 2,
-    borderColor: 'transparent',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 20,
+    padding: 24,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     position: 'relative',
   },
   optionButtonSelected: {
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderColor: '#00D4FF',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderColor: '#FF6B35',
   },
   optionContent: {
     alignItems: 'center',
@@ -211,17 +214,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     marginBottom: 4,
+    letterSpacing: 1,
   },
   optionLabelSelected: {
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   optionSubtitle: {
     fontSize: 14,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1,
   },
   optionSubtitleSelected: {
-    color: 'rgba(0, 212, 255, 0.8)',
+    color: 'rgba(255, 107, 53, 0.8)',
   },
   selectedIndicator: {
     position: 'absolute',
@@ -229,20 +234,21 @@ const styles = StyleSheet.create({
     right: 16,
     width: 12,
     height: 12,
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 6,
   },
   confirmationText: {
     fontSize: 16,
     fontFamily: 'Inter-Medium',
-    color: '#00D4FF',
+    color: '#FF6B35',
     textAlign: 'center',
+    letterSpacing: 1,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: 20,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -252,14 +258,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
+    paddingVertical: 20,
     paddingHorizontal: 32,
   },
   buttonText: {
     fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 8,
+    marginRight: 12,
+    letterSpacing: 2,
   },
   buttonTextDisabled: {
     color: 'rgba(255, 255, 255, 0.3)',

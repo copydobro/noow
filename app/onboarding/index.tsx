@@ -10,7 +10,7 @@ const { width, height } = Dimensions.get('window');
 export default function OnboardingWelcome() {
   return (
     <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
+      colors={['#0A0A0A', '#1A1A1A', '#2A2A2A']}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
@@ -20,61 +20,61 @@ export default function OnboardingWelcome() {
             <View style={styles.progressBar}>
               <View style={[styles.progressFill, { width: '16.67%' }]} />
             </View>
-            <Text style={styles.progressText}>Шаг 1 из 6</Text>
+            <Text style={styles.progressText}>ШАГ 1 ИЗ 6</Text>
           </View>
 
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Brain size={64} color="#00D4FF" strokeWidth={1.5} />
+              <Brain size={64} color="#FF6B35" strokeWidth={1.5} />
             </View>
 
-            <Text style={styles.title}>Привет! Я твой компаньон Noowing.</Text>
+            <Text style={styles.title}>ПРИВЕТ! Я ТВОЙ КОМПАНЬОН NOOWING.</Text>
             
             <Text style={styles.description}>
-              Давай вместе перезагрузим твой биологический ритм! 
-              Присоединяйся к нашей растущей сообществу цифровых воинов.
+              ДАВАЙ ВМЕСТЕ ПЕРЕЗАГРУЗИМ ТВОЙ БИОЛОГИЧЕСКИЙ РИТМ! 
+              ПРИСОЕДИНЯЙСЯ К НАШЕЙ РАСТУЩЕЙ СООБЩЕСТВУ ЦИФРОВЫХ ВОИНОВ.
             </Text>
 
             <View style={styles.cycleContainer}>
-              <Text style={styles.cycleTitle}>Что такое Noowing? Это твой цикл 45-2-5:</Text>
+              <Text style={styles.cycleTitle}>ЧТО ТАКОЕ NOOWING? ЭТО ТВОЙ ЦИКЛ 45-2-5:</Text>
               <View style={styles.cycleItem}>
                 <View style={styles.cycleDot} />
-                <Text style={styles.cycleText}>45 минут глубокой работы</Text>
+                <Text style={styles.cycleText}>45 МИНУТ ГЛУБОКОЙ РАБОТЫ</Text>
               </View>
               <View style={styles.cycleItem}>
                 <View style={styles.cycleDot} />
-                <Text style={styles.cycleText}>2 минуты физической активации</Text>
+                <Text style={styles.cycleText}>2 МИНУТЫ ФИЗИЧЕСКОЙ АКТИВАЦИИ</Text>
               </View>
               <View style={styles.cycleItem}>
                 <View style={styles.cycleDot} />
-                <Text style={styles.cycleText}>5 минут мини-отдыха</Text>
+                <Text style={styles.cycleText}>5 МИНУТ МИНИ-ОТДЫХА</Text>
               </View>
             </View>
 
             <Text style={styles.subtitle}>
-              Это не просто продуктивность. Это естественная операционная система твоего мозга.
+              ЭТО НЕ ПРОСТО ПРОДУКТИВНОСТЬ. ЭТО ЕСТЕСТВЕННАЯ ОПЕРАЦИОННАЯ СИСТЕМА ТВОЕГО МОЗГА.
             </Text>
 
             <Text style={styles.setupText}>
-              Готов обновить свою HumanOS? Настройка займет менее 30 секунд.
+              ГОТОВ ОБНОВИТЬ СВОЮ HUMANOS? НАСТРОЙКА ЗАЙМЕТ МЕНЕЕ 30 СЕКУНД.
             </Text>
           </View>
 
           {/* Bottom section */}
           <View style={styles.bottomSection}>
-            <Text style={styles.communityText}>100+ человек уже Noowing</Text>
+            <Text style={styles.communityText}>100+ ЧЕЛОВЕК УЖЕ NOOWING</Text>
             
             <TouchableOpacity 
               style={styles.continueButton}
               onPress={() => router.push('/onboarding/step-2')}
             >
               <LinearGradient
-                colors={['#00D4FF', '#0099CC']}
+                colors={['#FF6B35', '#E55A2B']}
                 style={styles.buttonGradient}
               >
-                <Text style={styles.buttonText}>Давай Noowing</Text>
-                <ArrowRight size={20} color="#000" strokeWidth={2} />
+                <Text style={styles.buttonText}>ДАВАЙ NOOWING</Text>
+                <ArrowRight size={20} color="#000" strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -101,19 +101,20 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
     marginBottom: 8,
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 14,
-    color: 'rgba(255, 255, 255, 0.7)',
+    fontSize: 12,
+    color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
+    letterSpacing: 1.5,
   },
   mainContent: {
     flex: 1,
@@ -122,10 +123,10 @@ const styles = StyleSheet.create({
   iconContainer: {
     marginBottom: 32,
     padding: 20,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 24,
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderRadius: 25,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
     fontSize: 28,
@@ -134,6 +135,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 16,
     lineHeight: 36,
+    letterSpacing: 2,
   },
   description: {
     fontSize: 16,
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 32,
+    letterSpacing: 0.5,
   },
   cycleContainer: {
     width: '100%',
@@ -150,9 +153,10 @@ const styles = StyleSheet.create({
   cycleTitle: {
     fontSize: 16,
     fontFamily: 'Inter-SemiBold',
-    color: '#00D4FF',
+    color: '#FF6B35',
     marginBottom: 16,
     textAlign: 'center',
+    letterSpacing: 1,
   },
   cycleItem: {
     flexDirection: 'row',
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
   cycleDot: {
     width: 6,
     height: 6,
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 3,
     marginRight: 12,
   },
@@ -172,6 +176,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.9)',
     lineHeight: 22,
+    letterSpacing: 0.5,
   },
   subtitle: {
     fontSize: 16,
@@ -180,6 +185,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 24,
     marginBottom: 16,
+    letterSpacing: 1,
   },
   setupText: {
     fontSize: 14,
@@ -187,6 +193,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
     lineHeight: 20,
+    letterSpacing: 0.5,
   },
   bottomSection: {
     paddingBottom: 20,
@@ -197,22 +204,24 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
     marginBottom: 24,
+    letterSpacing: 1,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: 20,
     overflow: 'hidden',
   },
   buttonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
+    paddingVertical: 20,
     paddingHorizontal: 32,
   },
   buttonText: {
     fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 8,
+    marginRight: 12,
+    letterSpacing: 2,
   },
 });

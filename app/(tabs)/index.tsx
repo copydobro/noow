@@ -31,7 +31,7 @@ const PHASE_DURATIONS = {
 const PHASE_CONFIG = {
   work: {
     title: 'ГЛУБОКАЯ РАБОТА',
-    subtitle: 'Время сосредоточиться',
+    subtitle: 'ВРЕМЯ СОСРЕДОТОЧИТЬСЯ',
     icon: Brain,
     color: '#FF6B35',
     gradient: ['#FF6B35', '#E55A2B'],
@@ -39,7 +39,7 @@ const PHASE_CONFIG = {
   },
   activation: {
     title: 'ФИЗИЧЕСКАЯ АКТИВАЦИЯ',
-    subtitle: 'Время двигаться',
+    subtitle: 'ВРЕМЯ ДВИГАТЬСЯ',
     icon: Activity,
     color: '#FF6B35',
     gradient: ['#FF6B35', '#E55A2B'],
@@ -47,7 +47,7 @@ const PHASE_CONFIG = {
   },
   rest: {
     title: 'ВОССТАНОВЛЕНИЕ',
-    subtitle: 'Время отдохнуть',
+    subtitle: 'ВРЕМЯ ОТДОХНУТЬ',
     icon: Coffee,
     color: '#FF6B35',
     gradient: ['#FF6B35', '#E55A2B'],
