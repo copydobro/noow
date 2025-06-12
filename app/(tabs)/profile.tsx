@@ -129,7 +129,7 @@ export default function ProfileTab() {
       disabled={setting.type === 'toggle'}
     >
       <View style={styles.settingIcon}>
-        <setting.icon size={20} color="#00D4FF" strokeWidth={2} />
+        <setting.icon size={20} color="#FF6B35" strokeWidth={2} />
       </View>
       
       <View style={styles.settingContent}>
@@ -143,7 +143,7 @@ export default function ProfileTab() {
         <Switch
           value={setting.value}
           onValueChange={setting.onToggle}
-          trackColor={{ false: 'rgba(255,255,255,0.2)', true: '#00D4FF' }}
+          trackColor={{ false: 'rgba(255,255,255,0.2)', true: '#FF6B35' }}
           thumbColor={setting.value ? '#FFFFFF' : '#FFFFFF'}
         />
       ) : (
@@ -153,32 +153,29 @@ export default function ProfileTab() {
   );
 
   return (
-    <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
           <View style={styles.content}>
             {/* Header */}
             <View style={styles.header}>
-              <Text style={styles.title}>Профиль</Text>
+              <Text style={styles.title}>ПРОФИЛЬ</Text>
               <TouchableOpacity 
                 style={styles.editButton}
                 onPress={() => Alert.alert('Редактировать', 'Здесь вы можете изменить информацию профиля')}
               >
-                <Edit3 size={20} color="#00D4FF" strokeWidth={2} />
+                <Edit3 size={20} color="#FF6B35" strokeWidth={2} />
               </TouchableOpacity>
             </View>
 
             {/* User Card */}
             <TouchableOpacity style={styles.userCard} onPress={showUserStats}>
               <LinearGradient
-                colors={['rgba(0, 212, 255, 0.1)', 'rgba(0, 212, 255, 0.05)']}
+                colors={['rgba(255, 107, 53, 0.1)', 'rgba(255, 107, 53, 0.05)']}
                 style={styles.userCardGradient}
               >
                 <View style={styles.userAvatar}>
-                  <Brain size={32} color="#00D4FF" strokeWidth={2} />
+                  <Brain size={32} color="#FF6B35" strokeWidth={2} />
                 </View>
                 
                 <View style={styles.userInfo}>
@@ -192,23 +189,23 @@ export default function ProfileTab() {
             <TouchableOpacity style={styles.statsContainer} onPress={showUserStats}>
               <View style={styles.statItem}>
                 <Text style={styles.statNumber}>{userStats.totalCycles}</Text>
-                <Text style={styles.statLabel}>Всего циклов</Text>
+                <Text style={styles.statLabel}>ВСЕГО ЦИКЛОВ</Text>
               </View>
               <View style={styles.statDivider} />
               <View style={styles.statItem}>
                 <Text style={styles.statNumber}>{userStats.currentStreak}</Text>
-                <Text style={styles.statLabel}>Текущая серия</Text>
+                <Text style={styles.statLabel}>ТЕКУЩАЯ СЕРИЯ</Text>
               </View>
               <View style={styles.statDivider} />
               <View style={styles.statItem}>
                 <Text style={styles.statNumber}>{userStats.bestStreak}</Text>
-                <Text style={styles.statLabel}>Лучшая серия</Text>
+                <Text style={styles.statLabel}>ЛУЧШАЯ СЕРИЯ</Text>
               </View>
             </TouchableOpacity>
 
             {/* Profile Settings */}
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Настройки профиля</Text>
+              <Text style={styles.sectionTitle}>НАСТРОЙКИ ПРОФИЛЯ</Text>
               <View style={styles.settingsList}>
                 {profileSettings.map(renderSetting)}
               </View>
@@ -216,7 +213,7 @@ export default function ProfileTab() {
 
             {/* App Settings */}
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Настройки приложения</Text>
+              <Text style={styles.sectionTitle}>НАСТРОЙКИ ПРИЛОЖЕНИЯ</Text>
               <View style={styles.settingsList}>
                 {appSettings.map(renderSetting)}
               </View>
@@ -224,7 +221,7 @@ export default function ProfileTab() {
 
             {/* Other Settings */}
             <View style={styles.section}>
-              <Text style={styles.sectionTitle}>Прочее</Text>
+              <Text style={styles.sectionTitle}>ПРОЧЕЕ</Text>
               <View style={styles.settingsList}>
                 {otherSettings.map(renderSetting)}
               </View>
@@ -241,13 +238,14 @@ export default function ProfileTab() {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0A0A0A',
   },
   safeArea: {
     flex: 1,
@@ -267,19 +265,20 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
+    letterSpacing: 2,
   },
   editButton: {
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.3)',
+    borderColor: 'rgba(255, 107, 53, 0.3)',
   },
   userCard: {
     borderRadius: 16,
@@ -291,14 +290,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 20,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.2)',
     borderRadius: 16,
   },
   userAvatar: {
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: 'rgba(0, 212, 255, 0.2)',
+    backgroundColor: 'rgba(255, 107, 53, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 16,
@@ -333,14 +332,15 @@ const styles = StyleSheet.create({
   statNumber: {
     fontSize: 24,
     fontFamily: 'Inter-Bold',
-    color: '#00D4FF',
+    color: '#FF6B35',
     marginBottom: 4,
   },
   statLabel: {
-    fontSize: 12,
-    fontFamily: 'Inter-Regular',
+    fontSize: 10,
+    fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   statDivider: {
     width: 1,
@@ -351,9 +351,10 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
   sectionTitle: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    letterSpacing: 1,
     marginBottom: 16,
   },
   settingsList: {
@@ -373,7 +374,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,

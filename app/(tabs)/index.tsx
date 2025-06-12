@@ -33,24 +33,24 @@ const PHASE_CONFIG = {
     title: 'Глубокая работа',
     subtitle: 'Время сосредоточиться',
     icon: Brain,
-    color: '#4ADE80',
-    gradient: ['#4ADE80', '#22C55E'],
+    color: '#FF6B35',
+    gradient: ['#FF6B35', '#E55A2B'],
     message: 'Сосредоточься на важной задаче. Никаких отвлечений!',
   },
   activation: {
     title: 'Физическая активация',
     subtitle: 'Время двигаться',
     icon: Activity,
-    color: '#FBBF24',
-    gradient: ['#FBBF24', '#F59E0B'],
+    color: '#FF6B35',
+    gradient: ['#FF6B35', '#E55A2B'],
     message: 'Встань и подвигайся! Сделай несколько упражнений.',
   },
   rest: {
     title: 'Восстановление',
     subtitle: 'Время отдохнуть',
     icon: Coffee,
-    color: '#8B5CF6',
-    gradient: ['#8B5CF6', '#7C3AED'],
+    color: '#FF6B35',
+    gradient: ['#FF6B35', '#E55A2B'],
     message: 'Расслабься и восстанови силы перед следующим циклом.',
   },
 };
@@ -217,8 +217,8 @@ export default function HomeTab() {
   const IconComponent = currentConfig.icon;
 
   const pulseStyle = useAnimatedStyle(() => {
-    const scale = interpolate(pulseAnimation.value, [0, 1], [1, 1.05]);
-    const opacity = interpolate(pulseAnimation.value, [0, 1], [0.8, 1]);
+    const scale = interpolate(pulseAnimation.value, [0, 1], [1, 1.02]);
+    const opacity = interpolate(pulseAnimation.value, [0, 1], [0.9, 1]);
     
     return {
       transform: [{ scale }],
@@ -235,38 +235,42 @@ export default function HomeTab() {
   });
 
   return (
-    <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.greeting}>Привет! 👋</Text>
-            <Text style={styles.subtitle}>Готов к Noowing?</Text>
+            <Text style={styles.greeting}>NOOWING</Text>
+            <Text style={styles.subtitle}>Цикл {cycleState.cycleCount + 1}</Text>
           </View>
 
-          {/* Cycle Counter */}
-          <View style={styles.cycleCounter}>
-            <Text style={styles.cycleCountText}>Цикл {cycleState.cycleCount + 1}</Text>
-            <Text style={styles.cycleSubtext}>Сегодня</Text>
+          {/* Stats Cards */}
+          <View style={styles.statsContainer}>
+            <View style={styles.statCard}>
+              <Text style={styles.statNumber}>{cycleState.cycleCount}</Text>
+              <Text style={styles.statLabel}>ЦИКЛОВ</Text>
+            </View>
+            <View style={styles.statCard}>
+              <Text style={styles.statNumber}>
+                {Math.floor(cycleState.cycleCount * 52 / 60)}:{(cycleState.cycleCount * 52) % 60}
+              </Text>
+              <Text style={styles.statLabel}>ВРЕМЯ</Text>
+            </View>
+            <View style={styles.statCard}>
+              <Text style={styles.statNumber}>{cycleState.cycleCount * 2}</Text>
+              <Text style={styles.statLabel}>АКТИВАЦИЙ</Text>
+            </View>
           </View>
 
           {/* Main Timer Circle */}
           <View style={styles.timerContainer}>
             <Animated.View style={[styles.timerCircle, pulseStyle]}>
-              <LinearGradient
-                colors={currentConfig.gradient}
-                style={styles.timerGradient}
-              >
-                <View style={styles.timerContent}>
-                  <IconComponent size={48} color="#000" strokeWidth={2} />
-                  <Text style={styles.timerTime}>{formatTime(cycleState.timeRemaining)}</Text>
-                  <Text style={styles.timerPhase}>{currentConfig.title}</Text>
-                  <Text style={styles.timerSubtitle}>{currentConfig.subtitle}</Text>
-                </View>
-              </LinearGradient>
+              <View style={styles.timerContent}>
+                <IconComponent size={48} color="#FF6B35" strokeWidth={2} />
+                <Text style={styles.timerTime}>{formatTime(cycleState.timeRemaining)}</Text>
+                <Text style={styles.timerPhase}>{currentConfig.title}</Text>
+                <Text style={styles.timerSubtitle}>{currentConfig.subtitle}</Text>
+              </View>
             </Animated.View>
             
             {/* Progress Ring */}
@@ -283,7 +287,6 @@ export default function HomeTab() {
                 style={[
                   styles.phaseIndicator,
                   cycleState.phase === phase && styles.phaseIndicatorActive,
-                  { borderColor: config.color }
                 ]}
                 onPress={() => {
                   Alert.alert(config.title, config.message);
@@ -291,7 +294,7 @@ export default function HomeTab() {
               >
                 <config.icon 
                   size={20} 
-                  color={cycleState.phase === phase ? config.color : 'rgba(255,255,255,0.4)'} 
+                  color={cycleState.phase === phase ? '#FF6B35' : 'rgba(255,255,255,0.4)'} 
                   strokeWidth={2} 
                 />
               </TouchableOpacity>
@@ -312,7 +315,7 @@ export default function HomeTab() {
               onPress={toggleTimer}
             >
               <LinearGradient
-                colors={['#00D4FF', '#0099CC']}
+                colors={['#FF6B35', '#E55A2B']}
                 style={styles.playButtonGradient}
               >
                 {cycleState.isActive ? (
@@ -331,35 +334,21 @@ export default function HomeTab() {
             </TouchableOpacity>
           </View>
 
-          {/* Daily Progress */}
-          <View style={styles.dailyProgress}>
-            <Text style={styles.dailyProgressTitle}>Сегодняшний прогресс</Text>
-            <View style={styles.progressStats}>
-              <View style={styles.progressStat}>
-                <Text style={styles.progressStatNumber}>{cycleState.cycleCount}</Text>
-                <Text style={styles.progressStatLabel}>Циклов</Text>
-              </View>
-              <View style={styles.progressStat}>
-                <Text style={styles.progressStatNumber}>
-                  {Math.floor(cycleState.cycleCount * 52 / 60)}ч {(cycleState.cycleCount * 52) % 60}м
-                </Text>
-                <Text style={styles.progressStatLabel}>Время</Text>
-              </View>
-              <View style={styles.progressStat}>
-                <Text style={styles.progressStatNumber}>{cycleState.cycleCount * 2}</Text>
-                <Text style={styles.progressStatLabel}>Активаций</Text>
-              </View>
-            </View>
+          {/* Current Phase Info */}
+          <View style={styles.phaseInfo}>
+            <Text style={styles.phaseInfoTitle}>ТЕКУЩАЯ ФАЗА</Text>
+            <Text style={styles.phaseInfoText}>{currentConfig.message}</Text>
           </View>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0A0A0A',
   },
   safeArea: {
     flex: 1,
@@ -371,33 +360,46 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 32,
   },
   greeting: {
-    fontSize: 24,
+    fontSize: 32,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    marginBottom: 4,
+    letterSpacing: 4,
+    marginBottom: 8,
   },
   subtitle: {
     fontSize: 16,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1,
   },
-  cycleCounter: {
-    alignItems: 'center',
+  statsContainer: {
+    flexDirection: 'row',
+    gap: 12,
     marginBottom: 40,
   },
-  cycleCountText: {
-    fontSize: 20,
-    fontFamily: 'Inter-SemiBold',
-    color: '#00D4FF',
+  statCard: {
+    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 16,
+    padding: 16,
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  statNumber: {
+    fontSize: 24,
+    fontFamily: 'Inter-Bold',
+    color: '#FF6B35',
     marginBottom: 4,
   },
-  cycleSubtext: {
-    fontSize: 14,
-    fontFamily: 'Inter-Regular',
+  statLabel: {
+    fontSize: 10,
+    fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1,
   },
   timerContainer: {
     alignItems: 'center',
@@ -409,10 +411,9 @@ const styles = StyleSheet.create({
     width: width * 0.7,
     height: width * 0.7,
     borderRadius: width * 0.35,
-    overflow: 'hidden',
-  },
-  timerGradient: {
-    flex: 1,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -420,58 +421,62 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTime: {
-    fontSize: 36,
+    fontSize: 48,
     fontFamily: 'Inter-Bold',
-    color: '#000',
-    marginTop: 12,
+    color: '#FFFFFF',
+    marginTop: 16,
     marginBottom: 8,
+    letterSpacing: 2,
   },
   timerPhase: {
     fontSize: 18,
     fontFamily: 'Inter-SemiBold',
-    color: '#000',
+    color: '#FF6B35',
     marginBottom: 4,
+    letterSpacing: 1,
   },
   timerSubtitle: {
     fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(0, 0, 0, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
   },
   progressRing: {
     position: 'absolute',
     width: width * 0.75,
     height: width * 0.75,
     borderRadius: width * 0.375,
-    borderWidth: 4,
-    borderColor: 'rgba(255, 255, 255, 0.2)',
+    borderWidth: 3,
+    borderColor: 'rgba(255, 107, 53, 0.2)',
   },
   progressIndicator: {
     position: 'absolute',
-    top: -2,
+    top: -3,
     left: '50%',
     width: 8,
     height: 8,
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 4,
     marginLeft: -4,
   },
   phaseIndicators: {
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: 20,
+    gap: 24,
     marginBottom: 40,
   },
   phaseIndicator: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     borderWidth: 2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
   },
   phaseIndicatorActive: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderColor: '#FF6B35',
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
   },
   controls: {
     flexDirection: 'row',
@@ -485,6 +490,8 @@ const styles = StyleSheet.create({
     height: 56,
     borderRadius: 28,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.2)',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -499,36 +506,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  dailyProgress: {
+  phaseInfo: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderRadius: 16,
     padding: 20,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
   },
-  dailyProgressTitle: {
-    fontSize: 16,
-    fontFamily: 'Inter-SemiBold',
-    color: '#FFFFFF',
-    textAlign: 'center',
-    marginBottom: 16,
-  },
-  progressStats: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-  },
-  progressStat: {
-    alignItems: 'center',
-  },
-  progressStatNumber: {
-    fontSize: 20,
-    fontFamily: 'Inter-Bold',
-    color: '#00D4FF',
-    marginBottom: 4,
-  },
-  progressStatLabel: {
+  phaseInfoTitle: {
     fontSize: 12,
+    fontFamily: 'Inter-SemiBold',
+    color: '#FF6B35',
+    letterSpacing: 1,
+    marginBottom: 8,
+  },
+  phaseInfoText: {
+    fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.6)',
+    color: 'rgba(255, 255, 255, 0.8)',
+    lineHeight: 20,
   },
 });

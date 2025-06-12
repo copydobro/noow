@@ -23,13 +23,13 @@ interface WeekData {
 }
 
 const weekData: WeekData[] = [
-  { day: 'Пн', cycles: 8, maxCycles: 12 },
-  { day: 'Вт', cycles: 6, maxCycles: 12 },
-  { day: 'Ср', cycles: 10, maxCycles: 12 },
-  { day: 'Чт', cycles: 12, maxCycles: 12 },
-  { day: 'Пт', cycles: 9, maxCycles: 12 },
-  { day: 'Сб', cycles: 4, maxCycles: 12 },
-  { day: 'Вс', cycles: 7, maxCycles: 12 },
+  { day: 'ПН', cycles: 8, maxCycles: 12 },
+  { day: 'ВТ', cycles: 6, maxCycles: 12 },
+  { day: 'СР', cycles: 10, maxCycles: 12 },
+  { day: 'ЧТ', cycles: 12, maxCycles: 12 },
+  { day: 'ПТ', cycles: 9, maxCycles: 12 },
+  { day: 'СБ', cycles: 4, maxCycles: 12 },
+  { day: 'ВС', cycles: 7, maxCycles: 12 },
 ];
 
 const achievements = [
@@ -49,8 +49,8 @@ export default function StatsTab() {
       value: '156',
       subtitle: '+12 на этой неделе',
       icon: Brain,
-      color: '#4ADE80',
-      gradient: ['#4ADE80', '#22C55E'],
+      color: '#FF6B35',
+      gradient: ['#FF6B35', '#E55A2B'],
       onPress: () => Alert.alert('Циклы работы', 'Вы завершили 156 циклов глубокой работы! Каждый цикл длится 45 минут.')
     },
     {
@@ -58,8 +58,8 @@ export default function StatsTab() {
       value: '5ч 12м',
       subtitle: 'Сегодня',
       icon: Clock,
-      color: '#00D4FF',
-      gradient: ['#00D4FF', '#0099CC'],
+      color: '#FF6B35',
+      gradient: ['#FF6B35', '#E55A2B'],
       onPress: () => Alert.alert('Время активности', 'Сегодня вы потратили 5 часов 12 минут на активные упражнения!')
     },
     {
@@ -67,8 +67,8 @@ export default function StatsTab() {
       value: '312',
       subtitle: 'Всего выполнено',
       icon: Activity,
-      color: '#FBBF24',
-      gradient: ['#FBBF24', '#F59E0B'],
+      color: '#FF6B35',
+      gradient: ['#FF6B35', '#E55A2B'],
       onPress: () => Alert.alert('Физические активации', 'Вы выполнили 312 двухминутных активаций! Отличная работа!')
     },
     {
@@ -76,16 +76,16 @@ export default function StatsTab() {
       value: '7 дней',
       subtitle: 'Лучшая: 14 дней',
       icon: TrendingUp,
-      color: '#8B5CF6',
-      gradient: ['#8B5CF6', '#7C3AED'],
+      color: '#FF6B35',
+      gradient: ['#FF6B35', '#E55A2B'],
       onPress: () => Alert.alert('Серия', 'Ваша текущая серия: 7 дней подряд! Лучший результат: 14 дней.')
     },
   ];
 
   const periods = [
-    { key: 'week', label: 'Неделя' },
-    { key: 'month', label: 'Месяц' },
-    { key: 'year', label: 'Год' },
+    { key: 'week', label: 'НЕДЕЛЯ' },
+    { key: 'month', label: 'МЕСЯЦ' },
+    { key: 'year', label: 'ГОД' },
   ];
 
   const shareStats = () => {
@@ -117,19 +117,18 @@ export default function StatsTab() {
   };
 
   return (
-    <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
           <View style={styles.content}>
             {/* Header */}
             <View style={styles.header}>
-              <Text style={styles.title}>Статистика</Text>
-              <Text style={styles.subtitle}>Твой прогресс в Noowing</Text>
+              <View>
+                <Text style={styles.title}>СТАТИСТИКА</Text>
+                <Text style={styles.subtitle}>Твой прогресс в Noowing</Text>
+              </View>
               <TouchableOpacity style={styles.shareButton} onPress={shareStats}>
-                <Share2 size={20} color="#00D4FF" strokeWidth={2} />
+                <Share2 size={20} color="#FF6B35" strokeWidth={2} />
               </TouchableOpacity>
             </View>
 
@@ -162,17 +161,14 @@ export default function StatsTab() {
                   style={styles.statCard}
                   onPress={stat.onPress}
                 >
-                  <LinearGradient
-                    colors={[`${stat.color}20`, `${stat.color}10`]}
-                    style={styles.statCardGradient}
-                  >
+                  <View style={styles.statCardContent}>
                     <View style={styles.statCardHeader}>
-                      <stat.icon size={24} color={stat.color} strokeWidth={2} />
+                      <stat.icon size={24} color="#FF6B35" strokeWidth={2} />
                       <Text style={styles.statCardTitle}>{stat.title}</Text>
                     </View>
                     <Text style={styles.statCardValue}>{stat.value}</Text>
                     <Text style={styles.statCardSubtitle}>{stat.subtitle}</Text>
-                  </LinearGradient>
+                  </View>
                 </TouchableOpacity>
               ))}
             </View>
@@ -180,8 +176,8 @@ export default function StatsTab() {
             {/* Weekly Chart */}
             <TouchableOpacity style={styles.chartContainer} onPress={showWeeklyChart}>
               <View style={styles.chartHeader}>
-                <Text style={styles.chartTitle}>Активность за неделю</Text>
-                <BarChart3 size={20} color="#00D4FF" strokeWidth={2} />
+                <Text style={styles.chartTitle}>АКТИВНОСТЬ ЗА НЕДЕЛЮ</Text>
+                <BarChart3 size={20} color="#FF6B35" strokeWidth={2} />
               </View>
               <View style={styles.chart}>
                 {weekData.map((day, index) => (
@@ -196,7 +192,7 @@ export default function StatsTab() {
                           styles.bar,
                           { 
                             height: `${(day.cycles / day.maxCycles) * 100}%`,
-                            backgroundColor: day.cycles === day.maxCycles ? '#4ADE80' : '#00D4FF'
+                            backgroundColor: day.cycles === day.maxCycles ? '#FF6B35' : 'rgba(255, 107, 53, 0.6)'
                           }
                         ]} 
                       />
@@ -210,14 +206,14 @@ export default function StatsTab() {
 
             {/* Phase Distribution */}
             <View style={styles.phaseContainer}>
-              <Text style={styles.phaseTitle}>Распределение времени</Text>
+              <Text style={styles.phaseTitle}>РАСПРЕДЕЛЕНИЕ ВРЕМЕНИ</Text>
               <View style={styles.phaseStats}>
                 <TouchableOpacity 
                   style={styles.phaseStat}
                   onPress={() => Alert.alert('Работа', 'Вы потратили 117 часов на глубокую работу (75% времени)')}
                 >
                   <View style={styles.phaseIcon}>
-                    <Brain size={20} color="#4ADE80" strokeWidth={2} />
+                    <Brain size={20} color="#FF6B35" strokeWidth={2} />
                   </View>
                   <View style={styles.phaseInfo}>
                     <Text style={styles.phaseLabel}>Работа</Text>
@@ -231,7 +227,7 @@ export default function StatsTab() {
                   onPress={() => Alert.alert('Активация', 'Вы потратили 10.4 часа на физические активации (7% времени)')}
                 >
                   <View style={styles.phaseIcon}>
-                    <Activity size={20} color="#FBBF24" strokeWidth={2} />
+                    <Activity size={20} color="#FF6B35" strokeWidth={2} />
                   </View>
                   <View style={styles.phaseInfo}>
                     <Text style={styles.phaseLabel}>Активация</Text>
@@ -245,7 +241,7 @@ export default function StatsTab() {
                   onPress={() => Alert.alert('Отдых', 'Вы потратили 26 часов на восстановление (18% времени)')}
                 >
                   <View style={styles.phaseIcon}>
-                    <Coffee size={20} color="#8B5CF6" strokeWidth={2} />
+                    <Coffee size={20} color="#FF6B35" strokeWidth={2} />
                   </View>
                   <View style={styles.phaseInfo}>
                     <Text style={styles.phaseLabel}>Отдых</Text>
@@ -258,7 +254,7 @@ export default function StatsTab() {
 
             {/* Achievements */}
             <View style={styles.achievementsContainer}>
-              <Text style={styles.achievementsTitle}>Достижения</Text>
+              <Text style={styles.achievementsTitle}>ДОСТИЖЕНИЯ</Text>
               <View style={styles.achievementsList}>
                 {achievements.map((achievement) => (
                   <TouchableOpacity 
@@ -272,7 +268,7 @@ export default function StatsTab() {
                     <View style={styles.achievementIcon}>
                       <Award 
                         size={24} 
-                        color={achievement.earned ? '#FBBF24' : 'rgba(255,255,255,0.3)'} 
+                        color={achievement.earned ? '#FF6B35' : 'rgba(255,255,255,0.3)'} 
                         strokeWidth={2} 
                       />
                     </View>
@@ -302,13 +298,14 @@ export default function StatsTab() {
           </View>
         </ScrollView>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0A0A0A',
   },
   safeArea: {
     flex: 1,
@@ -328,24 +325,23 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
+    letterSpacing: 2,
     marginBottom: 8,
-    flex: 1,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
-    flex: 1,
+    color: 'rgba(255, 255, 255, 0.6)',
   },
   shareButton: {
-    padding: 8,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    padding: 12,
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.3)',
+    borderColor: 'rgba(255, 107, 53, 0.3)',
   },
   periodSelector: {
     flexDirection: 'row',
@@ -361,12 +357,13 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   periodButtonActive: {
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
   },
   periodText: {
-    fontSize: 14,
-    fontFamily: 'Inter-Medium',
+    fontSize: 12,
+    fontFamily: 'Inter-SemiBold',
     color: 'rgba(255, 255, 255, 0.7)',
+    letterSpacing: 1,
   },
   periodTextActive: {
     color: '#000',
@@ -382,8 +379,9 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     overflow: 'hidden',
   },
-  statCardGradient: {
+  statCardContent: {
     padding: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
     borderRadius: 16,
@@ -394,11 +392,12 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   statCardTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.8)',
     marginLeft: 8,
     flex: 1,
+    letterSpacing: 0.5,
   },
   statCardValue: {
     fontSize: 24,
@@ -426,9 +425,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   chartTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    letterSpacing: 1,
   },
   chart: {
     flexDirection: 'row',
@@ -454,14 +454,15 @@ const styles = StyleSheet.create({
     minHeight: 4,
   },
   barLabel: {
-    fontSize: 12,
-    fontFamily: 'Inter-Medium',
+    fontSize: 10,
+    fontFamily: 'Inter-SemiBold',
     color: 'rgba(255, 255, 255, 0.7)',
     marginBottom: 4,
+    letterSpacing: 0.5,
   },
   barValue: {
     fontSize: 14,
-    fontFamily: 'Inter-SemiBold',
+    fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
   },
   phaseContainer: {
@@ -473,9 +474,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   phaseTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    letterSpacing: 1,
     marginBottom: 16,
   },
   phaseStats: {
@@ -489,7 +491,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -511,7 +513,7 @@ const styles = StyleSheet.create({
   phasePercentage: {
     fontSize: 16,
     fontFamily: 'Inter-Bold',
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   achievementsContainer: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -521,9 +523,10 @@ const styles = StyleSheet.create({
     borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   achievementsTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    letterSpacing: 1,
     marginBottom: 16,
   },
   achievementsList: {
@@ -545,7 +548,7 @@ const styles = StyleSheet.create({
     width: 48,
     height: 48,
     borderRadius: 24,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -574,7 +577,7 @@ const styles = StyleSheet.create({
     width: 24,
     height: 24,
     borderRadius: 12,
-    backgroundColor: '#4ADE80',
+    backgroundColor: '#FF6B35',
     alignItems: 'center',
     justifyContent: 'center',
   },

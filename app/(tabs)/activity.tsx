@@ -117,7 +117,7 @@ const exercises: Exercise[] = [
 
 const difficultyColors = {
   easy: '#4ADE80',
-  medium: '#FBBF24',
+  medium: '#FF6B35',
   hard: '#EF4444',
 };
 
@@ -184,16 +184,13 @@ export default function ActivityTab() {
   };
 
   return (
-    <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
-      style={styles.container}
-    >
+    <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.title}>Физическая активация</Text>
-            <Text style={styles.subtitle}>Выбери упражнения для 2-минутных активаций</Text>
+            <Text style={styles.title}>АКТИВАЦИЯ</Text>
+            <Text style={styles.subtitle}>Физические упражнения для 2-минутных активаций</Text>
           </View>
 
           {/* Stats */}
@@ -201,23 +198,23 @@ export default function ActivityTab() {
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Статистика', `Вы выполнили ${completedExercises.size} упражнений сегодня!`);
             }}>
-              <Zap size={24} color="#FBBF24" strokeWidth={2} />
+              <Zap size={24} color="#FF6B35" strokeWidth={2} />
               <Text style={styles.statNumber}>{completedExercises.size}</Text>
-              <Text style={styles.statLabel}>Выполнено</Text>
+              <Text style={styles.statLabel}>ВЫПОЛНЕНО</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Доступно', `${exercises.length} упражнений готовы к выполнению`);
             }}>
-              <Target size={24} color="#4ADE80" strokeWidth={2} />
+              <Target size={24} color="#FF6B35" strokeWidth={2} />
               <Text style={styles.statNumber}>{exercises.length}</Text>
-              <Text style={styles.statLabel}>Доступно</Text>
+              <Text style={styles.statLabel}>ДОСТУПНО</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.statCard} onPress={() => {
               Alert.alert('Время активности', `Вы потратили ${completedExercises.size * 2} минут на упражнения`);
             }}>
-              <Clock size={24} color="#8B5CF6" strokeWidth={2} />
+              <Clock size={24} color="#FF6B35" strokeWidth={2} />
               <Text style={styles.statNumber}>{completedExercises.size * 2}</Text>
-              <Text style={styles.statLabel}>Минут</Text>
+              <Text style={styles.statLabel}>МИНУТ</Text>
             </TouchableOpacity>
           </View>
 
@@ -271,7 +268,7 @@ export default function ActivityTab() {
                       }}
                     >
                       {completedExercises.has(exercise.id) ? (
-                        <CheckCircle size={24} color="#4ADE80" strokeWidth={2} />
+                        <CheckCircle size={24} color="#FF6B35" strokeWidth={2} />
                       ) : (
                         <View style={styles.incompleteCircle} />
                       )}
@@ -306,7 +303,7 @@ export default function ActivityTab() {
                       }}
                     >
                       <LinearGradient
-                        colors={['#00D4FF', '#0099CC']}
+                        colors={['#FF6B35', '#E55A2B']}
                         style={styles.startButtonGradient}
                       >
                         <Play size={16} color="#000" strokeWidth={2} />
@@ -320,13 +317,14 @@ export default function ActivityTab() {
           </ScrollView>
         </View>
       </SafeAreaView>
-    </LinearGradient>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0A0A0A',
   },
   safeArea: {
     flex: 1,
@@ -340,16 +338,17 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
+    letterSpacing: 2,
     marginBottom: 8,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.7)',
-    lineHeight: 24,
+    color: 'rgba(255, 255, 255, 0.6)',
+    lineHeight: 20,
   },
   statsContainer: {
     flexDirection: 'row',
@@ -373,9 +372,10 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   statLabel: {
-    fontSize: 12,
-    fontFamily: 'Inter-Regular',
+    fontSize: 10,
+    fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 1,
   },
   categoryScroll: {
     marginBottom: 24,
@@ -393,8 +393,8 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   categoryButtonActive: {
-    backgroundColor: 'rgba(0, 212, 255, 0.2)',
-    borderColor: '#00D4FF',
+    backgroundColor: 'rgba(255, 107, 53, 0.2)',
+    borderColor: '#FF6B35',
   },
   categoryText: {
     fontSize: 14,
@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.7)',
   },
   categoryTextActive: {
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   exerciseList: {
     flex: 1,

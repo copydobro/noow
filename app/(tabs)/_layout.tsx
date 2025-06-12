@@ -7,25 +7,26 @@ export default function TabLayout() {
       screenOptions={{
         headerShown: false,
         tabBarStyle: {
-          backgroundColor: '#0F0F23',
-          borderTopColor: 'rgba(255, 255, 255, 0.1)',
+          backgroundColor: '#0A0A0A',
+          borderTopColor: 'rgba(255, 107, 53, 0.2)',
           borderTopWidth: 1,
           paddingTop: 8,
           paddingBottom: 8,
           height: 80,
         },
-        tabBarActiveTintColor: '#00D4FF',
-        tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.6)',
+        tabBarActiveTintColor: '#FF6B35',
+        tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.4)',
         tabBarLabelStyle: {
-          fontSize: 12,
-          fontFamily: 'Inter-Medium',
+          fontSize: 10,
+          fontFamily: 'Inter-SemiBold',
           marginTop: 4,
+          letterSpacing: 0.5,
         },
       }}>
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Ритм',
+          title: 'РИТМ',
           tabBarIcon: ({ size, color }) => (
             <Brain size={size} color={color} strokeWidth={2} />
           ),
@@ -34,7 +35,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="activity"
         options={{
-          title: 'Активность',
+          title: 'АКТИВНОСТЬ',
           tabBarIcon: ({ size, color }) => (
             <Activity size={size} color={color} strokeWidth={2} />
           ),
@@ -43,7 +44,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="stats"
         options={{
-          title: 'Статистика',
+          title: 'СТАТИСТИКА',
           tabBarIcon: ({ size, color }) => (
             <BarChart3 size={size} color={color} strokeWidth={2} />
           ),
@@ -52,7 +53,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Профиль',
+          title: 'ПРОФИЛЬ',
           tabBarIcon: ({ size, color }) => (
             <User size={size} color={color} strokeWidth={2} />
           ),
