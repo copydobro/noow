@@ -128,7 +128,7 @@ export default function StatsTab() {
                 <Text style={styles.subtitle}>ТВОЙ ПРОГРЕСС В NOOWING</Text>
               </View>
               <TouchableOpacity style={styles.shareButton} onPress={shareStats}>
-                <Share2 size={20} color="#FF6B35" strokeWidth={1.5} />
+                <Share2 size={16} color="#FF6B35" strokeWidth={1.5} />
               </TouchableOpacity>
             </View>
 
@@ -163,7 +163,7 @@ export default function StatsTab() {
                 >
                   <View style={styles.statCardContent}>
                     <View style={styles.statCardHeader}>
-                      <stat.icon size={24} color="#FF6B35" strokeWidth={1.5} />
+                      <stat.icon size={16} color="#FF6B35" strokeWidth={1.5} />
                       <Text style={styles.statCardTitle}>{stat.title}</Text>
                     </View>
                     <Text style={styles.statCardValue}>{stat.value}</Text>
@@ -177,7 +177,7 @@ export default function StatsTab() {
             <TouchableOpacity style={styles.chartContainer} onPress={showWeeklyChart}>
               <View style={styles.chartHeader}>
                 <Text style={styles.chartTitle}>АКТИВНОСТЬ ЗА НЕДЕЛЮ</Text>
-                <BarChart3 size={20} color="#FF6B35" strokeWidth={1.5} />
+                <BarChart3 size={16} color="#FF6B35" strokeWidth={1.5} />
               </View>
               <View style={styles.chart}>
                 {weekData.map((day, index) => (
@@ -213,7 +213,7 @@ export default function StatsTab() {
                   onPress={() => Alert.alert('Работа', 'Вы потратили 117 часов на глубокую работу (75% времени)')}
                 >
                   <View style={styles.phaseIcon}>
-                    <Brain size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <Brain size={16} color="#FF6B35" strokeWidth={1.5} />
                   </View>
                   <View style={styles.phaseInfo}>
                     <Text style={styles.phaseLabel}>РАБОТА</Text>
@@ -227,7 +227,7 @@ export default function StatsTab() {
                   onPress={() => Alert.alert('Активация', 'Вы потратили 10.4 часа на физические активации (7% времени)')}
                 >
                   <View style={styles.phaseIcon}>
-                    <Activity size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <Activity size={16} color="#FF6B35" strokeWidth={1.5} />
                   </View>
                   <View style={styles.phaseInfo}>
                     <Text style={styles.phaseLabel}>АКТИВАЦИЯ</Text>
@@ -241,7 +241,7 @@ export default function StatsTab() {
                   onPress={() => Alert.alert('Отдых', 'Вы потратили 26 часов на восстановление (18% времени)')}
                 >
                   <View style={styles.phaseIcon}>
-                    <Coffee size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <Coffee size={16} color="#FF6B35" strokeWidth={1.5} />
                   </View>
                   <View style={styles.phaseInfo}>
                     <Text style={styles.phaseLabel}>ОТДЫХ</Text>
@@ -267,7 +267,7 @@ export default function StatsTab() {
                   >
                     <View style={styles.achievementIcon}>
                       <Award 
-                        size={24} 
+                        size={16} 
                         color={achievement.earned ? '#FF6B35' : 'rgba(255,255,255,0.2)'} 
                         strokeWidth={1.5} 
                       />
@@ -314,54 +314,54 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   content: {
-    paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingHorizontal: 20,
+    paddingTop: 10,
     paddingBottom: 100,
   },
   header: {
-    marginBottom: 24,
+    marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
   },
   title: {
-    fontSize: 36,
+    fontSize: 24,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    letterSpacing: 4,
-    marginBottom: 8,
+    letterSpacing: 3,
+    marginBottom: 2,
   },
   subtitle: {
-    fontSize: 12,
-    fontFamily: 'Inter-Regular',
+    fontSize: 10,
+    fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.5)',
-    letterSpacing: 1,
+    letterSpacing: 1.5,
   },
   shareButton: {
-    padding: 16,
+    padding: 12,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 107, 53, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   periodSelector: {
     flexDirection: 'row',
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 25,
-    padding: 4,
-    marginBottom: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 20,
+    padding: 3,
+    marginBottom: 16,
   },
   periodButton: {
     flex: 1,
-    paddingVertical: 12,
+    paddingVertical: 8,
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: 16,
   },
   periodButtonActive: {
     backgroundColor: '#FF6B35',
   },
   periodText: {
-    fontSize: 12,
+    fontSize: 9,
     fontFamily: 'Inter-SemiBold',
     color: 'rgba(255, 255, 255, 0.6)',
     letterSpacing: 1.5,
@@ -372,207 +372,207 @@ const styles = StyleSheet.create({
   statsGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 12,
-    marginBottom: 24,
+    gap: 6,
+    marginBottom: 16,
   },
   statCard: {
-    width: (width - 60) / 2,
-    borderRadius: 20,
+    width: (width - 46) / 2,
+    borderRadius: 16,
     overflow: 'hidden',
   },
   statCardContent: {
-    padding: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    padding: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    borderRadius: 20,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderRadius: 16,
   },
   statCardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 8,
   },
   statCardTitle: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.7)',
-    marginLeft: 8,
+    color: 'rgba(255, 255, 255, 0.6)',
+    marginLeft: 6,
     flex: 1,
     letterSpacing: 1,
   },
   statCardValue: {
-    fontSize: 28,
+    fontSize: 16,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
-    marginBottom: 4,
-    letterSpacing: 1,
+    marginBottom: 2,
+    letterSpacing: 0.5,
   },
   statCardSubtitle: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.5)',
+    color: 'rgba(255, 255, 255, 0.4)',
     letterSpacing: 0.5,
   },
   chartContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   chartHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   chartTitle: {
-    fontSize: 14,
+    fontSize: 11,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    letterSpacing: 2,
+    letterSpacing: 1.5,
   },
   chart: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
-    height: 120,
+    height: 80,
   },
   chartBar: {
     alignItems: 'center',
     flex: 1,
   },
   barContainer: {
-    height: 80,
-    width: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 10,
+    height: 60,
+    width: 16,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    borderRadius: 8,
     justifyContent: 'flex-end',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   bar: {
     width: '100%',
-    borderRadius: 10,
-    minHeight: 4,
+    borderRadius: 8,
+    minHeight: 3,
   },
   barLabel: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-SemiBold',
     color: 'rgba(255, 255, 255, 0.6)',
-    marginBottom: 4,
-    letterSpacing: 1,
+    marginBottom: 2,
+    letterSpacing: 0.5,
   },
   barValue: {
-    fontSize: 16,
+    fontSize: 11,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
   },
   phaseContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   phaseTitle: {
-    fontSize: 14,
+    fontSize: 11,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    letterSpacing: 2,
-    marginBottom: 16,
+    letterSpacing: 1.5,
+    marginBottom: 12,
   },
   phaseStats: {
-    gap: 16,
+    gap: 12,
   },
   phaseStat: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   phaseIcon: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 16,
+    marginRight: 12,
   },
   phaseInfo: {
     flex: 1,
   },
   phaseLabel: {
-    fontSize: 12,
+    fontSize: 9,
     fontFamily: 'Inter-Medium',
-    color: 'rgba(255, 255, 255, 0.7)',
-    marginBottom: 2,
+    color: 'rgba(255, 255, 255, 0.6)',
+    marginBottom: 1,
     letterSpacing: 1,
   },
   phaseValue: {
-    fontSize: 16,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     letterSpacing: 0.5,
   },
   phasePercentage: {
-    fontSize: 18,
+    fontSize: 14,
     fontFamily: 'Inter-Bold',
     color: '#FF6B35',
   },
   achievementsContainer: {
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 24,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 16,
+    padding: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   achievementsTitle: {
-    fontSize: 14,
+    fontSize: 11,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    letterSpacing: 2,
-    marginBottom: 16,
+    letterSpacing: 1.5,
+    marginBottom: 12,
   },
   achievementsList: {
-    gap: 12,
+    gap: 8,
   },
   achievementCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 16,
-    padding: 20,
+    backgroundColor: 'rgba(255, 255, 255, 0.02)',
+    borderRadius: 12,
+    padding: 12,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   achievementCardLocked: {
     opacity: 0.4,
   },
   achievementIcon: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
     alignItems: 'center',
     justifyContent: 'center',
-    marginRight: 16,
+    marginRight: 12,
   },
   achievementInfo: {
     flex: 1,
   },
   achievementTitle: {
-    fontSize: 14,
+    fontSize: 11,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 4,
+    marginBottom: 2,
     letterSpacing: 1,
   },
   achievementTitleLocked: {
     color: 'rgba(255, 255, 255, 0.4)',
   },
   achievementDescription: {
-    fontSize: 12,
+    fontSize: 9,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
   },
@@ -580,15 +580,15 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.3)',
   },
   achievementBadge: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: 18,
+    height: 18,
+    borderRadius: 9,
     backgroundColor: '#FF6B35',
     alignItems: 'center',
     justifyContent: 'center',
   },
   achievementBadgeText: {
-    fontSize: 14,
+    fontSize: 10,
     fontFamily: 'Inter-Bold',
     color: '#000',
   },
