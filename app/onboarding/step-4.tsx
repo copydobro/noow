@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowRight, ArrowLeft, Clock, CircleAlert as AlertCircle } from 'lucide-react-native';
@@ -176,7 +176,7 @@ export default function OnboardingStep4() {
                   style={styles.customButton}
                   onPress={() => setShowCustomPicker(true)}
                 >
-                  <Text style={styles.customButtonText}>Своё</Text>
+                  <Text style={styles.customButtonText}>Своё время</Text>
                 </TouchableOpacity>
 
                 {error && (
@@ -200,54 +200,69 @@ export default function OnboardingStep4() {
                 <Text style={styles.stepTitle}>Выбери время:</Text>
                 
                 <View style={styles.timePickerContainer}>
+                  {/* Hours Picker */}
                   <View style={styles.timePickerSection}>
                     <Text style={styles.timePickerLabel}>Час</Text>
-                    <ScrollView 
-                      style={styles.timePickerScroll}
-                      showsVerticalScrollIndicator={false}
-                    >
-                      <View style={styles.timePickerGrid}>
-                        {hours.map((hour) => (
+                    <View style={styles.pickerWrapper}>
+                      <ScrollView 
+                        style={styles.picker}
+                        showsVerticalScrollIndicator={false}
+                        snapToInterval={40}
+                        decelerationRate="fast"
+                        contentContainerStyle={styles.pickerContent}
+                      >
+                        {hours.map((hour, index) => (
                           <TouchableOpacity
                             key={hour}
                             style={[
-                              styles.timePickerButton,
-                              selectedHour === hour && styles.timePickerButtonSelected
+                              styles.pickerItem,
+                              selectedHour === hour && styles.pickerItemSelected
                             ]}
                             onPress={() => setSelectedHour(hour)}
                           >
                             <Text style={[
-                              styles.timePickerButtonText,
-                              selectedHour === hour && styles.timePickerButtonTextSelected
+                              styles.pickerItemText,
+                              selectedHour === hour && styles.pickerItemTextSelected
                             ]}>
                               {hour}
                             </Text>
                           </TouchableOpacity>
                         ))}
-                      </View>
-                    </ScrollView>
+                      </ScrollView>
+                      <View style={styles.pickerOverlay} />
+                    </View>
                   </View>
 
+                  {/* Minutes Picker */}
                   <View style={styles.timePickerSection}>
                     <Text style={styles.timePickerLabel}>Минуты</Text>
-                    <View style={styles.minutesContainer}>
-                      {minutes.map((minute) => (
-                        <TouchableOpacity
-                          key={minute}
-                          style={[
-                            styles.timePickerButton,
-                            selectedMinute === minute && styles.timePickerButtonSelected
-                          ]}
-                          onPress={() => setSelectedMinute(minute)}
-                        >
-                          <Text style={[
-                            styles.timePickerButtonText,
-                            selectedMinute === minute && styles.timePickerButtonTextSelected
-                          ]}>
-                            {minute}
-                          </Text>
-                        </TouchableOpacity>
-                      ))}
+                    <View style={styles.pickerWrapper}>
+                      <ScrollView 
+                        style={styles.picker}
+                        showsVerticalScrollIndicator={false}
+                        snapToInterval={40}
+                        decelerationRate="fast"
+                        contentContainerStyle={styles.pickerContent}
+                      >
+                        {minutes.map((minute) => (
+                          <TouchableOpacity
+                            key={minute}
+                            style={[
+                              styles.pickerItem,
+                              selectedMinute === minute && styles.pickerItemSelected
+                            ]}
+                            onPress={() => setSelectedMinute(minute)}
+                          >
+                            <Text style={[
+                              styles.pickerItemText,
+                              selectedMinute === minute && styles.pickerItemTextSelected
+                            ]}>
+                              {minute}
+                            </Text>
+                          </TouchableOpacity>
+                        ))}
+                      </ScrollView>
+                      <View style={styles.pickerOverlay} />
                     </View>
                   </View>
                 </View>
@@ -256,9 +271,14 @@ export default function OnboardingStep4() {
                   style={styles.confirmCustomButton}
                   onPress={handleCustomTimeSelect}
                 >
-                  <Text style={styles.confirmCustomButtonText}>
-                    Выбрать {selectedHour}:{selectedMinute}
-                  </Text>
+                  <LinearGradient
+                    colors={['#FF6B35', '#E55A2B']}
+                    style={styles.confirmCustomButtonGradient}
+                  >
+                    <Text style={styles.confirmCustomButtonText}>
+                      Выбрать {selectedHour}:{selectedMinute}
+                    </Text>
+                  </LinearGradient>
                 </TouchableOpacity>
               </View>
             )}
@@ -442,12 +462,14 @@ const styles = StyleSheet.create({
   },
   timePickerContainer: {
     flexDirection: 'row',
-    gap: 16,
+    gap: 20,
     marginBottom: 20,
+    width: '100%',
+    justifyContent: 'center',
   },
   timePickerSection: {
-    flex: 1,
     alignItems: 'center',
+    flex: 1,
   },
   timePickerLabel: {
     fontSize: 12,
@@ -456,53 +478,66 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     letterSpacing: 0.3,
   },
-  timePickerScroll: {
-    maxHeight: 120,
+  pickerWrapper: {
+    position: 'relative',
+    height: 160,
+    width: 80,
   },
-  timePickerGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 4,
-    justifyContent: 'center',
-  },
-  minutesContainer: {
-    gap: 4,
-  },
-  timePickerButton: {
-    width: 32,
-    height: 32,
+  picker: {
+    flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 4,
-    alignItems: 'center',
+    borderRadius: 12,
+  },
+  pickerContent: {
+    paddingVertical: 60,
+  },
+  pickerItem: {
+    height: 40,
     justifyContent: 'center',
+    alignItems: 'center',
+    marginVertical: 2,
+  },
+  pickerItemSelected: {
+    backgroundColor: 'rgba(255, 107, 53, 0.15)',
+    borderRadius: 8,
+    marginHorizontal: 8,
+  },
+  pickerItemText: {
+    fontSize: 16,
+    fontFamily: 'Inter-Medium',
+    color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 0.5,
+  },
+  pickerItemTextSelected: {
+    color: '#FF6B35',
+    fontFamily: 'Inter-SemiBold',
+  },
+  pickerOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
-  },
-  timePickerButtonSelected: {
-    backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderColor: '#FF6B35',
-  },
-  timePickerButtonText: {
-    fontSize: 10,
-    fontFamily: 'Inter-Medium',
-    color: '#FFFFFF',
-    letterSpacing: 0.2,
-  },
-  timePickerButtonTextSelected: {
-    color: '#FF6B35',
+    pointerEvents: 'none',
   },
   confirmCustomButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: '#FF6B35',
+    borderRadius: 12,
+    overflow: 'hidden',
+    width: '80%',
+  },
+  confirmCustomButtonGradient: {
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   confirmCustomButtonText: {
     fontSize: 12,
     fontFamily: 'Inter-SemiBold',
-    color: '#FF6B35',
+    color: '#000',
     letterSpacing: 0.3,
   },
   errorContainer: {
