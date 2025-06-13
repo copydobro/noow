@@ -39,8 +39,8 @@ function AnimatedTabIcon({
   useEffect(() => {
     if (focused) {
       // Плавная анимация при активации
-      scale.value = withSpring(1.1, { damping: 15, stiffness: 200 });
-      translateY.value = withSpring(-2, { damping: 15, stiffness: 200 });
+      scale.value = withSpring(1.08, { damping: 15, stiffness: 200 });
+      translateY.value = withSpring(-1, { damping: 15, stiffness: 200 });
       glowOpacity.value = withTiming(1, { duration: 300 });
       backgroundScale.value = withSpring(1, { damping: 15, stiffness: 200 });
     } else {
@@ -73,9 +73,9 @@ function AnimatedTabIcon({
       {/* Main icon */}
       <Animated.View style={animatedIconStyle}>
         <AnimatedIcon 
-          size={focused ? 22 : 20} 
+          size={focused ? 21 : 20} 
           color={color} 
-          strokeWidth={focused ? 2.5 : 2} 
+          strokeWidth={focused ? 2.2 : 2} 
         />
       </Animated.View>
     </View>
@@ -157,9 +157,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
-    height: 70,
-    paddingTop: 8,
-    paddingBottom: 12,
+    height: 68,
+    paddingTop: 0,
+    paddingBottom: 10,
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -167,6 +167,7 @@ const styles = StyleSheet.create({
   },
   tabBarIconStyle: {
     marginTop: 0,
+    marginBottom: 0,
   },
   tabBarBackground: {
     flex: 1,
@@ -214,15 +215,18 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 48,
-    height: 48,
+    width: 44,
+    height: 44,
+    // Убираем все отступы и центрируем идеально
+    marginTop: 0,
+    marginBottom: 0,
   },
   iconBackground: {
     position: 'absolute',
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: 'rgba(255, 107, 53, 0.15)',
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(255, 107, 53, 0.12)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.4,
