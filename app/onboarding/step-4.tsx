@@ -57,7 +57,7 @@ export default function OnboardingStep4() {
     const diffMinutes = endMinutes - startMinutes;
     
     if (diffMinutes < 240) {
-      setError('Пожалуйста, выбери минимум{\'\n'}4 часа между началом и концом');
+      setError('Пожалуйста, выбери минимум\n4 часа между началом и концом');
       return false;
     }
     
@@ -83,7 +83,7 @@ export default function OnboardingStep4() {
       };
     } else {
       return {
-        title: 'Теперь выбери время{\'\n'}окончания работы:',
+        title: 'Теперь выбери время\nокончания работы:',
         quickTimes: quickEndTimes,
         selectedTime: endTime,
       };
@@ -189,8 +189,8 @@ export default function OnboardingStep4() {
                 {stepData.selectedTime && !error && (
                   <Text style={styles.confirmationText}>
                     {step === 'start' 
-                      ? `Отлично! Твой рабочий день{'\n'}начинается в ${stepData.selectedTime}`
-                      : `Идеально! Твои рабочие часы{'\n'}установлены: ${startTime} - ${stepData.selectedTime}`
+                      ? `Отлично! Твой рабочий день\nначинается в ${stepData.selectedTime}`
+                      : `Идеально! Твои рабочие часы\nустановлены: ${startTime} - ${stepData.selectedTime}`
                     }
                   </Text>
                 )}
