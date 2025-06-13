@@ -56,8 +56,8 @@ export default function OnboardingStep4() {
     
     const diffMinutes = endMinutes - startMinutes;
     
-    if (diffMinutes < 240) { // Less than 4 hours
-      setError('Пожалуйста, выбери минимум 4 часа между началом и концом');
+    if (diffMinutes < 240) {
+      setError('Пожалуйста, выбери минимум{'\n'}4 часа между началом и концом');
       return false;
     }
     
@@ -66,7 +66,6 @@ export default function OnboardingStep4() {
 
   const handleContinue = () => {
     if (startTime && endTime) {
-      // Сохраняем выбранные данные
       if (typeof window !== 'undefined') {
         localStorage.setItem('userWorkStartTime', startTime);
         localStorage.setItem('userWorkEndTime', endTime);
@@ -84,7 +83,7 @@ export default function OnboardingStep4() {
       };
     } else {
       return {
-        title: 'Теперь выбери время окончания работы:',
+        title: 'Теперь выбери время{'\n'}окончания работы:',
         quickTimes: quickEndTimes,
         selectedTime: endTime,
       };
@@ -116,7 +115,7 @@ export default function OnboardingStep4() {
                 }
               }}
             >
-              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={2} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -130,14 +129,16 @@ export default function OnboardingStep4() {
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Clock size={48} color="#00D4FF" strokeWidth={1.5} />
+              <Clock size={40} color="#00D4FF" strokeWidth={1.5} />
             </View>
 
-            <Text style={styles.title}>Когда ты обычно работаешь или учишься?</Text>
+            <Text style={styles.title}>Когда ты обычно{'\n'}работаешь или учишься?</Text>
             
             <Text style={styles.description}>
-              Помни: Твой мозг работает наиболее эффективно, когда тело активно.
-              {'\n'}Если у тебя Ошибка 404: Энергия не найдена. Давай Noowing для подзарядки.
+              Помни: Твой мозг работает наиболее{'\n'}
+              эффективно, когда тело активно.{'\n'}
+              Если у тебя Ошибка 404: Энергия не найдена.{'\n'}
+              Давай Noowing для подзарядки.
             </Text>
 
             {!showCustomPicker ? (
@@ -180,7 +181,7 @@ export default function OnboardingStep4() {
 
                 {error && (
                   <View style={styles.errorContainer}>
-                    <AlertCircle size={16} color="#EF4444" strokeWidth={2} />
+                    <AlertCircle size={14} color="#EF4444" strokeWidth={2} />
                     <Text style={styles.errorText}>{error}</Text>
                   </View>
                 )}
@@ -188,8 +189,8 @@ export default function OnboardingStep4() {
                 {stepData.selectedTime && !error && (
                   <Text style={styles.confirmationText}>
                     {step === 'start' 
-                      ? `Отлично! Твой рабочий день начинается в ${stepData.selectedTime}`
-                      : `Идеально! Твои рабочие часы установлены: ${startTime} - ${stepData.selectedTime}`
+                      ? `Отлично! Твой рабочий день{'\n'}начинается в ${stepData.selectedTime}`
+                      : `Идеально! Твои рабочие часы{'\n'}установлены: ${startTime} - ${stepData.selectedTime}`
                     }
                   </Text>
                 )}
@@ -283,7 +284,7 @@ export default function OnboardingStep4() {
                 ]}>
                   Продолжить
                 </Text>
-                <ArrowRight size={20} color={(startTime && endTime && !error) ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
+                <ArrowRight size={18} color={(startTime && endTime && !error) ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -308,7 +309,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 32,
   },
   backButton: {
     padding: 8,
@@ -329,7 +330,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'rgba(255, 255, 255, 0.7)',
     fontFamily: 'Inter-Medium',
   },
@@ -338,65 +339,66 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: {
-    marginBottom: 24,
-    padding: 16,
+    marginBottom: 20,
+    padding: 12,
     backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: 'rgba(0, 212, 255, 0.2)',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 16,
-    lineHeight: 32,
+    lineHeight: 26,
   },
   description: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
-    lineHeight: 20,
-    marginBottom: 32,
+    lineHeight: 16,
+    marginBottom: 24,
   },
   stepTitle: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 20,
+    lineHeight: 20,
   },
   selectedTimeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
-    padding: 12,
+    padding: 10,
     backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 12,
+    borderRadius: 10,
   },
   selectedTimeLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
     marginRight: 8,
   },
   selectedTime: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#00D4FF',
   },
   quickTimesContainer: {
     flexDirection: 'row',
-    gap: 16,
-    marginBottom: 24,
+    gap: 12,
+    marginBottom: 20,
   },
   quickTimeButton: {
-    paddingVertical: 16,
-    paddingHorizontal: 24,
+    paddingVertical: 12,
+    paddingHorizontal: 20,
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 2,
     borderColor: 'transparent',
   },
@@ -405,7 +407,7 @@ const styles = StyleSheet.create({
     borderColor: '#00D4FF',
   },
   quickTimeText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
   },
@@ -413,14 +415,14 @@ const styles = StyleSheet.create({
     color: '#00D4FF',
   },
   customButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-    marginBottom: 24,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   customButtonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.8)',
   },
@@ -430,36 +432,36 @@ const styles = StyleSheet.create({
   },
   timePickerContainer: {
     flexDirection: 'row',
-    gap: 24,
-    marginBottom: 32,
+    gap: 20,
+    marginBottom: 24,
   },
   timePickerSection: {
     flex: 1,
     alignItems: 'center',
   },
   timePickerLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   timePickerScroll: {
-    maxHeight: 200,
+    maxHeight: 160,
   },
   timePickerGrid: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 6,
     justifyContent: 'center',
   },
   minutesContainer: {
-    gap: 8,
+    gap: 6,
   },
   timePickerButton: {
-    width: 48,
-    height: 48,
+    width: 40,
+    height: 40,
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 8,
+    borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
@@ -470,7 +472,7 @@ const styles = StyleSheet.create({
     borderColor: '#00D4FF',
   },
   timePickerButtonText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
   },
@@ -478,15 +480,15 @@ const styles = StyleSheet.create({
     color: '#00D4FF',
   },
   confirmCustomButton: {
-    paddingVertical: 12,
-    paddingHorizontal: 24,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     backgroundColor: 'rgba(0, 212, 255, 0.2)',
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: '#00D4FF',
   },
   confirmCustomButtonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#00D4FF',
   },
@@ -494,31 +496,32 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
-    padding: 12,
+    padding: 10,
     backgroundColor: 'rgba(239, 68, 68, 0.1)',
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: 'rgba(239, 68, 68, 0.3)',
   },
   errorText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#EF4444',
-    marginLeft: 8,
+    marginLeft: 6,
     flex: 1,
+    lineHeight: 16,
   },
   confirmationText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#00D4FF',
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 16,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: 14,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -528,11 +531,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
+    paddingHorizontal: 28,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
     marginRight: 8,

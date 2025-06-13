@@ -34,10 +34,8 @@ export default function OnboardingStep3() {
 
   const handleContinue = () => {
     if (selectedLevel) {
-      // Сохраняем выбранные данные
       const selectedActivityLevel = activityLevels.find(level => level.id === selectedLevel);
       if (selectedActivityLevel) {
-        // Для веб-версии используем localStorage
         if (typeof window !== 'undefined') {
           localStorage.setItem('userActivityLevel', selectedActivityLevel.id);
           localStorage.setItem('userActivityLevelLabel', `${selectedActivityLevel.label} (${selectedActivityLevel.subtitle})`);
@@ -60,7 +58,7 @@ export default function OnboardingStep3() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={2} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -74,18 +72,20 @@ export default function OnboardingStep3() {
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Activity size={48} color="#00D4FF" strokeWidth={1.5} />
+              <Activity size={40} color="#00D4FF" strokeWidth={1.5} />
             </View>
 
-            <Text style={styles.title}>Какой у тебя текущий уровень активности?</Text>
+            <Text style={styles.title}>Какой у тебя текущий{'\n'}уровень активности?</Text>
             
             <Text style={styles.description}>
-              Давай измерим его в приседаниях:
-              {'\n'}Сколько приседаний ты можешь сделать за 1 минуту?
+              Давай измерим его в приседаниях:{'\n'}
+              Сколько приседаний ты можешь{'\n'}
+              сделать за 1 минуту?
             </Text>
 
             <Text style={styles.subtitle}>
-              Это поможет нам настроить идеальную интенсивность активации.
+              Это поможет нам настроить{'\n'}
+              идеальную интенсивность активации.
             </Text>
 
             <View style={styles.optionsContainer}>
@@ -124,7 +124,7 @@ export default function OnboardingStep3() {
 
             {selectedLevel && (
               <Text style={styles.confirmationText}>
-                Отлично! Твоя интенсивность активации установлена
+                Отлично! Твоя интенсивность{'\n'}активации установлена
               </Text>
             )}
           </View>
@@ -146,7 +146,7 @@ export default function OnboardingStep3() {
                 ]}>
                   Продолжить
                 </Text>
-                <ArrowRight size={20} color={selectedLevel ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
+                <ArrowRight size={18} color={selectedLevel ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 32,
   },
   backButton: {
     padding: 8,
@@ -192,7 +192,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'rgba(255, 255, 255, 0.7)',
     fontFamily: 'Inter-Medium',
   },
@@ -201,46 +201,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: {
-    marginBottom: 24,
-    padding: 16,
+    marginBottom: 20,
+    padding: 12,
     backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: 'rgba(0, 212, 255, 0.2)',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 16,
-    lineHeight: 32,
+    lineHeight: 26,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: 20,
     marginBottom: 12,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
-    lineHeight: 20,
-    marginBottom: 32,
+    lineHeight: 16,
+    marginBottom: 24,
   },
   optionsContainer: {
     width: '100%',
-    gap: 16,
-    marginBottom: 32,
+    gap: 12,
+    marginBottom: 24,
   },
   optionButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: 14,
+    padding: 16,
     borderWidth: 2,
     borderColor: 'transparent',
     position: 'relative',
@@ -255,14 +255,14 @@ const styles = StyleSheet.create({
   optionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 6,
   },
   optionIcon: {
-    fontSize: 20,
-    marginRight: 12,
+    fontSize: 16,
+    marginRight: 8,
   },
   optionLabel: {
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
   },
@@ -270,7 +270,7 @@ const styles = StyleSheet.create({
     color: '#00D4FF',
   },
   optionSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
   },
@@ -279,24 +279,25 @@ const styles = StyleSheet.create({
   },
   selectedIndicator: {
     position: 'absolute',
-    top: 16,
-    right: 16,
-    width: 12,
-    height: 12,
+    top: 12,
+    right: 12,
+    width: 10,
+    height: 10,
     backgroundColor: '#00D4FF',
-    borderRadius: 6,
+    borderRadius: 5,
   },
   confirmationText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: '#00D4FF',
     textAlign: 'center',
+    lineHeight: 18,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: 14,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -306,11 +307,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
+    paddingHorizontal: 28,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
     marginRight: 8,

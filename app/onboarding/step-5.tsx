@@ -12,7 +12,6 @@ export default function OnboardingStep5() {
 
   const handleAutoLocation = () => {
     setSelectedMethod('auto');
-    // Simulate getting timezone from browser/device
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const offset = new Date().getTimezoneOffset() / -60;
     const offsetString = offset >= 0 ? `+${offset}` : `${offset}`;
@@ -34,13 +33,11 @@ export default function OnboardingStep5() {
 
   const handleContinue = () => {
     if (selectedMethod === 'auto' && detectedTimezone) {
-      // Сохраняем автоматически определенный часовой пояс
       if (typeof window !== 'undefined') {
         localStorage.setItem('userTimezone', detectedTimezone);
       }
       router.push('/onboarding/step-6');
     } else if (selectedMethod === 'manual' && validateUTCOffset(utcOffset)) {
-      // Сохраняем вручную введенный часовой пояс
       const offsetString = utcOffset.startsWith('+') || utcOffset.startsWith('-') ? utcOffset : '+' + utcOffset;
       const timezoneString = `UTC${offsetString}`;
       if (typeof window !== 'undefined') {
@@ -67,7 +64,7 @@ export default function OnboardingStep5() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={2} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -81,18 +78,20 @@ export default function OnboardingStep5() {
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Globe size={48} color="#00D4FF" strokeWidth={1.5} />
+              <Globe size={40} color="#00D4FF" strokeWidth={1.5} />
             </View>
 
-            <Text style={styles.title}>Какой у тебя часовой пояс?</Text>
+            <Text style={styles.title}>Какой у тебя{'\n'}часовой пояс?</Text>
             
             <Text style={styles.description}>
-              Это обеспечит соответствие твоего ритма биологическим часам.
-              {'\n'}Выбери свой вариант:
+              Это обеспечит соответствие твоего{'\n'}
+              ритма биологическим часам.{'\n'}
+              Выбери свой вариант:
             </Text>
 
             <Text style={styles.subtitle}>
-              Твой стул убивает тебя. Давай бороться с этим идеальным таймингом.
+              Твой стул убивает тебя. Давай{'\n'}
+              бороться с этим идеальным таймингом.
             </Text>
 
             <View style={styles.optionsContainer}>
@@ -104,13 +103,13 @@ export default function OnboardingStep5() {
                 onPress={handleAutoLocation}
               >
                 <View style={styles.optionContent}>
-                  <MapPin size={24} color={selectedMethod === 'auto' ? '#00D4FF' : '#FFFFFF'} strokeWidth={2} />
+                  <MapPin size={20} color={selectedMethod === 'auto' ? '#00D4FF' : '#FFFFFF'} strokeWidth={2} />
                   <View style={styles.optionTextContainer}>
                     <Text style={[
                       styles.optionLabel,
                       selectedMethod === 'auto' && styles.optionLabelSelected
                     ]}>
-                      Поделиться моим местоположением
+                      Поделиться моим{'\n'}местоположением
                     </Text>
                     <Text style={[
                       styles.optionSubtitle,
@@ -133,7 +132,7 @@ export default function OnboardingStep5() {
                 onPress={handleManualInput}
               >
                 <View style={styles.optionContent}>
-                  <Globe size={24} color={selectedMethod === 'manual' ? '#00D4FF' : '#FFFFFF'} strokeWidth={2} />
+                  <Globe size={20} color={selectedMethod === 'manual' ? '#00D4FF' : '#FFFFFF'} strokeWidth={2} />
                   <View style={styles.optionTextContainer}>
                     <Text style={[
                       styles.optionLabel,
@@ -169,7 +168,7 @@ export default function OnboardingStep5() {
                 />
                 {utcOffset && !validateUTCOffset(utcOffset) && (
                   <Text style={styles.errorText}>
-                    Введите корректное смещение от -12 до +14
+                    Введите корректное смещение{'\n'}от -12 до +14
                   </Text>
                 )}
               </View>
@@ -184,7 +183,7 @@ export default function OnboardingStep5() {
 
             {canContinue && (
               <Text style={styles.confirmationText}>
-                Идеально! Твой ритм синхронизирован с {
+                Идеально! Твой ритм синхронизирован с{'\n'}{
                   selectedMethod === 'auto' 
                     ? detectedTimezone 
                     : `UTC${utcOffset.startsWith('+') || utcOffset.startsWith('-') ? utcOffset : '+' + utcOffset}`
@@ -210,7 +209,7 @@ export default function OnboardingStep5() {
                 ]}>
                   Продолжить
                 </Text>
-                <ArrowRight size={20} color={canContinue ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
+                <ArrowRight size={18} color={canContinue ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -235,7 +234,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 32,
   },
   backButton: {
     padding: 8,
@@ -256,7 +255,7 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 14,
+    fontSize: 12,
     color: 'rgba(255, 255, 255, 0.7)',
     fontFamily: 'Inter-Medium',
   },
@@ -265,46 +264,46 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: {
-    marginBottom: 24,
-    padding: 16,
+    marginBottom: 20,
+    padding: 12,
     backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: 'rgba(0, 212, 255, 0.2)',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 16,
-    lineHeight: 32,
+    lineHeight: 26,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
-    lineHeight: 24,
+    lineHeight: 18,
     marginBottom: 12,
   },
   subtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
-    lineHeight: 20,
-    marginBottom: 32,
+    lineHeight: 16,
+    marginBottom: 24,
   },
   optionsContainer: {
     width: '100%',
-    gap: 16,
-    marginBottom: 24,
+    gap: 12,
+    marginBottom: 20,
   },
   optionButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: 14,
+    padding: 16,
     borderWidth: 2,
     borderColor: 'transparent',
     position: 'relative',
@@ -318,20 +317,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   optionTextContainer: {
-    marginLeft: 16,
+    marginLeft: 12,
     flex: 1,
   },
   optionLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     marginBottom: 4,
+    lineHeight: 18,
   },
   optionLabelSelected: {
     color: '#00D4FF',
   },
   optionSubtitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
   },
@@ -340,30 +340,30 @@ const styles = StyleSheet.create({
   },
   selectedIndicator: {
     position: 'absolute',
-    top: 16,
-    right: 16,
-    width: 12,
-    height: 12,
+    top: 12,
+    right: 12,
+    width: 10,
+    height: 10,
     backgroundColor: '#00D4FF',
-    borderRadius: 6,
+    borderRadius: 5,
   },
   manualInputContainer: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: 20,
   },
   inputLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 12,
+    marginBottom: 10,
     textAlign: 'center',
   },
   textInput: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 12,
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    fontSize: 16,
+    borderRadius: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     textAlign: 'center',
@@ -371,45 +371,46 @@ const styles = StyleSheet.create({
     borderColor: 'transparent',
   },
   errorText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: '#EF4444',
     textAlign: 'center',
-    marginTop: 8,
+    marginTop: 6,
+    lineHeight: 16,
   },
   detectedContainer: {
     backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderRadius: 12,
-    padding: 16,
-    marginBottom: 24,
+    borderRadius: 10,
+    padding: 12,
+    marginBottom: 20,
     borderWidth: 1,
     borderColor: 'rgba(0, 212, 255, 0.3)',
   },
   detectedLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
     marginBottom: 4,
   },
   detectedTimezone: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#00D4FF',
     textAlign: 'center',
   },
   confirmationText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#00D4FF',
     textAlign: 'center',
-    lineHeight: 20,
+    lineHeight: 16,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 16,
+    borderRadius: 14,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -419,11 +420,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 18,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
+    paddingHorizontal: 28,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
     marginRight: 8,

@@ -5,10 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowRight, ArrowLeft, CircleCheck as CheckCircle, CreditCard as Edit3, Clock, Globe, Activity, User } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-// Реальные данные пользователя (в реальном приложении это будет из AsyncStorage или контекста)
 const getUserData = () => {
-  // Здесь должны быть данные из предыдущих шагов
-  // Пока используем localStorage для веб-версии
   if (typeof window !== 'undefined') {
     return {
       ageRange: localStorage.getItem('userAgeRange') || '26-35',
@@ -21,7 +18,6 @@ const getUserData = () => {
     };
   }
   
-  // Fallback для мобильных платформ
   return {
     ageRange: '26-35',
     ageRangeLabel: 'Технологические воины',
@@ -134,7 +130,6 @@ export default function OnboardingStep6() {
     
     setUserData(newData);
     
-    // Сохраняем в localStorage для веб-версии
     if (typeof window !== 'undefined') {
       if (field === 'ageRange') {
         localStorage.setItem('userAgeRange', value);
@@ -158,7 +153,6 @@ export default function OnboardingStep6() {
     };
     setUserData(newData);
     
-    // Сохраняем в localStorage
     if (typeof window !== 'undefined') {
       localStorage.setItem('userWorkStartTime', startTime);
       localStorage.setItem('userWorkEndTime', endTime);
@@ -168,12 +162,10 @@ export default function OnboardingStep6() {
   };
 
   const handleComplete = () => {
-    // Сохраняем флаг завершения онбординга
     if (typeof window !== 'undefined') {
       localStorage.setItem('onboardingCompleted', 'true');
     }
     
-    // Используем replace вместо push для полной замены стека навигации
     router.replace('/(tabs)');
   };
 
@@ -187,7 +179,6 @@ export default function OnboardingStep6() {
           text: 'Сбросить', 
           style: 'destructive',
           onPress: () => {
-            // Очищаем сохраненные данные
             if (typeof window !== 'undefined') {
               localStorage.clear();
             }
@@ -211,7 +202,7 @@ export default function OnboardingStep6() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={24} color="#FFFFFF" strokeWidth={1.5} />
+              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -233,20 +224,20 @@ export default function OnboardingStep6() {
           <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={styles.mainContent}>
               <View style={styles.iconContainer}>
-                <CheckCircle size={48} color="#FF6B35" strokeWidth={1.5} />
+                <CheckCircle size={40} color="#FF6B35" strokeWidth={1.5} />
               </View>
 
-              <Text style={styles.title}>НАСТРОЙКА NOOWING ЗАВЕРШЕНА</Text>
+              <Text style={styles.title}>НАСТРОЙКА NOOWING{'\n'}ЗАВЕРШЕНА</Text>
 
               {/* Profile Section */}
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
                   <View style={styles.sectionTitleContainer}>
-                    <User size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <User size={16} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.sectionTitle}>ТВОЙ ПРОФИЛЬ</Text>
                   </View>
                   <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
-                    <Edit3 size={16} color="#FF6B35" strokeWidth={1.5} />
+                    <Edit3 size={12} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.editButtonText}>РЕДАКТИРОВАТЬ</Text>
                   </TouchableOpacity>
                 </View>
@@ -266,11 +257,11 @@ export default function OnboardingStep6() {
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
                   <View style={styles.sectionTitleContainer}>
-                    <Clock size={20} color="#FF6B35" strokeWidth={1.5} />
+                    <Clock size={16} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.sectionTitle}>РАСПИСАНИЕ</Text>
                   </View>
                   <TouchableOpacity style={styles.editButton} onPress={handleEditSchedule}>
-                    <Edit3 size={16} color="#FF6B35" strokeWidth={1.5} />
+                    <Edit3 size={12} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.editButtonText}>РЕДАКТИРОВАТЬ</Text>
                   </TouchableOpacity>
                 </View>
@@ -288,7 +279,7 @@ export default function OnboardingStep6() {
 
               {/* Cycle Explanation */}
               <View style={styles.cycleContainer}>
-                <Text style={styles.cycleTitle}>ТВОЙ ПЕРСОНАЛЬНЫЙ ЦИКЛ 45-2-5:</Text>
+                <Text style={styles.cycleTitle}>ТВОЙ ПЕРСОНАЛЬНЫЙ{'\n'}ЦИКЛ 45-2-5:</Text>
                 <View style={styles.cycleItem}>
                   <View style={[styles.cycleDot, { backgroundColor: '#FF6B35' }]} />
                   <Text style={styles.cycleText}>45 МИНУТ СОСРЕДОТОЧЕННОЙ РАБОТЫ</Text>
@@ -314,7 +305,7 @@ export default function OnboardingStep6() {
               </View>
 
               <Text style={styles.editPrompt}>
-                ГОТОВЫ НАЧАТЬ СВОЕ ПУТЕШЕСТВИЕ К ЛУЧШЕЙ ПРОДУКТИВНОСТИ? 🚀
+                ГОТОВЫ НАЧАТЬ СВОЕ ПУТЕШЕСТВИЕ{'\n'}К ЛУЧШЕЙ ПРОДУКТИВНОСТИ? 🚀
               </Text>
             </View>
           </ScrollView>
@@ -330,7 +321,7 @@ export default function OnboardingStep6() {
                 style={styles.buttonGradient}
               >
                 <Text style={styles.buttonText}>НАЧАТЬ NOOWING</Text>
-                <ArrowRight size={20} color="#000" strokeWidth={1.5} />
+                <ArrowRight size={18} color="#000" strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -355,7 +346,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 32,
   },
   backButton: {
     padding: 8,
@@ -382,16 +373,16 @@ const styles = StyleSheet.create({
     letterSpacing: 1.5,
   },
   resetButton: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     backgroundColor: 'rgba(239, 68, 68, 0.08)',
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: 'rgba(239, 68, 68, 0.2)',
     marginLeft: 16,
   },
   resetButtonText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
     color: '#EF4444',
     letterSpacing: 1,
@@ -404,28 +395,28 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   iconContainer: {
-    marginBottom: 24,
-    padding: 20,
+    marginBottom: 20,
+    padding: 16,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 25,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 32,
-    lineHeight: 32,
-    letterSpacing: 2,
+    marginBottom: 24,
+    lineHeight: 26,
+    letterSpacing: 1.5,
   },
   sectionContainer: {
     width: '100%',
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 16,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
   },
@@ -433,139 +424,140 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   sectionTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   sectionTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginLeft: 12,
-    letterSpacing: 2,
+    marginLeft: 8,
+    letterSpacing: 1.5,
   },
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 12,
+    borderRadius: 10,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.2)',
   },
   editButtonText: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
     color: '#FF6B35',
-    marginLeft: 6,
-    letterSpacing: 1,
+    marginLeft: 4,
+    letterSpacing: 0.5,
   },
   profileItem: {
-    marginBottom: 16,
+    marginBottom: 12,
   },
   profileLabel: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
-    marginBottom: 6,
-    letterSpacing: 1,
+    marginBottom: 4,
+    letterSpacing: 0.5,
   },
   profileValue: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   cycleContainer: {
     width: '100%',
     backgroundColor: 'rgba(255, 107, 53, 0.05)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 24,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   cycleTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 20,
+    marginBottom: 16,
     textAlign: 'center',
-    letterSpacing: 2,
+    letterSpacing: 1.5,
+    lineHeight: 18,
   },
   cycleItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   cycleDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 16,
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    marginRight: 12,
   },
   cycleText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
-    lineHeight: 20,
+    lineHeight: 16,
     flex: 1,
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   infoContainer: {
     width: '100%',
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 20,
-    padding: 24,
-    marginBottom: 24,
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   infoTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 16,
+    marginBottom: 12,
     textAlign: 'center',
-    letterSpacing: 2,
+    letterSpacing: 1.5,
   },
   infoText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
-    lineHeight: 22,
-    letterSpacing: 0.5,
+    lineHeight: 18,
+    letterSpacing: 0.3,
   },
   editPrompt: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     textAlign: 'center',
-    lineHeight: 24,
-    letterSpacing: 1,
+    lineHeight: 20,
+    letterSpacing: 0.5,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 20,
+    borderRadius: 18,
     overflow: 'hidden',
   },
   buttonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
+    paddingHorizontal: 28,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 12,
-    letterSpacing: 2,
+    marginRight: 8,
+    letterSpacing: 1.5,
   },
 });
