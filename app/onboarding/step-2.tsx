@@ -41,7 +41,7 @@ export default function OnboardingStep2() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
+              <ArrowLeft size={18} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -118,7 +118,7 @@ export default function OnboardingStep2() {
                 ]}>
                   ПРОДОЛЖИТЬ
                 </Text>
-                <ArrowRight size={18} color={selectedAge ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
+                <ArrowRight size={16} color={selectedAge ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -138,12 +138,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingTop: 16,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 32,
+    marginBottom: 24,
   },
   backButton: {
     padding: 8,
@@ -153,10 +153,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   progressBar: {
-    height: 4,
+    height: 3,
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   progressFill: {
     height: '100%',
@@ -164,40 +164,40 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 12,
+    fontSize: 10,
     color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
-    letterSpacing: 1.5,
+    letterSpacing: 1,
   },
   mainContent: {
     flex: 1,
   },
   title: {
-    fontSize: 22,
+    fontSize: 18,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 16,
-    lineHeight: 28,
-    letterSpacing: 1.5,
+    marginBottom: 12,
+    lineHeight: 22,
+    letterSpacing: 1,
   },
   description: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
-    lineHeight: 20,
-    marginBottom: 32,
-    letterSpacing: 0.5,
+    lineHeight: 16,
+    marginBottom: 24,
+    letterSpacing: 0.3,
   },
   optionsContainer: {
-    gap: 12,
-    marginBottom: 24,
+    gap: 10,
+    marginBottom: 20,
   },
   optionButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 16,
-    padding: 20,
+    borderRadius: 14,
+    padding: 16,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
     position: 'relative',
@@ -210,45 +210,45 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   optionLabel: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 4,
-    letterSpacing: 1,
+    marginBottom: 2,
+    letterSpacing: 0.5,
   },
   optionLabelSelected: {
     color: '#FF6B35',
   },
   optionSubtitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   optionSubtitleSelected: {
     color: 'rgba(255, 107, 53, 0.8)',
   },
   selectedIndicator: {
     position: 'absolute',
-    top: 16,
-    right: 16,
-    width: 10,
-    height: 10,
+    top: 12,
+    right: 12,
+    width: 8,
+    height: 8,
     backgroundColor: '#FF6B35',
-    borderRadius: 5,
+    borderRadius: 4,
   },
   confirmationText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#FF6B35',
     textAlign: 'center',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   bottomSection: {
-    paddingBottom: 20,
+    paddingBottom: 16,
   },
   continueButton: {
-    borderRadius: 18,
+    borderRadius: 16,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -258,15 +258,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 28,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
   },
   buttonText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 8,
-    letterSpacing: 1.5,
+    marginRight: 6,
+    letterSpacing: 1,
   },
   buttonTextDisabled: {
     color: 'rgba(255, 255, 255, 0.3)',

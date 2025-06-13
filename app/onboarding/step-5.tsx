@@ -64,7 +64,7 @@ export default function OnboardingStep5() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
+              <ArrowLeft size={18} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -78,7 +78,7 @@ export default function OnboardingStep5() {
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Globe size={40} color="#FF6B35" strokeWidth={1.5} />
+              <Globe size={28} color="#FF6B35" strokeWidth={1.5} />
             </View>
 
             <Text style={styles.title}>Какой у тебя{'\n'}часовой пояс?</Text>
@@ -103,7 +103,7 @@ export default function OnboardingStep5() {
                 onPress={handleAutoLocation}
               >
                 <View style={styles.optionContent}>
-                  <MapPin size={20} color={selectedMethod === 'auto' ? '#FF6B35' : '#FFFFFF'} strokeWidth={1.5} />
+                  <MapPin size={18} color={selectedMethod === 'auto' ? '#FF6B35' : '#FFFFFF'} strokeWidth={1.5} />
                   <View style={styles.optionTextContainer}>
                     <Text style={[
                       styles.optionLabel,
@@ -132,7 +132,7 @@ export default function OnboardingStep5() {
                 onPress={handleManualInput}
               >
                 <View style={styles.optionContent}>
-                  <Globe size={20} color={selectedMethod === 'manual' ? '#FF6B35' : '#FFFFFF'} strokeWidth={1.5} />
+                  <Globe size={18} color={selectedMethod === 'manual' ? '#FF6B35' : '#FFFFFF'} strokeWidth={1.5} />
                   <View style={styles.optionTextContainer}>
                     <Text style={[
                       styles.optionLabel,
@@ -209,7 +209,7 @@ export default function OnboardingStep5() {
                 ]}>
                   ПРОДОЛЖИТЬ
                 </Text>
-                <ArrowRight size={18} color={canContinue ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
+                <ArrowRight size={16} color={canContinue ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -229,12 +229,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingTop: 16,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 32,
+    marginBottom: 24,
   },
   backButton: {
     padding: 8,
@@ -244,10 +244,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   progressBar: {
-    height: 4,
+    height: 3,
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   progressFill: {
     height: '100%',
@@ -255,59 +255,59 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 12,
+    fontSize: 10,
     color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
-    letterSpacing: 1.5,
+    letterSpacing: 1,
   },
   mainContent: {
     flex: 1,
     alignItems: 'center',
   },
   iconContainer: {
-    marginBottom: 20,
-    padding: 12,
+    marginBottom: 16,
+    padding: 10,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 16,
+    borderRadius: 14,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 16,
-    lineHeight: 26,
-    letterSpacing: 1.5,
+    marginBottom: 12,
+    lineHeight: 20,
+    letterSpacing: 1,
   },
   description: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
-    lineHeight: 18,
-    marginBottom: 12,
-    letterSpacing: 0.5,
+    lineHeight: 16,
+    marginBottom: 10,
+    letterSpacing: 0.3,
   },
   subtitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
-    lineHeight: 16,
-    marginBottom: 24,
-    letterSpacing: 0.3,
+    lineHeight: 14,
+    marginBottom: 20,
+    letterSpacing: 0.2,
   },
   optionsContainer: {
     width: '100%',
-    gap: 12,
-    marginBottom: 20,
+    gap: 10,
+    marginBottom: 16,
   },
   optionButton: {
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 14,
-    padding: 16,
+    borderRadius: 12,
+    padding: 14,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
     position: 'relative',
@@ -321,108 +321,108 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   optionTextContainer: {
-    marginLeft: 12,
+    marginLeft: 10,
     flex: 1,
   },
   optionLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 4,
-    lineHeight: 18,
-    letterSpacing: 0.5,
+    marginBottom: 2,
+    lineHeight: 16,
+    letterSpacing: 0.3,
   },
   optionLabelSelected: {
     color: '#FF6B35',
   },
   optionSubtitle: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
-    letterSpacing: 0.3,
+    letterSpacing: 0.2,
   },
   optionSubtitleSelected: {
     color: 'rgba(255, 107, 53, 0.8)',
   },
   selectedIndicator: {
     position: 'absolute',
-    top: 12,
-    right: 12,
-    width: 10,
-    height: 10,
+    top: 10,
+    right: 10,
+    width: 8,
+    height: 8,
     backgroundColor: '#FF6B35',
-    borderRadius: 5,
+    borderRadius: 4,
   },
   manualInputContainer: {
     width: '100%',
-    marginBottom: 20,
+    marginBottom: 16,
   },
   inputLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginBottom: 10,
+    marginBottom: 8,
     textAlign: 'center',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   textInput: {
     backgroundColor: 'rgba(255, 255, 255, 0.05)',
-    borderRadius: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    fontSize: 14,
+    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     textAlign: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   errorText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: '#EF4444',
     textAlign: 'center',
-    marginTop: 6,
-    lineHeight: 16,
-    letterSpacing: 0.3,
+    marginTop: 4,
+    lineHeight: 14,
+    letterSpacing: 0.2,
   },
   detectedContainer: {
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 20,
+    borderRadius: 8,
+    padding: 10,
+    marginBottom: 16,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   detectedLabel: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
-    marginBottom: 4,
-    letterSpacing: 0.3,
+    marginBottom: 2,
+    letterSpacing: 0.2,
   },
   detectedTimezone: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
     textAlign: 'center',
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   confirmationText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Medium',
     color: '#FF6B35',
     textAlign: 'center',
-    lineHeight: 16,
-    letterSpacing: 0.5,
+    lineHeight: 14,
+    letterSpacing: 0.3,
   },
   bottomSection: {
-    paddingBottom: 20,
+    paddingBottom: 16,
   },
   continueButton: {
-    borderRadius: 18,
+    borderRadius: 16,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -432,15 +432,15 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 28,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
   },
   buttonText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 8,
-    letterSpacing: 1.5,
+    marginRight: 6,
+    letterSpacing: 1,
   },
   buttonTextDisabled: {
     color: 'rgba(255, 255, 255, 0.3)',

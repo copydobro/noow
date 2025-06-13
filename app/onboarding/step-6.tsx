@@ -202,7 +202,7 @@ export default function OnboardingStep6() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
+              <ArrowLeft size={18} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
@@ -224,7 +224,7 @@ export default function OnboardingStep6() {
           <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
             <View style={styles.mainContent}>
               <View style={styles.iconContainer}>
-                <CheckCircle size={40} color="#FF6B35" strokeWidth={1.5} />
+                <CheckCircle size={28} color="#FF6B35" strokeWidth={1.5} />
               </View>
 
               <Text style={styles.title}>НАСТРОЙКА NOOWING{'\n'}ЗАВЕРШЕНА</Text>
@@ -233,11 +233,11 @@ export default function OnboardingStep6() {
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
                   <View style={styles.sectionTitleContainer}>
-                    <User size={16} color="#FF6B35" strokeWidth={1.5} />
+                    <User size={14} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.sectionTitle}>ТВОЙ ПРОФИЛЬ</Text>
                   </View>
                   <TouchableOpacity style={styles.editButton} onPress={handleEditProfile}>
-                    <Edit3 size={12} color="#FF6B35" strokeWidth={1.5} />
+                    <Edit3 size={10} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.editButtonText}>РЕДАКТИРОВАТЬ</Text>
                   </TouchableOpacity>
                 </View>
@@ -257,11 +257,11 @@ export default function OnboardingStep6() {
               <View style={styles.sectionContainer}>
                 <View style={styles.sectionHeader}>
                   <View style={styles.sectionTitleContainer}>
-                    <Clock size={16} color="#FF6B35" strokeWidth={1.5} />
+                    <Clock size={14} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.sectionTitle}>РАСПИСАНИЕ</Text>
                   </View>
                   <TouchableOpacity style={styles.editButton} onPress={handleEditSchedule}>
-                    <Edit3 size={12} color="#FF6B35" strokeWidth={1.5} />
+                    <Edit3 size={10} color="#FF6B35" strokeWidth={1.5} />
                     <Text style={styles.editButtonText}>РЕДАКТИРОВАТЬ</Text>
                   </TouchableOpacity>
                 </View>
@@ -321,7 +321,7 @@ export default function OnboardingStep6() {
                 style={styles.buttonGradient}
               >
                 <Text style={styles.buttonText}>НАЧАТЬ NOOWING</Text>
-                <ArrowRight size={18} color="#000" strokeWidth={1.5} />
+                <ArrowRight size={16} color="#000" strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -341,12 +341,12 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 24,
-    paddingTop: 20,
+    paddingTop: 16,
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 32,
+    marginBottom: 24,
   },
   backButton: {
     padding: 8,
@@ -356,10 +356,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   progressBar: {
-    height: 4,
+    height: 3,
     backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
-    marginBottom: 8,
+    marginBottom: 6,
   },
   progressFill: {
     height: '100%',
@@ -367,56 +367,56 @@ const styles = StyleSheet.create({
     borderRadius: 2,
   },
   progressText: {
-    fontSize: 12,
+    fontSize: 10,
     color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
-    letterSpacing: 1.5,
+    letterSpacing: 1,
   },
   resetButton: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     backgroundColor: 'rgba(239, 68, 68, 0.08)',
-    borderRadius: 10,
+    borderRadius: 8,
     borderWidth: 1,
     borderColor: 'rgba(239, 68, 68, 0.2)',
-    marginLeft: 16,
+    marginLeft: 12,
   },
   resetButtonText: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Medium',
     color: '#EF4444',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
   },
   scrollView: {
     flex: 1,
   },
   mainContent: {
     alignItems: 'center',
-    paddingBottom: 20,
+    paddingBottom: 16,
   },
   iconContainer: {
-    marginBottom: 20,
-    padding: 16,
+    marginBottom: 16,
+    padding: 12,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 20,
+    borderRadius: 16,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 24,
-    lineHeight: 26,
-    letterSpacing: 1.5,
+    marginBottom: 20,
+    lineHeight: 20,
+    letterSpacing: 1,
   },
   sectionContainer: {
     width: '100%',
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
+    borderRadius: 14,
+    padding: 12,
+    marginBottom: 10,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
   },
@@ -424,140 +424,140 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 16,
+    marginBottom: 12,
   },
   sectionTitleContainer: {
     flexDirection: 'row',
     alignItems: 'center',
   },
   sectionTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    marginLeft: 8,
-    letterSpacing: 1.5,
+    marginLeft: 6,
+    letterSpacing: 1,
   },
   editButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 10,
+    borderRadius: 8,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.2)',
   },
   editButtonText: {
-    fontSize: 8,
+    fontSize: 6,
     fontFamily: 'Inter-Medium',
     color: '#FF6B35',
-    marginLeft: 4,
-    letterSpacing: 0.5,
+    marginLeft: 3,
+    letterSpacing: 0.3,
   },
   profileItem: {
-    marginBottom: 12,
+    marginBottom: 8,
   },
   profileLabel: {
-    fontSize: 10,
+    fontSize: 8,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
-    marginBottom: 4,
-    letterSpacing: 0.5,
+    marginBottom: 2,
+    letterSpacing: 0.3,
   },
   profileValue: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
-    letterSpacing: 0.3,
+    letterSpacing: 0.2,
   },
   cycleContainer: {
     width: '100%',
     backgroundColor: 'rgba(255, 107, 53, 0.05)',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
+    borderRadius: 14,
+    padding: 12,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   cycleTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 16,
+    marginBottom: 12,
     textAlign: 'center',
-    letterSpacing: 1.5,
-    lineHeight: 18,
+    letterSpacing: 1,
+    lineHeight: 16,
   },
   cycleItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 8,
   },
   cycleDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    marginRight: 12,
+    width: 4,
+    height: 4,
+    borderRadius: 2,
+    marginRight: 8,
   },
   cycleText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
-    lineHeight: 16,
+    lineHeight: 14,
     flex: 1,
-    letterSpacing: 0.5,
+    letterSpacing: 0.3,
   },
   infoContainer: {
     width: '100%',
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 16,
+    borderRadius: 14,
+    padding: 12,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   infoTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 12,
+    marginBottom: 8,
     textAlign: 'center',
-    letterSpacing: 1.5,
+    letterSpacing: 1,
   },
   infoText: {
-    fontSize: 12,
+    fontSize: 10,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
-    lineHeight: 18,
-    letterSpacing: 0.3,
+    lineHeight: 14,
+    letterSpacing: 0.2,
   },
   editPrompt: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     textAlign: 'center',
-    lineHeight: 20,
-    letterSpacing: 0.5,
+    lineHeight: 16,
+    letterSpacing: 0.3,
   },
   bottomSection: {
-    paddingBottom: 20,
+    paddingBottom: 16,
   },
   continueButton: {
-    borderRadius: 18,
+    borderRadius: 16,
     overflow: 'hidden',
   },
   buttonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 16,
-    paddingHorizontal: 28,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
   },
   buttonText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 8,
-    letterSpacing: 1.5,
+    marginRight: 6,
+    letterSpacing: 1,
   },
 });
