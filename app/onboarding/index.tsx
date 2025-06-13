@@ -26,18 +26,20 @@ export default function OnboardingWelcome() {
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Brain size={64} color="#FF6B35" strokeWidth={1.5} />
+              <Brain size={48} color="#FF6B35" strokeWidth={1.5} />
             </View>
 
-            <Text style={styles.title}>ПРИВЕТ! Я ТВОЙ КОМПАНЬОН NOOWING.</Text>
+            <Text style={styles.title}>ПРИВЕТ! Я ТВОЙ{'\n'}КОМПАНЬОН NOOWING.</Text>
             
             <Text style={styles.description}>
-              ДАВАЙ ВМЕСТЕ ПЕРЕЗАГРУЗИМ ТВОЙ БИОЛОГИЧЕСКИЙ РИТМ! 
-              ПРИСОЕДИНЯЙСЯ К НАШЕЙ РАСТУЩЕЙ СООБЩЕСТВУ ЦИФРОВЫХ ВОИНОВ.
+              ДАВАЙ ВМЕСТЕ ПЕРЕЗАГРУЗИМ ТВОЙ{'\n'}
+              БИОЛОГИЧЕСКИЙ РИТМ!{'\n'}
+              ПРИСОЕДИНЯЙСЯ К НАШЕМУ{'\n'}
+              СООБЩЕСТВУ ЦИФРОВЫХ ВОИНОВ.
             </Text>
 
             <View style={styles.cycleContainer}>
-              <Text style={styles.cycleTitle}>ЧТО ТАКОЕ NOOWING? ЭТО ТВОЙ ЦИКЛ 45-2-5:</Text>
+              <Text style={styles.cycleTitle}>ЧТО ТАКОЕ NOOWING?{'\n'}ЭТО ТВОЙ ЦИКЛ 45-2-5:</Text>
               <View style={styles.cycleItem}>
                 <View style={styles.cycleDot} />
                 <Text style={styles.cycleText}>45 МИНУТ ГЛУБОКОЙ РАБОТЫ</Text>
@@ -53,11 +55,14 @@ export default function OnboardingWelcome() {
             </View>
 
             <Text style={styles.subtitle}>
-              ЭТО НЕ ПРОСТО ПРОДУКТИВНОСТЬ. ЭТО ЕСТЕСТВЕННАЯ ОПЕРАЦИОННАЯ СИСТЕМА ТВОЕГО МОЗГА.
+              ЭТО НЕ ПРОСТО ПРОДУКТИВНОСТЬ.{'\n'}
+              ЭТО ЕСТЕСТВЕННАЯ ОПЕРАЦИОННАЯ{'\n'}
+              СИСТЕМА ТВОЕГО МОЗГА.
             </Text>
 
             <Text style={styles.setupText}>
-              ГОТОВ ОБНОВИТЬ СВОЮ HUMANOS? НАСТРОЙКА ЗАЙМЕТ МЕНЕЕ 30 СЕКУНД.
+              ГОТОВ ОБНОВИТЬ СВОЮ HUMANOS?{'\n'}
+              НАСТРОЙКА ЗАЙМЕТ МЕНЕЕ 30 СЕКУНД.
             </Text>
           </View>
 
@@ -74,7 +79,7 @@ export default function OnboardingWelcome() {
                 style={styles.buttonGradient}
               >
                 <Text style={styles.buttonText}>ДАВАЙ NOOWING</Text>
-                <ArrowRight size={20} color="#000" strokeWidth={1.5} />
+                <ArrowRight size={18} color="#000" strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -97,7 +102,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   progressContainer: {
-    marginBottom: 40,
+    marginBottom: 32,
   },
   progressBar: {
     height: 4,
@@ -121,107 +126,108 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconContainer: {
-    marginBottom: 32,
-    padding: 20,
+    marginBottom: 24,
+    padding: 16,
     backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 25,
+    borderRadius: 20,
     borderWidth: 1,
     borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
-    fontSize: 28,
+    fontSize: 22,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
     marginBottom: 16,
-    lineHeight: 36,
-    letterSpacing: 2,
+    lineHeight: 28,
+    letterSpacing: 1.5,
   },
   description: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.8)',
     textAlign: 'center',
-    lineHeight: 24,
-    marginBottom: 32,
+    lineHeight: 20,
+    marginBottom: 24,
     letterSpacing: 0.5,
   },
   cycleContainer: {
     width: '100%',
-    marginBottom: 24,
+    marginBottom: 20,
   },
   cycleTitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
-    marginBottom: 16,
+    marginBottom: 12,
     textAlign: 'center',
-    letterSpacing: 1,
+    letterSpacing: 0.5,
+    lineHeight: 18,
   },
   cycleItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 12,
+    marginBottom: 8,
     paddingLeft: 20,
   },
   cycleDot: {
-    width: 6,
-    height: 6,
+    width: 5,
+    height: 5,
     backgroundColor: '#FF6B35',
-    borderRadius: 3,
-    marginRight: 12,
+    borderRadius: 2.5,
+    marginRight: 10,
   },
   cycleText: {
-    fontSize: 15,
+    fontSize: 13,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.9)',
-    lineHeight: 22,
-    letterSpacing: 0.5,
+    lineHeight: 18,
+    letterSpacing: 0.3,
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     textAlign: 'center',
-    lineHeight: 24,
-    marginBottom: 16,
-    letterSpacing: 1,
+    lineHeight: 20,
+    marginBottom: 12,
+    letterSpacing: 0.5,
   },
   setupText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
-    lineHeight: 20,
-    letterSpacing: 0.5,
+    lineHeight: 16,
+    letterSpacing: 0.3,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   communityText: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.6)',
     textAlign: 'center',
-    marginBottom: 24,
+    marginBottom: 20,
     letterSpacing: 1,
   },
   continueButton: {
-    borderRadius: 20,
+    borderRadius: 18,
     overflow: 'hidden',
   },
   buttonGradient: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 32,
+    paddingVertical: 16,
+    paddingHorizontal: 28,
   },
   buttonText: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#000',
-    marginRight: 12,
-    letterSpacing: 2,
+    marginRight: 8,
+    letterSpacing: 1.5,
   },
 });
