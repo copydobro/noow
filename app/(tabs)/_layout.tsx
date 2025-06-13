@@ -6,11 +6,10 @@ import Animated, {
   withSpring, 
   withTiming,
   interpolate,
-  runOnJS,
   withSequence,
   withDelay
 } from 'react-native-reanimated';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
 
 const { width } = Dimensions.get('window');
@@ -25,7 +24,7 @@ function AnimatedTabIcon({
   IconComponent, 
   focused, 
   color, 
-  size = 18 // Уменьшили размер по умолчанию с 20 до 18
+  size = 20 
 }: { 
   IconComponent: any;
   focused: boolean;
@@ -33,113 +32,77 @@ function AnimatedTabIcon({
   size?: number;
 }) {
   const scale = useSharedValue(1);
-  const rotation = useSharedValue(0);
+  const translateY = useSharedValue(0);
   const glowOpacity = useSharedValue(0);
-  const pulseScale = useSharedValue(1);
+  const backgroundScale = useSharedValue(0);
 
   useEffect(() => {
     if (focused) {
-      // Последовательность анимаций при активации
-      scale.value = withSequence(
-        withTiming(1.15, { duration: 150 }), // Уменьшили с 1.2 до 1.15
-        withSpring(1.08, { damping: 12, stiffness: 200 }) // Уменьшили с 1.1 до 1.08
-      );
-      
-      rotation.value = withSequence(
-        withTiming(360, { duration: 400 }),
-        withTiming(0, { duration: 0 })
-      );
-      
-      glowOpacity.value = withTiming(1, { duration: 200 });
-      
-      // Пульсация
-      pulseScale.value = withSequence(
-        withDelay(200, withTiming(1.1, { duration: 300 })), // Уменьшили с 1.15 до 1.1
-        withTiming(1, { duration: 300 })
-      );
+      // Плавная анимация при активации
+      scale.value = withSpring(1.1, { damping: 15, stiffness: 200 });
+      translateY.value = withSpring(-2, { damping: 15, stiffness: 200 });
+      glowOpacity.value = withTiming(1, { duration: 300 });
+      backgroundScale.value = withSpring(1, { damping: 15, stiffness: 200 });
     } else {
-      scale.value = withSpring(1, { damping: 15, stiffness: 150 });
-      rotation.value = withTiming(0, { duration: 200 });
+      scale.value = withSpring(1, { damping: 15, stiffness: 200 });
+      translateY.value = withSpring(0, { damping: 15, stiffness: 200 });
       glowOpacity.value = withTiming(0, { duration: 200 });
-      pulseScale.value = withTiming(1, { duration: 200 });
+      backgroundScale.value = withSpring(0, { damping: 15, stiffness: 200 });
     }
   }, [focused]);
 
   const animatedIconStyle = useAnimatedStyle(() => ({
     transform: [
       { scale: scale.value },
-      { rotate: `${rotation.value}deg` }
+      { translateY: translateY.value }
     ],
   }));
 
   const glowStyle = useAnimatedStyle(() => ({
     opacity: glowOpacity.value,
-    transform: [{ scale: pulseScale.value }],
+    transform: [{ scale: backgroundScale.value }],
   }));
 
   const AnimatedIcon = Animated.createAnimatedComponent(IconComponent);
 
   return (
     <View style={styles.iconContainer}>
-      {/* Glow effect */}
-      <Animated.View style={[styles.glowEffect, glowStyle]} />
+      {/* Background glow effect */}
+      <Animated.View style={[styles.iconBackground, glowStyle]} />
       
       {/* Main icon */}
       <Animated.View style={animatedIconStyle}>
         <AnimatedIcon 
-          size={focused ? 20 : 18} // Уменьшили размеры с 22/20 до 20/18
+          size={focused ? 22 : 20} 
           color={color} 
-          strokeWidth={focused ? 2 : 1.5} 
+          strokeWidth={focused ? 2.5 : 2} 
         />
       </Animated.View>
     </View>
   );
 }
 
-// Компонент для анимированного фона таба
-function AnimatedTabBackground() {
-  const backgroundOpacity = useSharedValue(0);
-  const backgroundScale = useSharedValue(0.8);
-
-  useEffect(() => {
-    backgroundOpacity.value = withTiming(1, { duration: 500 });
-    backgroundScale.value = withSpring(1, { damping: 15, stiffness: 100 });
-  }, []);
-
-  const backgroundStyle = useAnimatedStyle(() => ({
-    opacity: backgroundOpacity.value,
-    transform: [{ scale: backgroundScale.value }],
-  }));
-
-  return (
-    <Animated.View style={[styles.tabBackground, backgroundStyle]}>
-      {/* Gradient lines */}
-      <View style={styles.gradientLine1} />
-      <View style={styles.gradientLine2} />
-      <View style={styles.gradientLine3} />
-    </Animated.View>
-  );
-}
-
 export default function TabLayout() {
   return (
     <View style={styles.container}>
-      <AnimatedTabBackground />
       <Tabs
         screenOptions={{
           headerShown: false,
           tabBarStyle: styles.tabBarStyle,
           tabBarActiveTintColor: '#FF6B35',
-          tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.25)',
+          tabBarInactiveTintColor: 'rgba(255, 255, 255, 0.4)',
           tabBarShowLabel: false,
           tabBarIconStyle: styles.tabBarIconStyle,
           tabBarBackground: () => (
             <View style={styles.tabBarBackground}>
-              {/* Holographic effect */}
-              <View style={styles.holographicOverlay} />
+              {/* Gradient overlay */}
+              <View style={styles.gradientOverlay} />
               
-              {/* Animated border */}
-              <View style={styles.animatedBorder} />
+              {/* Top border line */}
+              <View style={styles.topBorderLine} />
+              
+              {/* Subtle pattern */}
+              <View style={styles.patternOverlay} />
             </View>
           ),
         }}>
@@ -194,9 +157,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
-    height: 60,
-    paddingTop: 4,
-    paddingBottom: 8,
+    height: 70,
+    paddingTop: 8,
+    paddingBottom: 12,
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -207,93 +170,62 @@ const styles = StyleSheet.create({
   },
   tabBarBackground: {
     flex: 1,
-    backgroundColor: 'rgba(10, 10, 10, 0.98)',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    backgroundColor: 'rgba(8, 8, 8, 0.95)',
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
     overflow: 'hidden',
     position: 'relative',
+    // Добавляем тень для глубины
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 12,
+    elevation: 8,
   },
-  holographicOverlay: {
+  gradientOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(255, 107, 53, 0.02)',
+  },
+  topBorderLine: {
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.4)',
+    backgroundColor: 'rgba(255, 107, 53, 0.2)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.8,
-    shadowRadius: 8,
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
   },
-  animatedBorder: {
+  patternOverlay: {
     position: 'absolute',
-    top: 0,
+    top: 1,
     left: 0,
     right: 0,
     height: 1,
-    backgroundColor: 'linear-gradient(90deg, transparent, #FF6B35, transparent)',
-    opacity: 0.6,
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
   },
   iconContainer: {
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 36, // Уменьшили с 40 до 36
-    height: 36, // Уменьшили с 40 до 36
+    width: 48,
+    height: 48,
   },
-  glowEffect: {
+  iconBackground: {
     position: 'absolute',
-    width: 30, // Уменьшили с 36 до 30
-    height: 30, // Уменьшили с 36 до 30
-    borderRadius: 15, // Уменьшили с 18 до 15
-    backgroundColor: 'rgba(255, 107, 53, 0.12)',
-    shadowColor: '#FF6B35',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 10,
-  },
-  tabBackground: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: 60,
-    zIndex: -1,
-  },
-  gradientLine1: {
-    position: 'absolute',
-    top: 0,
-    left: '10%',
-    width: '20%',
-    height: 1,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
     backgroundColor: 'rgba(255, 107, 53, 0.15)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.4,
-    shadowRadius: 3,
-  },
-  gradientLine2: {
-    position: 'absolute',
-    top: 0,
-    left: '40%',
-    width: '20%',
-    height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.25)',
-    shadowColor: '#FF6B35',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.6,
-    shadowRadius: 5,
-  },
-  gradientLine3: {
-    position: 'absolute',
-    top: 0,
-    left: '70%',
-    width: '20%',
-    height: 1,
-    backgroundColor: 'rgba(255, 107, 53, 0.15)',
-    shadowColor: '#FF6B35',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.4,
-    shadowRadius: 3,
+    shadowRadius: 8,
   },
 });
