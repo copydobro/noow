@@ -57,7 +57,7 @@ export default function OnboardingStep4() {
     const diffMinutes = endMinutes - startMinutes;
     
     if (diffMinutes < 240) {
-      setError('Пожалуйста, выбери минимум{'\n'}4 часа между началом и концом');
+      setError('Пожалуйста, выбери минимум{\'\n'}4 часа между началом и концом');
       return false;
     }
     
@@ -83,7 +83,7 @@ export default function OnboardingStep4() {
       };
     } else {
       return {
-        title: 'Теперь выбери время{'\n'}окончания работы:',
+        title: 'Теперь выбери время{\'\n'}окончания работы:',
         quickTimes: quickEndTimes,
         selectedTime: endTime,
       };
