@@ -53,7 +53,7 @@ export default function OnboardingStep5() {
 
   return (
     <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
+      colors={['#0A0A0A', '#1A1A1A', '#2A2A2A']}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
@@ -64,21 +64,21 @@ export default function OnboardingStep5() {
               style={styles.backButton}
               onPress={() => router.back()}
             >
-              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
               <View style={styles.progressBar}>
                 <View style={[styles.progressFill, { width: '83.33%' }]} />
               </View>
-              <Text style={styles.progressText}>Шаг 5 из 6</Text>
+              <Text style={styles.progressText}>ШАГ 5 ИЗ 6</Text>
             </View>
           </View>
 
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Globe size={40} color="#00D4FF" strokeWidth={1.5} />
+              <Globe size={40} color="#FF6B35" strokeWidth={1.5} />
             </View>
 
             <Text style={styles.title}>Какой у тебя{'\n'}часовой пояс?</Text>
@@ -103,7 +103,7 @@ export default function OnboardingStep5() {
                 onPress={handleAutoLocation}
               >
                 <View style={styles.optionContent}>
-                  <MapPin size={20} color={selectedMethod === 'auto' ? '#00D4FF' : '#FFFFFF'} strokeWidth={2} />
+                  <MapPin size={20} color={selectedMethod === 'auto' ? '#FF6B35' : '#FFFFFF'} strokeWidth={1.5} />
                   <View style={styles.optionTextContainer}>
                     <Text style={[
                       styles.optionLabel,
@@ -132,7 +132,7 @@ export default function OnboardingStep5() {
                 onPress={handleManualInput}
               >
                 <View style={styles.optionContent}>
-                  <Globe size={20} color={selectedMethod === 'manual' ? '#00D4FF' : '#FFFFFF'} strokeWidth={2} />
+                  <Globe size={20} color={selectedMethod === 'manual' ? '#FF6B35' : '#FFFFFF'} strokeWidth={1.5} />
                   <View style={styles.optionTextContainer}>
                     <Text style={[
                       styles.optionLabel,
@@ -200,16 +200,16 @@ export default function OnboardingStep5() {
               disabled={!canContinue}
             >
               <LinearGradient
-                colors={canContinue ? ['#00D4FF', '#0099CC'] : ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
+                colors={canContinue ? ['#FF6B35', '#E55A2B'] : ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
                 style={styles.buttonGradient}
               >
                 <Text style={[
                   styles.buttonText,
                   !canContinue && styles.buttonTextDisabled
                 ]}>
-                  Продолжить
+                  ПРОДОЛЖИТЬ
                 </Text>
-                <ArrowRight size={18} color={canContinue ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
+                <ArrowRight size={18} color={canContinue ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -245,19 +245,20 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
     marginBottom: 8,
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 2,
   },
   progressText: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
+    letterSpacing: 1.5,
   },
   mainContent: {
     flex: 1,
@@ -266,10 +267,10 @@ const styles = StyleSheet.create({
   iconContainer: {
     marginBottom: 20,
     padding: 12,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
     fontSize: 20,
@@ -278,6 +279,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 16,
     lineHeight: 26,
+    letterSpacing: 1.5,
   },
   description: {
     fontSize: 14,
@@ -286,6 +288,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 18,
     marginBottom: 12,
+    letterSpacing: 0.5,
   },
   subtitle: {
     fontSize: 12,
@@ -294,6 +297,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 16,
     marginBottom: 24,
+    letterSpacing: 0.3,
   },
   optionsContainer: {
     width: '100%',
@@ -301,16 +305,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   optionButton: {
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderRadius: 14,
     padding: 16,
-    borderWidth: 2,
-    borderColor: 'transparent',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     position: 'relative',
   },
   optionButtonSelected: {
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderColor: '#00D4FF',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderColor: '#FF6B35',
   },
   optionContent: {
     flexDirection: 'row',
@@ -326,17 +330,19 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 4,
     lineHeight: 18,
+    letterSpacing: 0.5,
   },
   optionLabelSelected: {
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   optionSubtitle: {
     fontSize: 12,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.6)',
+    letterSpacing: 0.3,
   },
   optionSubtitleSelected: {
-    color: 'rgba(0, 212, 255, 0.8)',
+    color: 'rgba(255, 107, 53, 0.8)',
   },
   selectedIndicator: {
     position: 'absolute',
@@ -344,7 +350,7 @@ const styles = StyleSheet.create({
     right: 12,
     width: 10,
     height: 10,
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 5,
   },
   manualInputContainer: {
@@ -357,9 +363,10 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     marginBottom: 10,
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   textInput: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderRadius: 10,
     paddingVertical: 12,
     paddingHorizontal: 16,
@@ -367,8 +374,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
     textAlign: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    letterSpacing: 0.5,
   },
   errorText: {
     fontSize: 12,
@@ -377,14 +385,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 6,
     lineHeight: 16,
+    letterSpacing: 0.3,
   },
   detectedContainer: {
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     borderRadius: 10,
     padding: 12,
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.3)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   detectedLabel: {
     fontSize: 12,
@@ -392,25 +401,28 @@ const styles = StyleSheet.create({
     color: 'rgba(255, 255, 255, 0.7)',
     textAlign: 'center',
     marginBottom: 4,
+    letterSpacing: 0.3,
   },
   detectedTimezone: {
     fontSize: 14,
     fontFamily: 'Inter-SemiBold',
-    color: '#00D4FF',
+    color: '#FF6B35',
     textAlign: 'center',
+    letterSpacing: 0.5,
   },
   confirmationText: {
     fontSize: 12,
     fontFamily: 'Inter-Medium',
-    color: '#00D4FF',
+    color: '#FF6B35',
     textAlign: 'center',
     lineHeight: 16,
+    letterSpacing: 0.5,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 14,
+    borderRadius: 18,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -428,6 +440,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     color: '#000',
     marginRight: 8,
+    letterSpacing: 1.5,
   },
   buttonTextDisabled: {
     color: 'rgba(255, 255, 255, 0.3)',

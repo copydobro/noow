@@ -94,7 +94,7 @@ export default function OnboardingStep4() {
 
   return (
     <LinearGradient
-      colors={['#0F0F23', '#1A1A3A', '#2D2D5F']}
+      colors={['#0A0A0A', '#1A1A1A', '#2A2A2A']}
       style={styles.container}
     >
       <SafeAreaView style={styles.safeArea}>
@@ -115,21 +115,21 @@ export default function OnboardingStep4() {
                 }
               }}
             >
-              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={2} />
+              <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
             
             <View style={styles.progressContainer}>
               <View style={styles.progressBar}>
                 <View style={[styles.progressFill, { width: '66.67%' }]} />
               </View>
-              <Text style={styles.progressText}>Шаг 4 из 6</Text>
+              <Text style={styles.progressText}>ШАГ 4 ИЗ 6</Text>
             </View>
           </View>
 
           {/* Main content */}
           <View style={styles.mainContent}>
             <View style={styles.iconContainer}>
-              <Clock size={40} color="#00D4FF" strokeWidth={1.5} />
+              <Clock size={40} color="#FF6B35" strokeWidth={1.5} />
             </View>
 
             <Text style={styles.title}>Когда ты обычно{'\n'}работаешь или учишься?</Text>
@@ -181,7 +181,7 @@ export default function OnboardingStep4() {
 
                 {error && (
                   <View style={styles.errorContainer}>
-                    <AlertCircle size={14} color="#EF4444" strokeWidth={2} />
+                    <AlertCircle size={14} color="#EF4444" strokeWidth={1.5} />
                     <Text style={styles.errorText}>{error}</Text>
                   </View>
                 )}
@@ -275,16 +275,16 @@ export default function OnboardingStep4() {
               disabled={!startTime || !endTime || !!error}
             >
               <LinearGradient
-                colors={(startTime && endTime && !error) ? ['#00D4FF', '#0099CC'] : ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
+                colors={(startTime && endTime && !error) ? ['#FF6B35', '#E55A2B'] : ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)']}
                 style={styles.buttonGradient}
               >
                 <Text style={[
                   styles.buttonText,
                   (!startTime || !endTime || error) && styles.buttonTextDisabled
                 ]}>
-                  Продолжить
+                  ПРОДОЛЖИТЬ
                 </Text>
-                <ArrowRight size={18} color={(startTime && endTime && !error) ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={2} />
+                <ArrowRight size={18} color={(startTime && endTime && !error) ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -320,19 +320,20 @@ const styles = StyleSheet.create({
   },
   progressBar: {
     height: 4,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     borderRadius: 2,
     marginBottom: 8,
   },
   progressFill: {
     height: '100%',
-    backgroundColor: '#00D4FF',
+    backgroundColor: '#FF6B35',
     borderRadius: 2,
   },
   progressText: {
     fontSize: 12,
-    color: 'rgba(255, 255, 255, 0.7)',
+    color: 'rgba(255, 255, 255, 0.6)',
     fontFamily: 'Inter-Medium',
+    letterSpacing: 1.5,
   },
   mainContent: {
     flex: 1,
@@ -341,10 +342,10 @@ const styles = StyleSheet.create({
   iconContainer: {
     marginBottom: 20,
     padding: 12,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     borderRadius: 16,
     borderWidth: 1,
-    borderColor: 'rgba(0, 212, 255, 0.2)',
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   title: {
     fontSize: 20,
@@ -353,6 +354,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 16,
     lineHeight: 26,
+    letterSpacing: 1.5,
   },
   description: {
     fontSize: 12,
@@ -361,6 +363,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 16,
     marginBottom: 24,
+    letterSpacing: 0.3,
   },
   stepTitle: {
     fontSize: 16,
@@ -369,14 +372,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
     lineHeight: 20,
+    letterSpacing: 0.5,
   },
   selectedTimeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
     padding: 10,
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 107, 53, 0.15)',
   },
   selectedTimeLabel: {
     fontSize: 12,
@@ -387,7 +393,7 @@ const styles = StyleSheet.create({
   selectedTime: {
     fontSize: 14,
     fontFamily: 'Inter-SemiBold',
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   quickTimesContainer: {
     flexDirection: 'row',
@@ -397,34 +403,38 @@ const styles = StyleSheet.create({
   quickTimeButton: {
     paddingVertical: 12,
     paddingHorizontal: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderRadius: 10,
-    borderWidth: 2,
-    borderColor: 'transparent',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   quickTimeButtonSelected: {
-    backgroundColor: 'rgba(0, 212, 255, 0.1)',
-    borderColor: '#00D4FF',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderColor: '#FF6B35',
   },
   quickTimeText: {
     fontSize: 14,
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
+    letterSpacing: 0.5,
   },
   quickTimeTextSelected: {
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   customButton: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
     borderRadius: 10,
     marginBottom: 20,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   customButtonText: {
     fontSize: 14,
     fontFamily: 'Inter-Medium',
     color: 'rgba(255, 255, 255, 0.8)',
+    letterSpacing: 0.5,
   },
   customPickerContainer: {
     width: '100%',
@@ -444,6 +454,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     color: '#FFFFFF',
     marginBottom: 12,
+    letterSpacing: 0.5,
   },
   timePickerScroll: {
     maxHeight: 160,
@@ -460,47 +471,49 @@ const styles = StyleSheet.create({
   timePickerButton: {
     width: 40,
     height: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderRadius: 6,
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 1,
-    borderColor: 'transparent',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
   },
   timePickerButtonSelected: {
-    backgroundColor: 'rgba(0, 212, 255, 0.2)',
-    borderColor: '#00D4FF',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
+    borderColor: '#FF6B35',
   },
   timePickerButtonText: {
     fontSize: 12,
     fontFamily: 'Inter-Medium',
     color: '#FFFFFF',
+    letterSpacing: 0.3,
   },
   timePickerButtonTextSelected: {
-    color: '#00D4FF',
+    color: '#FF6B35',
   },
   confirmCustomButton: {
     paddingVertical: 10,
     paddingHorizontal: 20,
-    backgroundColor: 'rgba(0, 212, 255, 0.2)',
+    backgroundColor: 'rgba(255, 107, 53, 0.08)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: '#00D4FF',
+    borderColor: '#FF6B35',
   },
   confirmCustomButtonText: {
     fontSize: 14,
     fontFamily: 'Inter-SemiBold',
-    color: '#00D4FF',
+    color: '#FF6B35',
+    letterSpacing: 0.5,
   },
   errorContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 16,
     padding: 10,
-    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+    backgroundColor: 'rgba(239, 68, 68, 0.08)',
     borderRadius: 10,
     borderWidth: 1,
-    borderColor: 'rgba(239, 68, 68, 0.3)',
+    borderColor: 'rgba(239, 68, 68, 0.2)',
   },
   errorText: {
     fontSize: 12,
@@ -509,19 +522,21 @@ const styles = StyleSheet.create({
     marginLeft: 6,
     flex: 1,
     lineHeight: 16,
+    letterSpacing: 0.3,
   },
   confirmationText: {
     fontSize: 12,
     fontFamily: 'Inter-Medium',
-    color: '#00D4FF',
+    color: '#FF6B35',
     textAlign: 'center',
     lineHeight: 16,
+    letterSpacing: 0.5,
   },
   bottomSection: {
     paddingBottom: 20,
   },
   continueButton: {
-    borderRadius: 14,
+    borderRadius: 18,
     overflow: 'hidden',
   },
   continueButtonDisabled: {
@@ -539,6 +554,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter-SemiBold',
     color: '#000',
     marginRight: 8,
+    letterSpacing: 1.5,
   },
   buttonTextDisabled: {
     color: 'rgba(255, 255, 255, 0.3)',
