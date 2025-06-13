@@ -39,8 +39,8 @@ function AnimatedTabIcon({
   useEffect(() => {
     if (focused) {
       // Плавная анимация при активации
-      scale.value = withSpring(1.08, { damping: 15, stiffness: 200 });
-      translateY.value = withSpring(-1, { damping: 15, stiffness: 200 });
+      scale.value = withSpring(1.05, { damping: 15, stiffness: 200 });
+      translateY.value = withSpring(0, { damping: 15, stiffness: 200 }); // Убираем вертикальное смещение
       glowOpacity.value = withTiming(1, { duration: 300 });
       backgroundScale.value = withSpring(1, { damping: 15, stiffness: 200 });
     } else {
@@ -73,9 +73,9 @@ function AnimatedTabIcon({
       {/* Main icon */}
       <Animated.View style={animatedIconStyle}>
         <AnimatedIcon 
-          size={focused ? 21 : 20} 
+          size={focused ? 20 : 19} 
           color={color} 
-          strokeWidth={focused ? 2.2 : 2} 
+          strokeWidth={focused ? 2 : 1.8} 
         />
       </Animated.View>
     </View>
@@ -157,9 +157,9 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
-    height: 68,
+    height: 64, // Уменьшили высоту навбара
     paddingTop: 0,
-    paddingBottom: 10,
+    paddingBottom: 8,
     position: 'absolute',
     bottom: 0,
     left: 0,
@@ -168,6 +168,7 @@ const styles = StyleSheet.create({
   tabBarIconStyle: {
     marginTop: 0,
     marginBottom: 0,
+    // Убираем все отступы для идеального центрирования
   },
   tabBarBackground: {
     flex: 1,
@@ -215,21 +216,21 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 44,
-    height: 44,
-    // Убираем все отступы и центрируем идеально
-    marginTop: 0,
-    marginBottom: 0,
+    width: 40,
+    height: 40,
+    // Полностью убираем все отступы для идеального центрирования
+    margin: 0,
+    padding: 0,
   },
   iconBackground: {
     position: 'absolute',
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255, 107, 53, 0.12)',
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: 'rgba(255, 107, 53, 0.1)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
   },
 });
