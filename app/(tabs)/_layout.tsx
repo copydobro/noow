@@ -40,7 +40,7 @@ function AnimatedTabIcon({
     if (focused) {
       // Плавная анимация при активации
       scale.value = withSpring(1.05, { damping: 15, stiffness: 200 });
-      translateY.value = withSpring(0, { damping: 15, stiffness: 200 }); // Убираем вертикальное смещение
+      translateY.value = withSpring(0, { damping: 15, stiffness: 200 });
       glowOpacity.value = withTiming(1, { duration: 300 });
       backgroundScale.value = withSpring(1, { damping: 15, stiffness: 200 });
     } else {
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     borderTopWidth: 0,
     elevation: 0,
     shadowOpacity: 0,
-    height: 64, // Уменьшили высоту навбара
+    height: 64,
     paddingTop: 0,
     paddingBottom: 8,
     position: 'absolute',
@@ -166,9 +166,8 @@ const styles = StyleSheet.create({
     right: 0,
   },
   tabBarIconStyle: {
-    marginTop: 0,
+    marginTop: 8, // Опускаем иконки на 8px вниз (примерно 20% от высоты навбара)
     marginBottom: 0,
-    // Убираем все отступы для идеального центрирования
   },
   tabBarBackground: {
     flex: 1,
@@ -218,7 +217,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 40,
     height: 40,
-    // Полностью убираем все отступы для идеального центрирования
     margin: 0,
     padding: 0,
   },
