@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Play, Pause, SkipForward, Brain, Activity, Coffee, RotateCcw } from 'lucide-react-native';
+import { Play, Pause, SkipForward, Brain, Coffee, RotateCcw } from 'lucide-react-native';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
@@ -40,7 +40,7 @@ const PHASE_CONFIG = {
   activation: {
     title: 'ФИЗИЧЕСКАЯ АКТИВАЦИЯ',
     subtitle: 'ВРЕМЯ ДВИГАТЬСЯ',
-    icon: Activity,
+    icon: Brain, // Используем Brain вместо Activity
     color: '#FF6B35',
     gradient: ['#FF6B35', '#E55A2B'],
     message: 'Встань и подвигайся! Сделай несколько упражнений.',
@@ -266,7 +266,7 @@ export default function HomeTab() {
           <View style={styles.timerContainer}>
             <Animated.View style={[styles.timerCircle, pulseStyle]}>
               <View style={styles.timerContent}>
-                <IconComponent size={32} color="#FF6B35" strokeWidth={1.5} />
+                <IconComponent size={28} color="#FF6B35" strokeWidth={1.5} />
                 <Text style={styles.timerTime}>{formatTime(cycleState.timeRemaining)}</Text>
                 <Text style={styles.timerPhase}>{currentConfig.title}</Text>
                 <Text style={styles.timerSubtitle}>{currentConfig.subtitle}</Text>
@@ -285,7 +285,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={skipPhase}
             >
-              <SkipForward size={18} color="#FFFFFF" strokeWidth={1.5} />
+              <SkipForward size={16} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
 
             <TouchableOpacity
@@ -297,9 +297,9 @@ export default function HomeTab() {
                 style={styles.playButtonGradient}
               >
                 {cycleState.isActive ? (
-                  <Pause size={24} color="#000" strokeWidth={1.5} />
+                  <Pause size={20} color="#000" strokeWidth={1.5} />
                 ) : (
-                  <Play size={24} color="#000" strokeWidth={1.5} />
+                  <Play size={20} color="#000" strokeWidth={1.5} />
                 )}
               </LinearGradient>
             </TouchableOpacity>
@@ -308,7 +308,7 @@ export default function HomeTab() {
               style={styles.controlButton}
               onPress={resetTimer}
             >
-              <RotateCcw size={18} color="#FFFFFF" strokeWidth={1.5} />
+              <RotateCcw size={16} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
           </View>
 
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
     paddingTop: 20,
-    paddingBottom: 80, // Увеличиваем отступ снизу для навигации
+    paddingBottom: 80,
   },
   header: {
     alignItems: 'center',
@@ -386,12 +386,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     position: 'relative',
     flex: 1,
-    maxHeight: width * 0.8,
+    maxHeight: width * 0.65, // Уменьшили с 0.8 до 0.65 (на ~19%)
   },
   timerCircle: {
-    width: width * 0.75,
-    height: width * 0.75,
-    borderRadius: width * 0.375,
+    width: width * 0.6, // Уменьшили с 0.75 до 0.6 (на 20%)
+    height: width * 0.6, // Уменьшили с 0.75 до 0.6 (на 20%)
+    borderRadius: width * 0.3, // Уменьшили с 0.375 до 0.3
     backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.05)',
@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTime: {
-    fontSize: 48,
+    fontSize: 40, // Уменьшили с 48 до 40
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     marginTop: 12,
@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   timerPhase: {
-    fontSize: 14,
+    fontSize: 12, // Уменьшили с 14 до 12
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
     marginBottom: 4,
@@ -418,7 +418,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   timerSubtitle: {
-    fontSize: 10,
+    fontSize: 9, // Уменьшили с 10 до 9
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.4)',
     letterSpacing: 0.5,
@@ -426,9 +426,9 @@ const styles = StyleSheet.create({
   },
   progressRing: {
     position: 'absolute',
-    width: width * 0.8,
-    height: width * 0.8,
-    borderRadius: width * 0.4,
+    width: width * 0.65, // Уменьшили с 0.8 до 0.65
+    height: width * 0.65, // Уменьшили с 0.8 до 0.65
+    borderRadius: width * 0.325, // Уменьшили с 0.4 до 0.325
     borderWidth: 2,
     borderColor: 'rgba(255, 107, 53, 0.1)',
   },
@@ -450,9 +450,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   controlButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
+    width: 44, // Уменьшили с 48 до 44
+    height: 44, // Уменьшили с 48 до 44
+    borderRadius: 22, // Уменьшили с 24 до 22
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
@@ -460,9 +460,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   playButton: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: 64, // Уменьшили с 72 до 64
+    height: 64, // Уменьшили с 72 до 64
+    borderRadius: 32, // Уменьшили с 36 до 32
     overflow: 'hidden',
   },
   playButtonGradient: {

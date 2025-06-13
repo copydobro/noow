@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Brain, Activity, ChartBar as BarChart3, User } from 'lucide-react-native';
+import { Brain, ChartBar as BarChart3, User } from 'lucide-react-native';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
@@ -17,7 +17,6 @@ const { width } = Dimensions.get('window');
 
 // Создаем анимированные компоненты
 const AnimatedBrain = Animated.createAnimatedComponent(Brain);
-const AnimatedActivity = Animated.createAnimatedComponent(Activity);
 const AnimatedBarChart = Animated.createAnimatedComponent(BarChart3);
 const AnimatedUser = Animated.createAnimatedComponent(User);
 
@@ -26,7 +25,7 @@ function AnimatedTabIcon({
   IconComponent, 
   focused, 
   color, 
-  size = 20 
+  size = 18 // Уменьшили размер по умолчанию с 20 до 18
 }: { 
   IconComponent: any;
   focused: boolean;
@@ -42,8 +41,8 @@ function AnimatedTabIcon({
     if (focused) {
       // Последовательность анимаций при активации
       scale.value = withSequence(
-        withTiming(1.2, { duration: 150 }),
-        withSpring(1.1, { damping: 12, stiffness: 200 })
+        withTiming(1.15, { duration: 150 }), // Уменьшили с 1.2 до 1.15
+        withSpring(1.08, { damping: 12, stiffness: 200 }) // Уменьшили с 1.1 до 1.08
       );
       
       rotation.value = withSequence(
@@ -55,7 +54,7 @@ function AnimatedTabIcon({
       
       // Пульсация
       pulseScale.value = withSequence(
-        withDelay(200, withTiming(1.15, { duration: 300 })),
+        withDelay(200, withTiming(1.1, { duration: 300 })), // Уменьшили с 1.15 до 1.1
         withTiming(1, { duration: 300 })
       );
     } else {
@@ -88,7 +87,7 @@ function AnimatedTabIcon({
       {/* Main icon */}
       <Animated.View style={animatedIconStyle}>
         <AnimatedIcon 
-          size={focused ? 22 : 20} 
+          size={focused ? 20 : 18} // Уменьшили размеры с 22/20 до 20/18
           color={color} 
           strokeWidth={focused ? 2 : 1.5} 
         />
@@ -150,18 +149,6 @@ export default function TabLayout() {
             tabBarIcon: ({ color, focused }) => (
               <AnimatedTabIcon 
                 IconComponent={Brain}
-                focused={focused}
-                color={color}
-              />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="activity"
-          options={{
-            tabBarIcon: ({ color, focused }) => (
-              <AnimatedTabIcon 
-                IconComponent={Activity}
                 focused={focused}
                 color={color}
               />
@@ -251,14 +238,14 @@ const styles = StyleSheet.create({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    width: 40,
-    height: 40,
+    width: 36, // Уменьшили с 40 до 36
+    height: 36, // Уменьшили с 40 до 36
   },
   glowEffect: {
     position: 'absolute',
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 30, // Уменьшили с 36 до 30
+    height: 30, // Уменьшили с 36 до 30
+    borderRadius: 15, // Уменьшили с 18 до 15
     backgroundColor: 'rgba(255, 107, 53, 0.12)',
     shadowColor: '#FF6B35',
     shadowOffset: { width: 0, height: 0 },
