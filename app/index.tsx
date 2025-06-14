@@ -4,17 +4,21 @@ import { View, StyleSheet } from 'react-native';
 
 export default function Index() {
   useEffect(() => {
-    // Check if user has completed onboarding
+    // Check if user is registered and has completed onboarding
+    let isRegistered = false;
     let hasCompletedOnboarding = false;
     
     if (typeof window !== 'undefined') {
+      isRegistered = localStorage.getItem('isRegistered') === 'true';
       hasCompletedOnboarding = localStorage.getItem('onboardingCompleted') === 'true';
     }
     
-    if (hasCompletedOnboarding) {
+    if (isRegistered && hasCompletedOnboarding) {
       router.replace('/(tabs)');
-    } else {
+    } else if (isRegistered && !hasCompletedOnboarding) {
       router.replace('/onboarding');
+    } else {
+      router.replace('/auth/welcome');
     }
   }, []);
 
