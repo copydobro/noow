@@ -258,7 +258,7 @@ export default function RegisterScreen() {
                   onPress={() => handleSocialRegister('apple')}
                 >
                   <View style={styles.socialIcon}>
-                    <Text style={styles.socialIconText}>🍎</Text>
+                    <Text style={styles.socialIconText}></Text>
                   </View>
                   <Text style={styles.socialButtonText}>APPLE</Text>
                 </TouchableOpacity>

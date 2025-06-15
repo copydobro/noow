@@ -17,36 +17,7 @@ export default function WelcomeScreen() {
         <View style={styles.content}>
           {/* Hero Section */}
           <View style={styles.heroSection}>
-            <View style={styles.logoContainer}>
-              <Brain size={40} color="#FF6B35" strokeWidth={1.5} />
-            </View>
-
             <Text style={styles.title}>ДОБРО ПОЖАЛОВАТЬ{'\n'}В NOOWING</Text>
-            
-            <Text style={styles.subtitle}>
-              ТВОЯ ПЕРСОНАЛЬНАЯ ОПЕРАЦИОННАЯ{'\n'}
-              СИСТЕМА ДЛЯ МАКСИМАЛЬНОЙ{'\n'}
-              ПРОДУКТИВНОСТИ
-            </Text>
-
-            <View style={styles.featuresContainer}>
-              <View style={styles.featureItem}>
-                <View style={styles.featureDot} />
-                <Text style={styles.featureText}>ЦИКЛ 45-2-5 ДЛЯ ОПТИМАЛЬНОЙ РАБОТЫ МОЗГА</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <View style={styles.featureDot} />
-                <Text style={styles.featureText}>ФИЗИЧЕСКАЯ АКТИВАЦИЯ КАЖДЫЕ 47 МИНУТ</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <View style={styles.featureDot} />
-                <Text style={styles.featureText}>ПЕРСОНАЛИЗИРОВАННЫЕ ТРЕНИРОВКИ</Text>
-              </View>
-              <View style={styles.featureItem}>
-                <View style={styles.featureDot} />
-                <Text style={styles.featureText}>ОТСЛЕЖИВАНИЕ ПРОГРЕССА И СТАТИСТИКА</Text>
-              </View>
-            </View>
           </View>
 
           {/* Auth Buttons */}
@@ -91,7 +62,7 @@ export default function WelcomeScreen() {
 
               <TouchableOpacity style={styles.socialButton}>
                 <View style={styles.socialIcon}>
-                  <Text style={styles.socialIconText}>🍎</Text>
+                  <Text style={styles.socialIconText}></Text>
                 </View>
                 <Text style={styles.socialButtonText}>APPLE</Text>
               </TouchableOpacity>
@@ -121,65 +92,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingTop: 20,
     paddingBottom: 20,
+    justifyContent: 'space-between',
   },
   heroSection: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  logoContainer: {
-    marginBottom: 24,
-    padding: 16,
-    backgroundColor: 'rgba(255, 107, 53, 0.08)',
-    borderRadius: 20,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 107, 53, 0.15)',
+    paddingTop: 60,
   },
   title: {
-    fontSize: 24,
+    fontSize: 28,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 16,
-    lineHeight: 28,
+    lineHeight: 34,
     letterSpacing: 2,
   },
-  subtitle: {
-    fontSize: 12,
-    fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.8)',
-    textAlign: 'center',
-    lineHeight: 16,
-    marginBottom: 32,
-    letterSpacing: 0.5,
-  },
-  featuresContainer: {
-    width: '100%',
-    maxWidth: 300,
-  },
-  featureItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 12,
-    paddingLeft: 8,
-  },
-  featureDot: {
-    width: 4,
-    height: 4,
-    backgroundColor: '#FF6B35',
-    borderRadius: 2,
-    marginRight: 12,
-  },
-  featureText: {
-    fontSize: 10,
-    fontFamily: 'Inter-Regular',
-    color: 'rgba(255, 255, 255, 0.9)',
-    lineHeight: 14,
-    letterSpacing: 0.3,
-    flex: 1,
-  },
   authSection: {
-    paddingTop: 20,
+    paddingTop: 40,
   },
   authTitle: {
     fontSize: 14,

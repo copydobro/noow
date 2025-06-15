@@ -209,7 +209,7 @@ export default function LoginScreen() {
                 onPress={() => handleSocialLogin('apple')}
               >
                 <View style={styles.socialIcon}>
-                  <Text style={styles.socialIconText}>🍎</Text>
+                  <Text style={styles.socialIconText}></Text>
                 </View>
                 <Text style={styles.socialButtonText}>APPLE</Text>
               </TouchableOpacity>
