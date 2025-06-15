@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowRight, ArrowLeft, User, Mail, Eye, EyeOff, Brain } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { RegisterRequest, AuthResponse } from '@/types/auth';
 
 export default function RegisterScreen() {
   const [formData, setFormData] = useState({
@@ -47,34 +48,57 @@ export default function RegisterScreen() {
   };
 
   const handleRegister = async () => {
-    if (isSubmitting) return; // Предотвращаем множественные нажатия
+    if (isSubmitting) return;
     
     if (validateForm()) {
       setIsSubmitting(true);
       
       try {
-        // Сохраняем данные пользователя
-        if (typeof window !== 'undefined') {
-          localStorage.setItem('userName', formData.name);
-          localStorage.setItem('userEmail', formData.email);
-          localStorage.setItem('isRegistered', 'true');
-        }
-        
-        // Показываем уведомление об успехе
-        Alert.alert(
-          'Регистрация успешна!',
-          `Добро пожаловать, ${formData.name}! Теперь настроим ваш профиль.`,
-          [
-            {
-              text: 'Продолжить',
-              onPress: () => {
-                router.replace('/onboarding');
+        const registerData: RegisterRequest = {
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          password: formData.password
+        };
+
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(registerData),
+        });
+
+        const result: AuthResponse = await response.json();
+
+        if (result.success && result.user) {
+          // Сохраняем данные пользователя
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('userName', result.user.name);
+            localStorage.setItem('userEmail', result.user.email);
+            localStorage.setItem('userId', result.user.id);
+            localStorage.setItem('isRegistered', 'true');
+          }
+          
+          Alert.alert(
+            'Регистрация успешна!',
+            `Добро пожаловать, ${result.user.name}! Теперь настроим ваш профиль.`,
+            [
+              {
+                text: 'Продолжить',
+                onPress: () => {
+                  router.replace('/onboarding');
+                }
               }
-            }
-          ]
-        );
+            ]
+          );
+        } else {
+          // Показываем ошибку от сервера
+          Alert.alert('Ошибка регистрации', result.message);
+          setIsSubmitting(false);
+        }
       } catch (error) {
-        Alert.alert('Ошибка', 'Произошла ошибка при регистрации. Попробуйте еще раз.');
+        console.error('Registration error:', error);
+        Alert.alert('Ошибка', 'Произошла ошибка при регистрации. Проверьте подключение к интернету.');
         setIsSubmitting(false);
       }
     }
@@ -104,6 +128,7 @@ export default function RegisterScreen() {
             <TouchableOpacity 
               style={styles.backButton}
               onPress={() => router.back()}
+              disabled={isSubmitting}
             >
               <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
@@ -276,7 +301,7 @@ export default function RegisterScreen() {
                   disabled={isSubmitting}
                 >
                   <View style={styles.socialIcon}>
-                    <Text style={styles.socialIconText}></Text>
+                    <Text style={styles.socialIconText}>🍎</Text>
                   </View>
                   <Text style={styles.socialButtonText}>APPLE</Text>
                 </TouchableOpacity>
