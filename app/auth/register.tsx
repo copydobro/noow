@@ -15,6 +15,7 @@ export default function RegisterScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -45,27 +46,37 @@ export default function RegisterScreen() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
+    if (isSubmitting) return; // Предотвращаем множественные нажатия
+    
     if (validateForm()) {
-      // Здесь будет логика регистрации
-      Alert.alert(
-        'Регистрация успешна!',
-        `Добро пожаловать, ${formData.name}! Теперь настроим ваш профиль.`,
-        [
-          {
-            text: 'Продолжить',
-            onPress: () => {
-              // Сохраняем данные пользователя
-              if (typeof window !== 'undefined') {
-                localStorage.setItem('userName', formData.name);
-                localStorage.setItem('userEmail', formData.email);
-                localStorage.setItem('isRegistered', 'true');
+      setIsSubmitting(true);
+      
+      try {
+        // Сохраняем данные пользователя
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('userName', formData.name);
+          localStorage.setItem('userEmail', formData.email);
+          localStorage.setItem('isRegistered', 'true');
+        }
+        
+        // Показываем уведомление об успехе
+        Alert.alert(
+          'Регистрация успешна!',
+          `Добро пожаловать, ${formData.name}! Теперь настроим ваш профиль.`,
+          [
+            {
+              text: 'Продолжить',
+              onPress: () => {
+                router.replace('/onboarding');
               }
-              router.replace('/onboarding');
             }
-          }
-        ]
-      );
+          ]
+        );
+      } catch (error) {
+        Alert.alert('Ошибка', 'Произошла ошибка при регистрации. Попробуйте еще раз.');
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -79,7 +90,7 @@ export default function RegisterScreen() {
 
   const isFormValid = formData.name.trim() && formData.email.trim() && 
                      formData.password && formData.confirmPassword &&
-                     Object.keys(errors).length === 0;
+                     Object.keys(errors).length === 0 && !isSubmitting;
 
   return (
     <LinearGradient
@@ -128,6 +139,7 @@ export default function RegisterScreen() {
                       placeholder="Введите ваше имя"
                       placeholderTextColor="rgba(255, 255, 255, 0.3)"
                       autoCapitalize="words"
+                      editable={!isSubmitting}
                     />
                   </View>
                   {errors.name && <Text style={styles.errorText}>{errors.name}</Text>}
@@ -151,6 +163,7 @@ export default function RegisterScreen() {
                       placeholderTextColor="rgba(255, 255, 255, 0.3)"
                       keyboardType="email-address"
                       autoCapitalize="none"
+                      editable={!isSubmitting}
                     />
                   </View>
                   {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
@@ -172,6 +185,7 @@ export default function RegisterScreen() {
                       placeholder="Минимум 6 символов"
                       placeholderTextColor="rgba(255, 255, 255, 0.3)"
                       secureTextEntry={!showPassword}
+                      editable={!isSubmitting}
                     />
                     <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                       {showPassword ? (
@@ -200,6 +214,7 @@ export default function RegisterScreen() {
                       placeholder="Повторите пароль"
                       placeholderTextColor="rgba(255, 255, 255, 0.3)"
                       secureTextEntry={!showConfirmPassword}
+                      editable={!isSubmitting}
                     />
                     <TouchableOpacity onPress={() => setShowConfirmPassword(!showConfirmPassword)}>
                       {showConfirmPassword ? (
@@ -227,9 +242,11 @@ export default function RegisterScreen() {
                     styles.registerButtonText,
                     !isFormValid && styles.registerButtonTextDisabled
                   ]}>
-                    СОЗДАТЬ АККАУНТ
+                    {isSubmitting ? 'СОЗДАНИЕ...' : 'СОЗДАТЬ АККАУНТ'}
                   </Text>
-                  <ArrowRight size={16} color={isFormValid ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
+                  {!isSubmitting && (
+                    <ArrowRight size={16} color={isFormValid ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
+                  )}
                 </LinearGradient>
               </TouchableOpacity>
 
@@ -245,6 +262,7 @@ export default function RegisterScreen() {
                 <TouchableOpacity 
                   style={styles.socialButton}
                   onPress={() => handleSocialRegister('google')}
+                  disabled={isSubmitting}
                 >
                   <View style={styles.socialIcon}>
                     <Text style={styles.socialIconText}>G</Text>
@@ -255,9 +273,10 @@ export default function RegisterScreen() {
                 <TouchableOpacity 
                   style={styles.socialButton}
                   onPress={() => handleSocialRegister('apple')}
+                  disabled={isSubmitting}
                 >
                   <View style={styles.socialIcon}>
-                    <Text style={styles.socialIconText}>🍎</Text>
+                    <Text style={styles.socialIconText}></Text>
                   </View>
                   <Text style={styles.socialButtonText}>APPLE</Text>
                 </TouchableOpacity>
@@ -267,6 +286,7 @@ export default function RegisterScreen() {
               <TouchableOpacity 
                 style={styles.loginLink}
                 onPress={() => router.push('/auth/login')}
+                disabled={isSubmitting}
               >
                 <Text style={styles.loginLinkText}>
                   УЖЕ ЕСТЬ АККАУНТ? <Text style={styles.loginLinkHighlight}>ВОЙТИ</Text>
