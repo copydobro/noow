@@ -16,7 +16,17 @@
       "output": "server",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": ["expo-router", "expo-font", "expo-web-browser"],
+    "plugins": [
+      "expo-router", 
+      "expo-font", 
+      "expo-web-browser",
+      [
+        "expo-router",
+        {
+          "origin": "https://your-custom-domain.com"
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     }
