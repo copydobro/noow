@@ -106,8 +106,7 @@ export default function RegisterScreen() {
             <View style={styles.formContainer}>
               <Text style={styles.title}>СОЗДАТЬ АККАУНТ</Text>
               <Text style={styles.subtitle}>
-                ПРИСОЕДИНЯЙСЯ К СООБЩЕСТВУ{'\n'}
-                ЦИФРОВЫХ ВОИНОВ NOOWING
+                ПРИСОЕДИНЯЙСЯ К СООБЩЕСТВУ{'\n'}ЦИФРОВЫХ ВОИНОВ NOOWING
               </Text>
 
               {/* Form Fields */}
