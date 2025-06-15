@@ -4,6 +4,7 @@ import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowRight, ArrowLeft, Mail, Eye, EyeOff, Brain } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { LoginRequest, AuthResponse } from '@/types/auth';
 
 export default function LoginScreen() {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ export default function LoginScreen() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
@@ -30,30 +32,68 @@ export default function LoginScreen() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
+    if (isSubmitting) return;
+    
     if (validateForm()) {
-      // Здесь будет логика входа
-      Alert.alert(
-        'Добро пожаловать обратно!',
-        'Вход выполнен успешно',
-        [
-          {
-            text: 'Продолжить',
-            onPress: () => {
-              // Проверяем, завершен ли онбординг
-              const onboardingCompleted = typeof window !== 'undefined' 
-                ? localStorage.getItem('onboardingCompleted') === 'true'
-                : false;
-              
-              if (onboardingCompleted) {
-                router.replace('/(tabs)');
-              } else {
-                router.replace('/onboarding');
-              }
-            }
+      setIsSubmitting(true);
+      
+      try {
+        const loginData: LoginRequest = {
+          email: formData.email.trim(),
+          password: formData.password
+        };
+
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(loginData),
+        });
+
+        const result: AuthResponse = await response.json();
+
+        if (result.success && result.user) {
+          // Сохраняем данные пользователя
+          if (typeof window !== 'undefined') {
+            localStorage.setItem('userName', result.user.name);
+            localStorage.setItem('userEmail', result.user.email);
+            localStorage.setItem('userId', result.user.id);
+            localStorage.setItem('isRegistered', 'true');
           }
-        ]
-      );
+          
+          Alert.alert(
+            'Добро пожаловать обратно!',
+            `Вход выполнен успешно, ${result.user.name}!`,
+            [
+              {
+                text: 'Продолжить',
+                onPress: () => {
+                  // Проверяем, завершен ли онбординг
+                  const onboardingCompleted = typeof window !== 'undefined' 
+                    ? localStorage.getItem('onboardingCompleted') === 'true'
+                    : false;
+                  
+                  if (onboardingCompleted) {
+                    router.replace('/(tabs)');
+                  } else {
+                    router.replace('/onboarding');
+                  }
+                }
+              }
+            ]
+          );
+        } else {
+          // Показываем ошибку от сервера
+          Alert.alert('Ошибка входа', result.message);
+          setIsSubmitting(false);
+        }
+      } catch (error) {
+        console.error('Login error:', error);
+        Alert.alert('Ошибка', 'Произошла ошибка при входе. Проверьте подключение к интернету.');
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -76,7 +116,8 @@ export default function LoginScreen() {
     );
   };
 
-  const isFormValid = formData.email.trim() && formData.password && Object.keys(errors).length === 0;
+  const isFormValid = formData.email.trim() && formData.password && 
+                     Object.keys(errors).length === 0 && !isSubmitting;
 
   return (
     <LinearGradient
@@ -90,6 +131,7 @@ export default function LoginScreen() {
             <TouchableOpacity 
               style={styles.backButton}
               onPress={() => router.back()}
+              disabled={isSubmitting}
             >
               <ArrowLeft size={20} color="#FFFFFF" strokeWidth={1.5} />
             </TouchableOpacity>
@@ -126,6 +168,7 @@ export default function LoginScreen() {
                     placeholderTextColor="rgba(255, 255, 255, 0.3)"
                     keyboardType="email-address"
                     autoCapitalize="none"
+                    editable={!isSubmitting}
                   />
                 </View>
                 {errors.email && <Text style={styles.errorText}>{errors.email}</Text>}
@@ -135,7 +178,7 @@ export default function LoginScreen() {
               <View style={styles.fieldContainer}>
                 <View style={styles.passwordHeader}>
                   <Text style={styles.fieldLabel}>ПАРОЛЬ</Text>
-                  <TouchableOpacity onPress={handleForgotPassword}>
+                  <TouchableOpacity onPress={handleForgotPassword} disabled={isSubmitting}>
                     <Text style={styles.forgotLink}>ЗАБЫЛИ?</Text>
                   </TouchableOpacity>
                 </View>
@@ -152,6 +195,7 @@ export default function LoginScreen() {
                     placeholder="Введите пароль"
                     placeholderTextColor="rgba(255, 255, 255, 0.3)"
                     secureTextEntry={!showPassword}
+                    editable={!isSubmitting}
                   />
                   <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
                     {showPassword ? (
@@ -179,9 +223,11 @@ export default function LoginScreen() {
                   styles.loginButtonText,
                   !isFormValid && styles.loginButtonTextDisabled
                 ]}>
-                  ВОЙТИ
+                  {isSubmitting ? 'ВХОД...' : 'ВОЙТИ'}
                 </Text>
-                <ArrowRight size={16} color={isFormValid ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
+                {!isSubmitting && (
+                  <ArrowRight size={16} color={isFormValid ? "#000" : "rgba(255,255,255,0.3)"} strokeWidth={1.5} />
+                )}
               </LinearGradient>
             </TouchableOpacity>
 
@@ -197,6 +243,7 @@ export default function LoginScreen() {
               <TouchableOpacity 
                 style={styles.socialButton}
                 onPress={() => handleSocialLogin('google')}
+                disabled={isSubmitting}
               >
                 <View style={styles.socialIcon}>
                   <Text style={styles.socialIconText}>G</Text>
@@ -207,9 +254,10 @@ export default function LoginScreen() {
               <TouchableOpacity 
                 style={styles.socialButton}
                 onPress={() => handleSocialLogin('apple')}
+                disabled={isSubmitting}
               >
                 <View style={styles.socialIcon}>
-                  <Text style={styles.socialIconText}></Text>
+                  <Text style={styles.socialIconText}>🍎</Text>
                 </View>
                 <Text style={styles.socialButtonText}>APPLE</Text>
               </TouchableOpacity>
@@ -219,6 +267,7 @@ export default function LoginScreen() {
             <TouchableOpacity 
               style={styles.registerLink}
               onPress={() => router.push('/auth/register')}
+              disabled={isSubmitting}
             >
               <Text style={styles.registerLinkText}>
                 НЕТ АККАУНТА? <Text style={styles.registerLinkHighlight}>СОЗДАТЬ</Text>
