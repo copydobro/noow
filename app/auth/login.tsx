@@ -4,7 +4,7 @@ import { router } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ArrowRight, ArrowLeft, Mail, Eye, EyeOff, Brain } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { LoginRequest, AuthResponse } from '@/types/auth';
+import { signIn, getUserProfile } from '@/lib/supabase';
 
 export default function LoginScreen() {
   const [formData, setFormData] = useState({
@@ -39,43 +39,34 @@ export default function LoginScreen() {
       setIsSubmitting(true);
       
       try {
-        const loginData: LoginRequest = {
-          email: formData.email.trim(),
-          password: formData.password
-        };
-
-        const response = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(loginData),
-        });
-
-        const result: AuthResponse = await response.json();
-
-        if (result.success && result.user) {
-          // Сохраняем данные пользователя
+        // Use Supabase signIn function
+        const { user } = await signIn(formData.email.trim(), formData.password);
+        
+        if (user) {
+          // Get user profile to get the name
+          const profile = await getUserProfile(user.id);
+          
+          // Save user data to localStorage
           if (typeof window !== 'undefined') {
-            localStorage.setItem('userName', result.user.name);
-            localStorage.setItem('userEmail', result.user.email);
-            localStorage.setItem('userId', result.user.id);
+            localStorage.setItem('userName', profile?.name || 'User');
+            localStorage.setItem('userEmail', user.email || formData.email);
+            localStorage.setItem('userId', user.id);
             localStorage.setItem('isRegistered', 'true');
           }
           
           Alert.alert(
             'Добро пожаловать обратно!',
-            `Вход выполнен успешно, ${result.user.name}!`,
+            `Вход выполнен успешно, ${profile?.name || 'User'}!`,
             [
               {
                 text: 'Продолжить',
                 onPress: () => {
-                  // Проверяем, завершен ли онбординг
+                  // Check if onboarding is completed
                   const onboardingCompleted = typeof window !== 'undefined' 
                     ? localStorage.getItem('onboardingCompleted') === 'true'
                     : false;
                   
-                  if (onboardingCompleted) {
+                  if (onboardingCompleted || profile?.onboarding_completed) {
                     router.replace('/(tabs)');
                   } else {
                     router.replace('/onboarding');
@@ -84,14 +75,22 @@ export default function LoginScreen() {
               }
             ]
           );
-        } else {
-          // Показываем ошибку от сервера
-          Alert.alert('Ошибка входа', result.message);
-          setIsSubmitting(false);
         }
-      } catch (error) {
+      } catch (error: any) {
         console.error('Login error:', error);
-        Alert.alert('Ошибка', 'Произошла ошибка при входе. Проверьте подключение к интернету.');
+        
+        // Handle specific Supabase auth errors
+        let errorMessage = 'Произошла ошибка при входе. Проверьте подключение к интернету.';
+        
+        if (error.message?.includes('Invalid login credentials')) {
+          errorMessage = 'Неверный email или пароль';
+        } else if (error.message?.includes('Email not confirmed')) {
+          errorMessage = 'Подтвердите email перед входом';
+        } else if (error.message?.includes('Too many requests')) {
+          errorMessage = 'Слишком много попыток входа. Попробуйте позже';
+        }
+        
+        Alert.alert('Ошибка входа', errorMessage);
         setIsSubmitting(false);
       }
     }
