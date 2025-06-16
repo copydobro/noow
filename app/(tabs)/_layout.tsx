@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Brain, ChartBar as BarChart3, User } from 'lucide-react-native';
+import { Brain, BarChart3, User } from 'lucide-react-native';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     right: 0,
   },
   tabBarIconStyle: {
-    marginTop: 8, // Опускаем иконки на 8px вниз (примерно 20% от высоты навбара)
+    marginTop: 8,
     marginBottom: 0,
   },
   tabBarBackground: {
@@ -176,7 +176,6 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 24,
     overflow: 'hidden',
     position: 'relative',
-    // Добавляем тень для глубины
     shadowColor: '#000',
     shadowOffset: { width: 0, height: -4 },
     shadowOpacity: 0.3,
