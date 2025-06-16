@@ -40,7 +40,7 @@ const PHASE_CONFIG = {
   activation: {
     title: 'ФИЗИЧЕСКАЯ АКТИВАЦИЯ',
     subtitle: 'ВРЕМЯ ДВИГАТЬСЯ',
-    icon: Brain, // Используем Brain вместо Activity
+    icon: Brain,
     color: '#FF6B35',
     gradient: ['#FF6B35', '#E55A2B'],
     message: 'Встань и подвигайся! Сделай несколько упражнений.',
@@ -386,12 +386,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     position: 'relative',
     flex: 1,
-    maxHeight: width * 0.65, // Уменьшили с 0.8 до 0.65 (на ~19%)
+    maxHeight: width * 0.65,
   },
   timerCircle: {
-    width: width * 0.6, // Уменьшили с 0.75 до 0.6 (на 20%)
-    height: width * 0.6, // Уменьшили с 0.75 до 0.6 (на 20%)
-    borderRadius: width * 0.3, // Уменьшили с 0.375 до 0.3
+    width: width * 0.6,
+    height: width * 0.6,
+    borderRadius: width * 0.3,
     backgroundColor: 'rgba(255, 255, 255, 0.02)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.05)',
@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   timerTime: {
-    fontSize: 40, // Уменьшили с 48 до 40
+    fontSize: 40,
     fontFamily: 'Inter-Bold',
     color: '#FFFFFF',
     marginTop: 12,
@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   timerPhase: {
-    fontSize: 12, // Уменьшили с 14 до 12
+    fontSize: 12,
     fontFamily: 'Inter-SemiBold',
     color: '#FF6B35',
     marginBottom: 4,
@@ -418,7 +418,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   timerSubtitle: {
-    fontSize: 9, // Уменьшили с 10 до 9
+    fontSize: 9,
     fontFamily: 'Inter-Regular',
     color: 'rgba(255, 255, 255, 0.4)',
     letterSpacing: 0.5,
@@ -426,9 +426,9 @@ const styles = StyleSheet.create({
   },
   progressRing: {
     position: 'absolute',
-    width: width * 0.65, // Уменьшили с 0.8 до 0.65
-    height: width * 0.65, // Уменьшили с 0.8 до 0.65
-    borderRadius: width * 0.325, // Уменьшили с 0.4 до 0.325
+    width: width * 0.65,
+    height: width * 0.65,
+    borderRadius: width * 0.325,
     borderWidth: 2,
     borderColor: 'rgba(255, 107, 53, 0.1)',
   },
@@ -450,9 +450,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   controlButton: {
-    width: 44, // Уменьшили с 48 до 44
-    height: 44, // Уменьшили с 48 до 44
-    borderRadius: 22, // Уменьшили с 24 до 22
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     backgroundColor: 'rgba(255, 255, 255, 0.03)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.08)',
@@ -460,9 +460,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   playButton: {
-    width: 64, // Уменьшили с 72 до 64
-    height: 64, // Уменьшили с 72 до 64
-    borderRadius: 32, // Уменьшили с 36 до 32
+    width: 64,
+    height: 64,
+    borderRadius: 32,
     overflow: 'hidden',
   },
   playButtonGradient: {
