@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { Brain, BarChart3, User } from 'lucide-react-native';
+import { Brain, ChartBar as BarChart3, User } from 'lucide-react-native';
 import Animated, { 
   useSharedValue, 
   useAnimatedStyle, 
