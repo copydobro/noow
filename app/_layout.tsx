@@ -36,6 +36,7 @@ export default function RootLayout() {
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="welcome" />
         <Stack.Screen name="auth" />
         <Stack.Screen name="onboarding" />
         <Stack.Screen name="(tabs)" />
@@ -44,7 +45,6 @@ export default function RootLayout() {
         <Stack.Screen name="achievements" />
         <Stack.Screen name="social" />
         <Stack.Screen name="donations" />
-        <Stack.Screen name="welcome" />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

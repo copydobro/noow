@@ -4,14 +4,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Brain, Clock, Activity, ArrowRight } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 export default function OnboardingWelcome() {
   const showSkipWarning = () => {
     Alert.alert(
       'Пропустить онбординг?',
-      'Настройка профиля поможет персонализировать ваш опыт использования NOOW. Вы уверены, что хотите пропустить?',
+      'Настройка профиля поможет персонализировать ваш опыт использования NOOWING. Вы уверены, что хотите пропустить?',
       [
         { text: 'Отмена', style: 'cancel' },
         { text: 'Пропустить', style: 'destructive', onPress: () => router.replace('/(tabs)') }
@@ -35,7 +35,7 @@ export default function OnboardingWelcome() {
           {/* Header */}
           <View style={styles.header}>
             <Text style={styles.title}>ДОБРО ПОЖАЛОВАТЬ В</Text>
-            <Text style={styles.brand}>NOOW</Text>
+            <Text style={styles.brand}>NOOWING</Text>
             <Text style={styles.subtitle}>РЕВОЛЮЦИОННАЯ СИСТЕМА ПРОДУКТИВНОСТИ</Text>
           </View>
 

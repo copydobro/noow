@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ArrowLeft, Clock, Sunrise, Sun, Sunset, Moon } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 const timeSlots = [
   { id: 'morning', label: 'УТРОМ', time: '06:00 - 10:00', icon: Sunrise, color: '#FCD34D' },
@@ -21,7 +21,7 @@ export default function OnboardingStep2() {
   };
 
   const handleSkip = () => {
-    router.push('/onboarding/step-3');
+    router.replace('/(tabs)');
   };
 
   return (

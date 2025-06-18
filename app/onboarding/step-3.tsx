@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ArrowLeft, Activity, Zap, Target } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 const activityLevels = [
   {
@@ -41,7 +41,7 @@ export default function OnboardingStep3() {
   };
 
   const handleSkip = () => {
-    router.push('/onboarding/step-4');
+    router.replace('/(tabs)');
   };
 
   return (

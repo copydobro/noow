@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ArrowLeft, Clock } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 export default function OnboardingStep4() {
   const [workStart, setWorkStart] = useState('09:00');
@@ -21,7 +21,7 @@ export default function OnboardingStep4() {
   };
 
   const handleSkip = () => {
-    router.push('/onboarding/step-5');
+    router.replace('/(tabs)');
   };
 
   return (
@@ -55,7 +55,7 @@ export default function OnboardingStep4() {
             
             <Text style={styles.title}>ВАШИ РАБОЧИЕ ЧАСЫ</Text>
             <Text style={styles.subtitle}>
-              Установите время, когда вы обычно работаете. Это поможет планировать циклы NOOW
+              Установите время, когда вы обычно работаете. Это поможет планировать циклы NOOWING
             </Text>
 
             {/* Time Pickers */}
@@ -86,7 +86,7 @@ export default function OnboardingStep4() {
               <Text style={styles.workInfoTitle}>ПРОДОЛЖИТЕЛЬНОСТЬ РАБОЧЕГО ДНЯ</Text>
               <Text style={styles.workDuration}>8 ЧАСОВ</Text>
               <Text style={styles.workInfoSubtitle}>
-                Рекомендуется 9-10 циклов NOOW в день для максимальной продуктивности
+                Рекомендуется 9-10 циклов NOOWING в день для максимальной продуктивности
               </Text>
             </View>
 
