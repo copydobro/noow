@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Brain, X, SkipForward } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 interface TestState {
   currentStimulus: number;
@@ -95,7 +95,7 @@ export default function StroopTest() {
       'Тест завершен',
       `Точность: ${accuracy.toFixed(1)}%\nСреднее время реакции: ${avgReactionTime.toFixed(0)}мс`,
       [
-        { text: 'OK', onPress: () => router.back() }
+        { text: 'OK', onPress: () => router.push('/feedback') }
       ]
     );
   };
@@ -106,7 +106,7 @@ export default function StroopTest() {
       'Когнитивные тесты помогают отслеживать ваш прогресс',
       [
         { text: 'Отмена', style: 'cancel' },
-        { text: 'Пропустить', onPress: () => router.back() }
+        { text: 'Пропустить', onPress: () => router.push('/feedback') }
       ]
     );
   };

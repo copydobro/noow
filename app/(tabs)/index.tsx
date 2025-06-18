@@ -87,8 +87,8 @@ export default function HomeTab() {
 
   // Функция для завершения цикла и перехода к тестам
   const completeCycle = () => {
-    // Показываем экран обратной связи
-    router.push('/feedback');
+    // Показываем когнитивные тесты поочередно, затем экран обратной связи
+    router.push('/cognitive/nback');
   };
 
   // Анимации

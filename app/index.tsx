@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Brain, ArrowRight } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../components/ui';
+import { Colors, Typography } from '../constants';
 
 export default function WelcomeScreen() {
   const handleGetStarted = () => {
@@ -25,7 +25,7 @@ export default function WelcomeScreen() {
             <View style={styles.logoContainer}>
               <Brain size={48} color={Colors.accentColors.primary} strokeWidth={1.5} />
             </View>
-            <Text style={styles.title}>NOOW</Text>
+            <Text style={styles.title}>NOOWING</Text>
             <Text style={styles.subtitle}>РЕВОЛЮЦИОННАЯ СИСТЕМА ПРОДУКТИВНОСТИ</Text>
           </View>
 

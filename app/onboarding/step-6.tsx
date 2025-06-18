@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ArrowLeft, CircleCheck as CheckCircle, User, Clock, Activity, Globe } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 export default function OnboardingStep6() {
   const handleComplete = () => {
@@ -49,7 +49,7 @@ export default function OnboardingStep6() {
             
             <Text style={styles.title}>НАСТРОЙКА ЗАВЕРШЕНА!</Text>
             <Text style={styles.subtitle}>
-              Ваш профиль готов. Теперь вы можете начать использовать NOOW для максимальной продуктивности
+              Ваш профиль готов. Теперь вы можете начать использовать NOOWING для максимальной продуктивности
             </Text>
 
             {/* Profile Summary */}
@@ -92,7 +92,7 @@ export default function OnboardingStep6() {
           {/* Actions */}
           <View style={styles.actions}>
             <Button
-              title="НАЧАТЬ ИСПОЛЬЗОВАНИЕ NOOW"
+              title="НАЧАТЬ ИСПОЛЬЗОВАНИЕ NOOWING"
               onPress={handleComplete}
               style={styles.completeButton}
             />

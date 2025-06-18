@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link, router } from 'expo-router';
 import { Mail, Lock, Eye, EyeOff, User, ArrowLeft } from 'lucide-react-native';
-import { Button, Input } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button, Input } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 export default function SignUpScreen() {
   const [name, setName] = useState('');
@@ -36,7 +36,7 @@ export default function SignUpScreen() {
             </TouchableOpacity>
             <View style={styles.headerCenter}>
               <Text style={styles.title}>СОЗДАТЬ АККАУНТ</Text>
-              <Text style={styles.subtitle}>ПРИСОЕДИНЯЙТЕСЬ К NOOW</Text>
+              <Text style={styles.subtitle}>ПРИСОЕДИНЯЙТЕСЬ К NOOWING</Text>
             </View>
           </View>
 

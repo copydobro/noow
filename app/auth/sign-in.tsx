@@ -4,8 +4,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link, router } from 'expo-router';
 import { Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react-native';
-import { Button, Input } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button, Input } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 export default function SignInScreen() {
   const [email, setEmail] = useState('');
@@ -19,7 +19,9 @@ export default function SignInScreen() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      router.replace('/(tabs)');
+      // Check if user has completed onboarding (simulate with localStorage or state)
+      // For now, always go to onboarding first
+      router.replace('/onboarding');
     }, 1500);
   };
 
@@ -38,7 +40,7 @@ export default function SignInScreen() {
             </TouchableOpacity>
             <View style={styles.headerCenter}>
               <Text style={styles.title}>ДОБРО ПОЖАЛОВАТЬ</Text>
-              <Text style={styles.subtitle}>ВОЙДИТЕ В СВОЙ АККАУНТ NOOW</Text>
+              <Text style={styles.subtitle}>ВОЙДИТЕ В СВОЙ АККАУНТ NOOWING</Text>
             </View>
           </View>
 
