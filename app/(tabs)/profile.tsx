@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Switch, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, CreditCard as Edit3, LogOut, CircleHelp as HelpCircle, Share2 } from 'lucide-react-native';
+import { router } from 'expo-router';
+import { User, Settings, Clock, Bell, Moon, Globe, Activity, Brain, ChevronRight, Edit3, LogOut, HelpCircle, Share2, TestTube, Award, Users, DollarSign } from 'lucide-react-native';
 
 interface ProfileSetting {
   id: string;
@@ -84,6 +85,65 @@ export default function ProfileTab() {
     },
   ];
 
+  const testingSettings: ProfileSetting[] = [
+    {
+      id: 'nback-test',
+      title: 'N-BACK ТЕСТ',
+      subtitle: 'ТЕСТ РАБОЧЕЙ ПАМЯТИ',
+      icon: Brain,
+      type: 'navigation',
+      onPress: () => router.push('/cognitive/nback'),
+    },
+    {
+      id: 'stroop-test',
+      title: 'STROOP ТЕСТ',
+      subtitle: 'ТЕСТ КОНЦЕНТРАЦИИ',
+      icon: TestTube,
+      type: 'navigation',
+      onPress: () => router.push('/cognitive/stroop'),
+    },
+    {
+      id: 'feedback',
+      title: 'ЭКРАН ОБРАТНОЙ СВЯЗИ',
+      subtitle: 'ОЦЕНКА САМОЧУВСТВИЯ',
+      icon: User,
+      type: 'navigation',
+      onPress: () => router.push('/feedback'),
+    },
+    {
+      id: 'achievements',
+      title: 'ДОСТИЖЕНИЯ',
+      subtitle: 'НАГРАДЫ И БЕЙДЖИ',
+      icon: Award,
+      type: 'navigation',
+      onPress: () => router.push('/achievements'),
+    },
+    {
+      id: 'social',
+      title: 'СОЦИАЛЬНЫЕ ФУНКЦИИ',
+      subtitle: 'ЛИДЕРБОРД И ВЫЗОВЫ',
+      icon: Users,
+      type: 'navigation',
+      onPress: () => router.push('/social/leaderboard'),
+    },
+    {
+      id: 'donations',
+      title: 'СИСТЕМА ДОНАТОВ',
+      subtitle: 'ПОДДЕРЖКА ПРОЕКТА',
+      icon: DollarSign,
+      type: 'navigation',
+      onPress: () => router.push('/donations'),
+    },
+    {
+      id: 'onboarding',
+      title: 'ОНБОРДИНГ',
+      subtitle: 'ПОВТОРИТЬ НАСТРОЙКУ',
+      icon: Settings,
+      type: 'navigation',
+      onPress: () => router.push('/onboarding'),
+    },
+  ];
+
   const otherSettings: ProfileSetting[] = [
     {
       id: 'help',
@@ -116,7 +176,7 @@ export default function ProfileTab() {
       'Вы уверены, что хотите выйти? Ваш прогресс будет сохранен.',
       [
         { text: 'Отмена', style: 'cancel' },
-        { text: 'Выйти', style: 'destructive', onPress: () => Alert.alert('Выход', 'Вы вышли из аккаунта') }
+        { text: 'Выйти', style: 'destructive', onPress: () => router.replace('/') }
       ]
     );
   };
@@ -216,6 +276,14 @@ export default function ProfileTab() {
               <Text style={styles.sectionTitle}>НАСТРОЙКИ ПРИЛОЖЕНИЯ</Text>
               <View style={styles.settingsList}>
                 {appSettings.map(renderSetting)}
+              </View>
+            </View>
+
+            {/* Testing Section */}
+            <View style={styles.section}>
+              <Text style={styles.sectionTitle}>🧪 ТЕСТИРОВАНИЕ ЭКРАНОВ</Text>
+              <View style={styles.settingsList}>
+                {testingSettings.map(renderSetting)}
               </View>
             </View>
 

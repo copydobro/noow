@@ -36,7 +36,15 @@ export default function RootLayout() {
   return (
     <>
       <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+        <Stack.Screen name="auth" />
+        <Stack.Screen name="onboarding" />
         <Stack.Screen name="(tabs)" />
+        <Stack.Screen name="cognitive" />
+        <Stack.Screen name="feedback" />
+        <Stack.Screen name="achievements" />
+        <Stack.Screen name="social" />
+        <Stack.Screen name="donations" />
         <Stack.Screen name="+not-found" />
       </Stack>
       <StatusBar style="auto" />

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { router } from 'expo-router';
 import { Play, Pause, SkipForward, Brain, Coffee, RotateCcw } from 'lucide-react-native';
 import Animated, { 
   useSharedValue, 
@@ -84,6 +85,12 @@ export default function HomeTab() {
     );
   };
 
+  // Функция для завершения цикла и перехода к тестам
+  const completeCycle = () => {
+    // Показываем экран обратной связи
+    router.push('/feedback');
+  };
+
   // Анимации
   useEffect(() => {
     if (cycleState.isActive) {
@@ -120,18 +127,32 @@ export default function HomeTab() {
               intervalRef.current = null;
             }
             
-            // Показываем уведомление о новой фазе
-            setTimeout(() => {
-              showPhaseAlert(nextPhase);
-            }, 100);
-            
-            return {
-              ...prev,
-              phase: nextPhase,
-              timeRemaining: PHASE_DURATIONS[nextPhase],
-              cycleCount: nextPhase === 'work' ? prev.cycleCount + 1 : prev.cycleCount,
-              isActive: false, // Останавливаем таймер для подтверждения
-            };
+            // Если завершился полный цикл (отдых), переходим к тестам
+            if (prev.phase === 'rest') {
+              setTimeout(() => {
+                completeCycle();
+              }, 100);
+              
+              return {
+                ...prev,
+                phase: 'work',
+                timeRemaining: PHASE_DURATIONS.work,
+                cycleCount: prev.cycleCount + 1,
+                isActive: false,
+              };
+            } else {
+              // Показываем уведомление о новой фазе
+              setTimeout(() => {
+                showPhaseAlert(nextPhase);
+              }, 100);
+              
+              return {
+                ...prev,
+                phase: nextPhase,
+                timeRemaining: PHASE_DURATIONS[nextPhase],
+                isActive: false, // Останавливаем таймер для подтверждения
+              };
+            }
           }
           
           return {
@@ -174,15 +195,27 @@ export default function HomeTab() {
 
   const skipPhase = () => {
     const nextPhase = getNextPhase(cycleState.phase);
-    setCycleState(prev => ({
-      ...prev,
-      phase: nextPhase,
-      timeRemaining: PHASE_DURATIONS[nextPhase],
-      cycleCount: nextPhase === 'work' ? prev.cycleCount + 1 : prev.cycleCount,
-      isActive: false,
-    }));
     
-    showPhaseAlert(nextPhase);
+    // Если пропускаем отдых, завершаем цикл
+    if (cycleState.phase === 'rest') {
+      completeCycle();
+      setCycleState(prev => ({
+        ...prev,
+        phase: 'work',
+        timeRemaining: PHASE_DURATIONS.work,
+        cycleCount: prev.cycleCount + 1,
+        isActive: false,
+      }));
+    } else {
+      setCycleState(prev => ({
+        ...prev,
+        phase: nextPhase,
+        timeRemaining: PHASE_DURATIONS[nextPhase],
+        isActive: false,
+      }));
+      
+      showPhaseAlert(nextPhase);
+    }
   };
 
   const resetTimer = () => {

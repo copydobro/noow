@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Link, router } from 'expo-router';
-import { Mail, Lock, Eye, EyeOff } from 'lucide-react-native';
+import { Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react-native';
 import { Button, Input } from '@/components/ui';
 import { Colors, Typography } from '@/constants';
 
@@ -14,19 +14,12 @@ export default function SignInScreen() {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSignIn = async () => {
-    if (!email || !password) {
-      Alert.alert('Ошибка', 'Пожалуйста, заполните все поля');
-      return;
-    }
-
     setIsLoading(true);
     
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      Alert.alert('Успех', 'Вход выполнен успешно!', [
-        { text: 'OK', onPress: () => router.replace('/(tabs)') }
-      ]);
+      router.replace('/(tabs)');
     }, 1500);
   };
 
@@ -40,8 +33,13 @@ export default function SignInScreen() {
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
-            <Text style={styles.title}>ДОБРО ПОЖАЛОВАТЬ</Text>
-            <Text style={styles.subtitle}>ВОЙДИТЕ В СВОЙ АККАУНТ NOOW</Text>
+            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+              <ArrowLeft size={20} color={Colors.text.primary} strokeWidth={1.5} />
+            </TouchableOpacity>
+            <View style={styles.headerCenter}>
+              <Text style={styles.title}>ДОБРО ПОЖАЛОВАТЬ</Text>
+              <Text style={styles.subtitle}>ВОЙДИТЕ В СВОЙ АККАУНТ NOOW</Text>
+            </View>
           </View>
 
           {/* Form */}
@@ -145,23 +143,34 @@ const styles = StyleSheet.create({
   content: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 40,
+    paddingTop: 20,
     paddingBottom: 20,
   },
   header: {
+    flexDirection: 'row',
     alignItems: 'center',
     marginBottom: 40,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: Colors.background.secondary,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 16,
+  },
+  headerCenter: {
+    flex: 1,
   },
   title: {
     ...Typography.sizes.h2,
     color: Colors.text.primary,
-    textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 4,
   },
   subtitle: {
     ...Typography.sizes.subtitle,
     color: Colors.text.secondary,
-    textAlign: 'center',
   },
   form: {
     marginBottom: 32,
