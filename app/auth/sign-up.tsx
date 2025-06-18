@@ -25,13 +25,17 @@ export default function SignUpScreen() {
     }, 1500);
   };
 
+  const goToWelcome = () => {
+    router.push('/welcome');
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
-            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <TouchableOpacity style={styles.backButton} onPress={goToWelcome}>
               <ArrowLeft size={20} color={Colors.text.primary} strokeWidth={1.5} />
             </TouchableOpacity>
             <View style={styles.headerCenter}>

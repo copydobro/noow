@@ -19,8 +19,7 @@ export default function SignInScreen() {
     // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
-      // Check if user has completed onboarding (simulate with localStorage or state)
-      // For now, always go to onboarding first
+      // Simulate successful login - go to onboarding
       router.replace('/onboarding');
     }, 1500);
   };
@@ -29,13 +28,17 @@ export default function SignInScreen() {
     Alert.alert('Социальная авторизация', `Вход через ${provider} будет доступен в следующих версиях`);
   };
 
+  const goToWelcome = () => {
+    router.push('/welcome');
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.safeArea}>
         <View style={styles.content}>
           {/* Header */}
           <View style={styles.header}>
-            <TouchableOpacity style={styles.backButton} onPress={() => router.back()}>
+            <TouchableOpacity style={styles.backButton} onPress={goToWelcome}>
               <ArrowLeft size={20} color={Colors.text.primary} strokeWidth={1.5} />
             </TouchableOpacity>
             <View style={styles.headerCenter}>
