@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-nati
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { ArrowLeft, Globe } from 'lucide-react-native';
-import { Button } from '@/components/ui';
-import { Colors, Typography } from '@/constants';
+import { Button } from '../../components/ui';
+import { Colors, Typography } from '../../constants';
 
 const timezones = [
   { id: 'utc-12', label: 'UTC-12', name: 'Международная линия дат' },
@@ -42,7 +42,7 @@ export default function OnboardingStep5() {
   };
 
   const handleSkip = () => {
-    router.push('/onboarding/step-6');
+    router.replace('/(tabs)');
   };
 
   return (
