@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
-import { Heart, Coffee, Zap, Crown, X, CheckCircle } from 'lucide-react-native';
+import { Heart, Coffee, Zap, Crown, X, CircleCheck as CheckCircle } from 'lucide-react-native';
 import { Button } from '@/components/ui';
 import { Colors, Typography } from '@/constants';
 
