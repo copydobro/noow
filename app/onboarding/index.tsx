@@ -4,6 +4,8 @@ import { router } from 'expo-router';
 import { Brain, ArrowRight, XCircle } from 'lucide-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Card } from '../../components';
+import { AuthCard } from '@/components/ui/AuthCard';
+import { AuthButton } from '@/components/ui/AuthButton';
 
 const { width, height } = Dimensions.get('window');
 
@@ -106,27 +108,26 @@ export default function OnboardingWelcome() {
         onRequestClose={cancelSkip}
       >
         <Pressable className="flex-1 justify-center items-center bg-black/70 p-6" onPress={cancelSkip}>
-          <Card variant="default" className="w-full max-w-sm p-6 bg-secondary-900 border border-secondary-700 rounded-3xl shadow-strong">
-            <TouchableOpacity onPress={cancelSkip} className="absolute top-4 right-4 p-2">
-              <XCircle size={24} color="#cbd5e1" />
+          <AuthCard style={{ borderRadius: 12, padding: 20, alignItems: 'center' }}>
+            <TouchableOpacity onPress={cancelSkip} style={{ position: 'absolute', top: 12, right: 12, zIndex: 10, padding: 4 }}>
+              <XCircle size={24} color="#fff" />
             </TouchableOpacity>
-            <Text className="text-white text-2xl font-bold mb-4 text-center">Пропустить онбординг?</Text>
-            <Text className="text-secondary-300 text-base text-center mb-6">
+            <Text style={{ color: '#fff', fontSize: 22, fontWeight: 'bold', marginBottom: 16, textAlign: 'center' }}>Пропустить онбординг?</Text>
+            <Text style={{ color: 'rgba(255,255,255,0.8)', fontSize: 15, textAlign: 'center', marginBottom: 24 }}>
               Пропуск онбординга может привести к непониманию основных функций приложения и потере ценных данных для персонализации.
             </Text>
-            <Button
+            <AuthButton
               title="Продолжить онбординг"
               onPress={cancelSkip}
-              fullWidth
-              className="mb-3"
+              style={{ width: '100%', marginBottom: 12, borderRadius: 12 }}
             />
-            <Button
+            <AuthButton
               title="Пропустить все равно"
               onPress={confirmSkip}
-              variant="ghost"
-              fullWidth
+              style={{ width: '100%', backgroundColor: 'transparent', borderWidth: 1, borderColor: '#FF6B00', borderRadius: 12 }}
+              textStyle={{ color: '#FF6B00' }}
             />
-          </Card>
+          </AuthCard>
         </Pressable>
       </Modal>
     </View>

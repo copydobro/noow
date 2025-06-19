@@ -6,6 +6,7 @@ import { Input } from '../../components/ui/Input';
 import { AuthButton } from '@/components/ui/AuthButton';
 import { Colors } from '../../constants/Colors';
 import { router } from 'expo-router';
+import { NoowLogo } from '@/components/ui/NoowLogo';
 
 export default function SignInScreen() {
   const [email, setEmail] = useState('');
@@ -21,53 +22,51 @@ export default function SignInScreen() {
 
   return (
     <ImageBackground
-      style={{ flex: 1, resizeMode: 'cover' }}
+      source={require('../../assets/images/authback.png')}
+      resizeMode="cover"
+      style={{ flex: 1, width: '100%', height: '100%' }}
     >
       <StatusBar style="light" />
-      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 16, backgroundColor: 'transparent' }}>
-        <AuthCard style={{ width: 326, backgroundColor: 'rgba(10,10,10,0.8)', borderColor: Colors.secondary[700], borderWidth: 1, borderRadius: 24, padding: 0 }}>
-          <View style={{ padding: 33 }}>
-            <Text style={{ color: Colors.text.primary, fontSize: 20, fontFamily: 'Inter', textAlign: 'center', marginBottom: 24, fontWeight: '400' }}>
+      <SafeAreaView style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'transparent' }}>
+        <AuthCard style={{ backgroundColor: 'rgba(10,10,10,0.8)', borderColor: Colors.secondary[700], borderWidth: 1, borderRadius: 12, paddingVertical: 48 }}>
+          <View>
+            <Text style={{ color: Colors.text.primary, fontSize: 20, fontFamily: 'Inter', textAlign: 'center', marginBottom: 0, fontWeight: '400' }}>
               WELCOME TO
             </Text>
-            <Text style={{ color: Colors.text.primary, fontSize: 24, fontFamily: 'Inter', textAlign: 'center', marginBottom: 32, fontWeight: '700', letterSpacing: 2 }}>
-              NOOW
-            </Text>
-            <View style={{ marginBottom: 16 }}>
-              <Text style={{ color: Colors.text.secondary, fontSize: 16, fontFamily: 'Segoe UI', fontWeight: '600', marginBottom: 8 }}>
-                Email
-              </Text>
-              <Input
-                placeholder="Введите ваш email"
-                keyboardType="email-address"
-                autoCapitalize="none"
-                value={email}
-                onChangeText={setEmail}
-                style={{ marginBottom: 0 }}
-              />
+            <View style={{ alignItems: 'center', marginBottom: 30 }}>
+              <NoowLogo width={150} height={36} />
             </View>
-            <View style={{ marginBottom: 24 }}>
-              <Text style={{ color: Colors.text.secondary, fontSize: 16, fontFamily: 'Segoe UI', fontWeight: '600', marginBottom: 8 }}>
-                Пароль
-              </Text>
-              <Input
-                placeholder="Введите ваш пароль"
-                secureTextEntry
-                value={password}
-                onChangeText={setPassword}
-                style={{ marginBottom: 0 }}
-              />
-            </View>
+            <Input
+              placeholder="email"
+              keyboardType="email-address"
+              autoCapitalize="none"
+              value={email}
+              onChangeText={setEmail}
+              style={{ marginBottom: 5 }}
+            />
+            <Input
+              placeholder="password"
+              secureTextEntry
+              value={password}
+              onChangeText={setPassword}
+              style={{ marginBottom: 30 }}
+            />
             <AuthButton
               title="Войти"
               onPress={handleSignIn}
               style={{ marginBottom: 16 }}
+              textStyle={{ fontSize: 14, letterSpacing: 1 }}
             />
-            <TouchableOpacity onPress={() => router.push('/auth/sign-up')}>
-              <Text style={{ color: Colors.primary[500], fontSize: 16, fontFamily: 'Segoe UI', fontWeight: '600', textAlign: 'center', textDecorationLine: 'underline' }}>
-                Нет аккаунта? Зарегистрироваться
+            <View style={{ alignItems: 'center', marginTop: 0 }}>
+              <Text style={{ color: Colors.text.secondary, fontSize: 12, textAlign: 'center', marginBottom: 0, textDecorationLine: 'none' }}>
+                Нет аккаунта?
               </Text>
-            </TouchableOpacity>
+              <TouchableOpacity onPress={() => router.push('/auth/sign-up')}>
+                <Text style={{ color: Colors.primary[500], fontSize: 12, textAlign: 'center', textDecorationLine: 'underline', fontWeight: '600' }}>
+                  Зарегистрироваться
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </AuthCard>
       </SafeAreaView>

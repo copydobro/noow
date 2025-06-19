@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, ViewStyle } from 'react-native';
+import { BlurView } from 'expo-blur';
 
 interface AuthCardProps {
   children: React.ReactNode;
@@ -9,7 +10,8 @@ interface AuthCardProps {
 export function AuthCard({ children, style }: AuthCardProps) {
   return (
     <View style={[styles.card, style]}>
-      {children}
+      <BlurView intensity={24} tint="dark" style={[StyleSheet.absoluteFill, { borderRadius: 12, overflow: 'hidden' }]} />
+      <View style={{ position: 'relative' }}>{children}</View>
     </View>
   );
 }
@@ -24,10 +26,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.40)',
     borderWidth: 1.5,
     borderColor: 'rgba(255,255,255,0.12)',
-    shadowColor: '#FFB86B',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.18,
-    shadowRadius: 32,
     alignSelf: 'center',
   },
 }); 
